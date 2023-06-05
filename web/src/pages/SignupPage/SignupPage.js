@@ -1,7 +1,7 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
-const SignUpPage = () => {
+const SignupPage = () => {
   return (
     <>
       <MetaTags title="Signup" description="Signup page" />
@@ -11,11 +11,11 @@ const SignUpPage = () => {
         Find me in <code>./web/src/pages/SignupPage/SignupPage.js</code>
       </p>
       <p>
-        My default route is named <code>signUp</code>, link to me with `
+        My default route is named <code>signup</code>, link to me with `
         <Link to={routes.signup()}>Signup</Link>`
       </p>
     </>
   )
 }
 
-export default SignUpPage
+export default SignupPage
