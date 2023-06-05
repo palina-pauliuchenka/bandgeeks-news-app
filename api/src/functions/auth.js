@@ -64,14 +64,14 @@ export const handler = async (event, context) => {
 
   const resetPasswordOptions = {
     // handler() is invoked after the password has been successfully updated in
-    // the database. Returning anything truthy will automatically log the user
+    // the database. Returning anything truthy will automatically logs the user
     // in. Return `false` otherwise, and in the Reset Password page redirect the
     // user to the login page.
     handler: (_user) => {
       return true
     },
 
-    // If `false` then the new password MUST be different from the current one
+    // If `false` then the new password MUST be different than the current one
     allowReusedPassword: true,
 
     errors: {
@@ -105,7 +105,7 @@ export const handler = async (event, context) => {
     handler: ({ username, hashedPassword, salt, userAttributes }) => {
       return db.user.create({
         data: {
-          email: username,
+          username: username,
           hashedPassword: hashedPassword,
           salt: salt,
           // name: userAttributes.name
@@ -132,19 +132,24 @@ export const handler = async (event, context) => {
     db: db,
 
     // The name of the property you'd call on `db` to access your user table.
-    // i.e. if your Prisma model is named `User` this value would be `user`, as in `db.user`
+    // ie. if your Prisma model is named `User` this value would be `user`, as in `db.user`
     authModelAccessor: 'user',
+
+    // The name of the property you'd call on `db` to access your user credentials table.
+    // ie. if your Prisma model is named `UserCredential` this value would be `userCredential`, as in `db.userCredential`
+    credentialModelAccessor: 'userCredential',
 
     // A map of what dbAuth calls a field to what your database calls it.
     // `id` is whatever column you use to uniquely identify a user (probably
     // something like `id` or `userId` or even `email`)
     authFields: {
       id: 'id',
-      username: 'email',
+      username: 'username',
       hashedPassword: 'hashedPassword',
       salt: 'salt',
       resetToken: 'resetToken',
       resetTokenExpiresAt: 'resetTokenExpiresAt',
+      challenge: 'webAuthnChallenge',
     },
 
     // Specifies attributes on the cookie that dbAuth sets in order to remember
@@ -153,7 +158,7 @@ export const handler = async (event, context) => {
       HttpOnly: true,
       Path: '/',
       SameSite: 'Strict',
-      Secure: process.env.NODE_ENV !== 'development',
+      Secure: process.env.NODE_ENV !== 'development' ? true : false,
 
       // If you need to allow other domains (besides the api side) access to
       // the dbAuth session cookie:
@@ -164,6 +169,34 @@ export const handler = async (event, context) => {
     login: loginOptions,
     resetPassword: resetPasswordOptions,
     signup: signupOptions,
+
+    // See https://redwoodjs.com/docs/authentication/dbauth#webauthn for options
+    webAuthn: {
+      enabled: true,
+      // How long to allow re-auth via WebAuthn in seconds (default is 10 years).
+      // The `login.expires` time denotes how many seconds before a user will be
+      // logged out, and this value is how long they'll be to continue to use a
+      // fingerprint/face scan to log in again. When this one expires they
+      // *must* re-enter username and password to authenticate (WebAuthn will
+      // then be re-enabled for this amount of time).
+      expires: 60 * 60 * 24 * 365 * 10,
+      name: 'Redwood Application',
+      domain:
+        process.env.NODE_ENV === 'development' ? 'localhost' : 'server.com',
+      origin:
+        process.env.NODE_ENV === 'development'
+          ? 'http://localhost:8910'
+          : 'https://server.com',
+      type: 'platform',
+      timeout: 60000,
+      credentialFields: {
+        id: 'id',
+        userId: 'userId',
+        publicKey: 'publicKey',
+        transports: 'transports',
+        counter: 'counter',
+      },
+    },
   })
 
   return await authHandler.invoke()
