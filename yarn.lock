@@ -3899,6 +3899,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prisma/client@npm:^4.15.0":
+  version: 4.15.0
+  resolution: "@prisma/client@npm:4.15.0"
+  dependencies:
+    "@prisma/engines-version": 4.15.0-28.8fbc245156db7124f997f4cecdd8d1219e360944
+  peerDependencies:
+    prisma: "*"
+  peerDependenciesMeta:
+    prisma:
+      optional: true
+  checksum: e9e2f7813b722ac511554226e6c1fce4ee99f2ac6fbb84a50982be782e2d1c8994e9a787478450de85af704dbd8186a9913ada34f8174ea71f1ae3d3334861bf
+  languageName: node
+  linkType: hard
+
 "@prisma/debug@npm:4.14.1":
   version: 4.14.1
   resolution: "@prisma/debug@npm:4.14.1"
@@ -3914,6 +3928,13 @@ __metadata:
   version: 4.14.0-67.d9a4c5988f480fa576d43970d5a23641aa77bc9c
   resolution: "@prisma/engines-version@npm:4.14.0-67.d9a4c5988f480fa576d43970d5a23641aa77bc9c"
   checksum: 8fb024300c720a5153f4035aacbb4443e3de5c06aef23755bdec8c19a22a0dc7dd3dd21b2be85679742a8aed6b05e4f8baf6b570077496a6aed1838cafa95cfe
+  languageName: node
+  linkType: hard
+
+"@prisma/engines-version@npm:4.15.0-28.8fbc245156db7124f997f4cecdd8d1219e360944":
+  version: 4.15.0-28.8fbc245156db7124f997f4cecdd8d1219e360944
+  resolution: "@prisma/engines-version@npm:4.15.0-28.8fbc245156db7124f997f4cecdd8d1219e360944"
+  checksum: eabf46e6ea15783d9fb2e579867b90ea768b3542cadc7d5356972bd6fb473f7d462a62ca276384cb9dbf2ec48804bbf97000091b17350f63ddb61af723009a90
   languageName: node
   linkType: hard
 
@@ -21109,6 +21130,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@prisma/client": ^4.15.0
     "@redwoodjs/auth-dbauth-setup": 5.2.4
     "@redwoodjs/core": 5.2.4
   languageName: unknown
