@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@redwoodjs/api": "5.2.4",
+    "@redwoodjs/auth-dbauth-api": "5.2.4",
     "@redwoodjs/graphql-server": "5.2.4"
   }
 }
