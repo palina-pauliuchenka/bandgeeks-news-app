@@ -1,10 +1,10 @@
-import SignUpPage from './SignUpPage'
+import SignupPage from './SignupPage'
 
 export const generated = () => {
-  return <SignUpPage />
+  return <SignupPage />
 }
 
 export default {
-  title: 'Pages/SignUpPage',
-  component: SignUpPage,
+  title: 'Pages/SignupPage',
+  component: SignupPage,
 }
