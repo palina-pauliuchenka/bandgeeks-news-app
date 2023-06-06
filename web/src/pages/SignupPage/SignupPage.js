@@ -108,6 +108,26 @@ const SignupPage = () => {
                     }}
                   />
 
+                  <Label
+                    name="confirm-password"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Confirm Password
+                  </Label>
+                  <PasswordField
+                    name="confirm-password"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    autoComplete="current-password"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Passwords must match',
+                      },
+                    }}
+                  />
+
                   <FieldError name="password" className="rw-field-error" />
 
                   <div className="rw-button-group">
