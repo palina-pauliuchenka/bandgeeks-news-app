@@ -20,15 +20,11 @@ import { useEffect } from 'react'
 const SignupPage = () => {
 
   const { isAuthenticated, signUp } = useAuth()
-  /*
-  // Uncomment this block when homepage is made
-  // Should redirect to home after signing up
   useEffect(() => {
     if (isAuthenticated) {
       navigate(routes.home())
     }
   }, [isAuthenticated])
-  */
 
   const usernameRef = useRef(null)
   useEffect(() => {
