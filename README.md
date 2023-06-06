@@ -35,6 +35,9 @@ The news app will have the following capabilities
     <br />
     <p></p>API:</p>
     <img height="30" src="https://camo.githubusercontent.com/52ea2d77e3c453c1cd1188cef5df627153bb420f8393b76c35559aaa3495ed5f/68747470733a2f2f692e696d6775722e636f6d2f68553367454e622e706e67" />
+    <br />
+    <p></p>Services:</p>
+    <img alt="Filestack logo" title="Filestack logo" src="https://assets.filestack.com/docs_v2/fs-logo.svg">
 <!--     <img src="" />
     <img src="" /> -->
 </div>
