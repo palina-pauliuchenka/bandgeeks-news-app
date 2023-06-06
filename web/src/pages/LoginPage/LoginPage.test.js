@@ -1,4 +1,4 @@
-import { render } from '@redwoodjs/testing/web'
+import { render, screen } from '@redwoodjs/testing/web'
 
 import LoginPage from './LoginPage'
 
@@ -9,6 +9,11 @@ describe('LoginPage', () => {
   it('renders successfully', () => {
     expect(() => {
       render(<LoginPage />)
+      screen.getByLabelText('Username').toBeIntheDocument()
+      screen.getByLabelText('Password').toBeIntheDocument()
+      screen.getByRole('Link', 'Forgot Password?').toBeIntheDocument()
+      screen.getByRole('Link', 'Sign up!').toBeIntheDocument()
+      screen.getByRole('Submit', 'Login').toBeIntheDocument()
     }).not.toThrow()
   })
 })
