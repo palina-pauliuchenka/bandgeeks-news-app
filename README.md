@@ -8,15 +8,15 @@
 <!-- | Software Engineer                                                                                                                                              | Software Engineer                                                                                                                                                                                                                                                                                                                                         | Software Engineer  | Software Engineer  | Software Engineer  | -->
 
 ### Project Description
-The project is a personal news feed  
+The project is a personal news feed
 The news app will have the following capabilities
 
-- Obtain recent new headlines from https://newsapi.org   
-- When no one is signed into the app, it will display articles from the “General” category  
-- When a user is signed into the app, it will display articles from categories chosen in the user’s settings  
-- There will be a page to sign up for the app  
-- There will be a page to sign into the app  
-- There will be a settings page for choosing new categories  
+- Obtain recent new headlines from https://newsapi.org
+- When no one is signed into the app, it will display articles from the “General” category
+- When a user is signed into the app, it will display articles from categories chosen in the user’s settings
+- There will be a page to sign up for the app
+- There will be a page to sign into the app
+- There will be a settings page for choosing new categories
 - There will be a search for users to search for specific topics
 
 ### Tools used
@@ -30,7 +30,7 @@ The news app will have the following capabilities
     <img src="https://img.shields.io/badge/GraphQl-E10098?style=for-the-badge&logo=graphql&logoColor=white" />
     <img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white" />
     <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
-    <br />    
+    <br />
     <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
     <br />
     <p></p>API:</p>
