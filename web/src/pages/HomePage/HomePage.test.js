@@ -1,11 +1,11 @@
 import { render } from '@redwoodjs/testing/web'
 
-import LandingPage from './LandingPage'
+import HomePage from './HomePage'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //   https://redwoodjs.com/docs/testing#testing-pages-layouts
 
-describe('LandingPage', () => {
+describe('HomePage', () => {
   const topLinks = [
     { name: 'International' },
     { name: 'Politics' },
@@ -17,14 +17,14 @@ describe('LandingPage', () => {
     { name: 'Food' },
   ]
   it('renders successfully', () => {
-    render(<LandingPage />)
+    render(<HomePage />)
     topLinks.forEach((data) => {
       expect(screen.getByRole('link', data)).toBeInTheDocument()
     })
   })
 
   it('is loading', () => {
-    render(<LandingPage />)
+    render(<HomePage />)
     topLinks.forEach((data) => {
       expect(screen.getByRole('link', data)).toBeInTheDocument()
     })
@@ -32,7 +32,7 @@ describe('LandingPage', () => {
   })
 
   it('failed to load', () => {
-    render(<LandingPage />)
+    render(<HomePage />)
     expect(screen.getByText('An error has occurred')).toBeInTheDocument()
   })
 })
