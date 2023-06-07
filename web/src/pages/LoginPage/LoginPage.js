@@ -15,7 +15,7 @@ const authLogic = () => {
   db.User.findFirst({where: {userid, password,},}).then((User) => {
     if (User)
     {
-      navigate('/landing');
+      navigate('/');
     }
     else
     {
