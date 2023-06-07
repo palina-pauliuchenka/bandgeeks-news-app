@@ -9,6 +9,9 @@ describe('SignupPage', () => {
   it('renders successfully', () => {
     expect(() => {
       render(<SignupPage />)
+      screen.getByLabelText('Username').toBeIntheDocument()
+      screen.getByLabelText('Password').toBeIntheDocument()
+      screen.getByRole('Submit', 'Sign Up').toBeIntheDocument()
     }).not.toThrow()
   })
 })
