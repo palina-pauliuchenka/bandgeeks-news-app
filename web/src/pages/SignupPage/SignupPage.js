@@ -20,15 +20,11 @@ import { useEffect } from 'react'
 const SignupPage = () => {
 
   const { isAuthenticated, signUp } = useAuth()
-  /*
-  // Uncomment this block when homepage is made
-  // Should redirect to home after signing up
   useEffect(() => {
     if (isAuthenticated) {
       navigate(routes.home())
     }
   }, [isAuthenticated])
-  */
 
   const usernameRef = useRef(null)
   useEffect(() => {
@@ -60,7 +56,7 @@ const SignupPage = () => {
         <div className="rw-scaffold rw-login-container">
           <div className="rw-segment">
             <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Signup</h2>
+              <h2 className="rw-heading rw-heading-secondary">Sign Up</h2>
             </header>
 
             <div className="rw-segment-main">
@@ -104,6 +100,26 @@ const SignupPage = () => {
                       required: {
                         value: true,
                         message: 'Password is required',
+                      },
+                    }}
+                  />
+
+                  <Label
+                    name="confirm-password"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Confirm Password
+                  </Label>
+                  <PasswordField
+                    name="confirm-password"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    autoComplete="current-password"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Passwords must match',
                       },
                     }}
                   />
