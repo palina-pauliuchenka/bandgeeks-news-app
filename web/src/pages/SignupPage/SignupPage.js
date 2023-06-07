@@ -16,7 +16,7 @@ import { useAuth } from 'src/auth'
 import { useRef } from 'react'
 import { useEffect } from 'react'
 
-
+// Authentication Logic
 const SignupPage = () => {
 
   const { isAuthenticated, signUp } = useAuth()
