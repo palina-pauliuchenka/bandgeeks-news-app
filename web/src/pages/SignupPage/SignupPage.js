@@ -56,7 +56,7 @@ const SignupPage = () => {
         <div className="rw-scaffold rw-login-container">
           <div className="rw-segment">
             <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Signup</h2>
+              <h2 className="rw-heading rw-heading-secondary">Sign Up</h2>
             </header>
 
             <div className="rw-segment-main">
