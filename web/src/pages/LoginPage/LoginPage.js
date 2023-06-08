@@ -1,77 +1,131 @@
-import { Link, routes } from '@redwoodjs/router'
+import {
+  Form,
+  Label,
+  TextField,
+  PasswordField,
+  FieldError,
+  Submit,
+} from '@redwoodjs/forms'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
-import { useState } from 'react'
-import { navigate } from '@redwoodjs/web'
+import { toast, Toaster } from '@redwoodjs/web/toast'
+
+import { useAuth } from 'src/auth'
+import { useRef } from 'react'
+import { useEffect } from 'react'
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const { isAuthenticated, logIn } = useAuth()
 
-  const authLogic = (event) => {
-    event.preventDefault()
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(routes.meme())
+    }
+  }, [isAuthenticated])
 
-    db.User.findFirst({ where: { username, password } })
-      .then((user) => {
-        if (user) {
-          navigate('/')
-        } else {
-          setError('Incorrect User Id or Password. Try again.')
-        }
-      })
-      .catch((error) => {
-        setError('Something went wrong. Please try again.')
-      })
+  const usernameRef = useRef()
+  useEffect(() => {
+    usernameRef.current.focus()
+  }, [])
+
+  const onSubmit = async (data) => {
+    // const response = await logIn({ ...data })
+    //
+    // if (response.message) {
+    //   toast(response.message)
+    // } else if (response.error) {
+    //   toast.error(response.error)
+    // } else {
+    //   toast.success('Welcome back!')
+    //   navigate(routes.meme())
+    // }
+
+    const response = await logIn({ ...data})
+
+    if (response.message) {
+      toast(response.message)
+    } else if (response.error) {
+      toast.error(response.error)
+    } else {
+      // user is signed in automatically
+      toast.success('Logged In - Successfully!')
+      navigate(routes.meme())
+    }
   }
 
   return (
-    <main className="rw-main">
-      <div className="rw-scaffold rw-login-container">
-        <div className="rw-segment">
-          <header className="rw-segment-header">
-            <h1 className="rw-heading rw-heading-secondary">Log In</h1>
-          </header>
+    <>
+      <MetaTags title="Login" />
 
-          <div className="rw-segment-main">
-            <div className="rw-form-wrapper">
-              {error && <p>{error}</p>}
+      <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className="rw-segment">
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Login into Account</h2>
 
-              <form onSubmit={authLogic}>
-                <p>
-                  <label htmlFor="username">Username</label>
-                  <br />
-                  <input
-                    type="text"
-                    id="username"
+            <div className="rw-segment-main">
+              <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                <Form onSubmit={onSubmit} className="space-y-6">
+                  <Label
                     name="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Username
+                  </Label>
+                  <TextField
+                    name="username"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    errorClassName="rw-input rw-input-error"
+                    ref={usernameRef}
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Username is required',
+                      },
+                    }}
                   />
-                </p>
-                <p>
-                  <label htmlFor="password">Password</label>
-                  <br />
-                  <input
-                    type="password"
-                    id="password"
+
+                  <FieldError name="username" className="rw-field-error" />
+
+                  <Label
                     name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Password
+                  </Label>
+                  <PasswordField
+                    name="password"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    errorClassName="rw-input rw-input-error"
+                    autoComplete="current-password"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Password is required',
+                      },
+                    }}
                   />
-                </p>
-                <button type="submit">Login</button>
-              </form>
-              <p>
-                Don't have an account?{' '}
-                <Link to={routes.signup()}>Create account</Link>
-              </p>
+
+                  <FieldError name="password" className="rw-field-error" />
+
+                  <div className="rw-button-group">
+                    <Submit className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</Submit>
+                  </div>
+                </Form>
+              </div>
             </div>
           </div>
+          <div className="rw-login-link mt-2 text-center">
+            <span>Don't have an account?</span>{' '}
+            <Link to={routes.signup()} className="underline text-indigo-600 leading-6">
+              Sign up!
+            </Link>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   )
 }
 

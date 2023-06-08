@@ -3,24 +3,27 @@ import { Link, routes } from '@redwoodjs/router'
 const NewsLayout = ({ children }) => {
   return (
     <>
-      <header>
-        <h1>Band Geeks</h1>
-        <nav>
-          <ul>
-            <li>
-              <Link to={routes.home()}>Home</Link>
-            </li>
-            <li>
-              <Link to={routes.about()}>About</Link>
-            </li>
-            <li>
-              <Link to={routes.meme()}>Meme</Link>
-            </li>
-            <li>
-              <Link to={routes.signup()}>Sign Up</Link>
-            </li>
-          </ul>
-        </nav>
+      <header className="bg-white shadow w-full">
+        <div className="flex items-center justify-between px-12 py-6">
+          <Link to={routes.home()} className="font-chomsky text-4xl">The Bikini Bottom News</Link>
+          <nav>
+            <ul className="font-mono lowercase text-sm">
+              <li className="mx-5">
+                <Link to={routes.home()}>Home</Link>
+              </li>
+              <li className="mx-5">
+                <Link to={routes.about()}>About</Link>
+              </li>
+              <li className="mx-5">
+                <Link to={routes.meme()}>Meme</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="font-mono lowercase text-sm">
+            <Link to={routes.signup()}>Account</Link>
+          </div>
+        </div>
       </header>
       <main>{children}</main>
     </>
