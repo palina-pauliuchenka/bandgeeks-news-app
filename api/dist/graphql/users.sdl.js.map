@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/graphql/users.sdl.js"],
+  "sourcesContent": ["export const schema = gql`\n  type User {\n    id: Int!\n    name: String\n    username: String!\n    # hashedPassword: String!\n    # salt: String!\n    # resetToken: String\n    # resetTokenExpiresAt: DateTime\n  }\n\n  type Query {\n    users: [User!]! @requireAuth\n  }\n\n  input CreateUserInput {\n    name: String\n    username: String!\n    hashedPassword: String!\n    salt: String!\n    resetToken: String\n    resetTokenExpiresAt: DateTime\n  }\n\n  input UpdateUserInput {\n    name: String\n    username: String\n    hashedPassword: String\n    salt: String\n    resetToken: String\n    resetTokenExpiresAt: DateTime\n  }\n`\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;yBAAyB;AAAlB,MAAMA,SAASC,mBAAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "names": ["schema", "gql"]
+}

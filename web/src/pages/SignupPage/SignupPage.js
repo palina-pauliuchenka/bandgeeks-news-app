@@ -22,7 +22,7 @@ const SignupPage = () => {
   const { isAuthenticated, signUp } = useAuth()
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/meme')
+      navigate(routes.home())
     }
   }, [isAuthenticated])
 

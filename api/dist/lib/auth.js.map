@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/lib/auth.js"],
+  "sourcesContent": ["import { db } from './db'\n\nexport const getCurrentUser = async (session) => {\n  return await db.user.findUnique({\n    where: { id: session.id },\n    select: { id: true, username: true },\n  })\n}\n\nexport const isAuthenticated = () => {\n  return !!context.currentUser\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;4BAUkB;AAVlB,gBAAmB;AAEZ,MAAMA,iBAAiB,OAAOC,YAAY;AAC/C,SAAO,MAAMC,aAAGC,KAAKC,WAAW;IAC9BC,OAAO;MAAEC,IAAIL,QAAQK;IAAG;IACxBC,QAAQ;MAAED,IAAI;MAAME,UAAU;IAAK;EACrC,CAAC;AACH;AAEO,MAAMC,kBAAkBA,MAAM;AACnC,SAAO,CAAC,CAACC,8BAAQC;AACnB;",
+  "names": ["getCurrentUser", "session", "db", "user", "findUnique", "where", "id", "select", "username", "isAuthenticated", "context", "currentUser"]
+}
