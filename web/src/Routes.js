@@ -14,6 +14,8 @@ import NewsLayout from './layouts/NewsLayout'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
+      <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       <Set wrap={NewsLayout}>
         <Route path="/meme" page={MemePage} name="meme" />
         <Route path="/about" page={AboutPage} name="about" />
