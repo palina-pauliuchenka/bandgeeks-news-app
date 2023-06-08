@@ -1,4 +1,4 @@
-import { render } from '@redwoodjs/testing/web'
+import { render, screen } from '@redwoodjs/testing/web'
 
 import SignupPage from './SignupPage'
 
@@ -9,9 +9,9 @@ describe('SignupPage', () => {
   it('renders successfully', () => {
     expect(() => {
       render(<SignupPage />)
-      screen.getByLabelText('Username').toBeIntheDocument()
-      screen.getByLabelText('Password').toBeIntheDocument()
-      screen.getByRole('Submit', 'Sign Up').toBeIntheDocument()
+      expect(screen.getByText('Username')).toBeInTheDocument()
+      expect(screen.getByText('Password')).toBeInTheDocument()
+      expect(screen.getByText('Sign Up')).toBeInTheDocument()
     }).not.toThrow()
   })
 })
