@@ -1,25 +1,36 @@
 import { MetaTags } from '@redwoodjs/web'
+import { useAuth } from 'src/auth'
+
 
 const MemePage = () => {
+  const { isAuthenticated, currentUser, logOut } = useAuth()
+
   return (
     <>
       <MetaTags title="Meme" description="Meme page" />
 
-      <main className="relative h-[calc(100vh-100px)] w-full">
-        <div className="absolute transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <figure className="snip1113 red font-gruppo shadow-lg block p-6">
-            <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/08/Animal-Crossing-New-Horizons-Spongebob-Squarepants-Band-Geeks.jpg" alt="band geeks" />
-            <figcaption>
-              <h3 className="tracking-widest">Band <span>Geeks</span></h3>
-              <h4>
-                Team
-              </h4>
-            </figcaption>
-          </figure>
-        </div>
+      <header>
+        {currentUser && (
+          <div>
+            Welcome, {currentUser.name}!
+            <button onClick={logOut}>Logout</button>
+          </div>
+        )}
+      </header>
 
-
-      </main>
+      {/*<main className="relative h-[calc(100vh-100px)] w-full">*/}
+      {/*  <div className="absolute transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">*/}
+      {/*    <figure className="snip1113 red font-gruppo shadow-lg block p-6">*/}
+      {/*      <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/08/Animal-Crossing-New-Horizons-Spongebob-Squarepants-Band-Geeks.jpg" alt="band geeks" />*/}
+      {/*      <figcaption>*/}
+      {/*        <h3 className="tracking-widest">Band <span>Geeks</span></h3>*/}
+      {/*        <h4>*/}
+      {/*          Team*/}
+      {/*        </h4>*/}
+      {/*      </figcaption>*/}
+      {/*    </figure>*/}
+      {/*  </div>*/}
+      {/*</main>*/}
 
       <section className="px-12 mx-auto">
         <div className="lg:columns-3 columns-1 gap-8">
