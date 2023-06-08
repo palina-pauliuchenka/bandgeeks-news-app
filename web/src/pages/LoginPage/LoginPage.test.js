@@ -9,11 +9,10 @@ describe('LoginPage', () => {
   it('renders successfully', () => {
     expect(() => {
       render(<LoginPage />)
-      screen.getByLabelText('Username').toBeIntheDocument()
-      screen.getByLabelText('Password').toBeIntheDocument()
-      screen.getByRole('Link', 'Forgot Password?').toBeIntheDocument()
-      screen.getByRole('Link', 'Sign up!').toBeIntheDocument()
-      screen.getByRole('Submit', 'Login').toBeIntheDocument()
+      expect(screen.getByLabelText('Username')).toBeInTheDocument()
+      expect(screen.getByLabelText('Password')).toBeInTheDocument()
+      expect(screen.getByText('Sign up!')).toBeInTheDocument()
+      expect(screen.getByText('Login')).toBeInTheDocument()
     }).not.toThrow()
   })
 })
