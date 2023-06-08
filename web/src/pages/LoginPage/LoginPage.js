@@ -6,8 +6,8 @@ import {
   Label,
   TextField,
   PasswordField,
-  Submit,
   FieldError,
+  Submit,
 } from '@redwoodjs/forms'
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
@@ -15,13 +15,41 @@ import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 
+/*const LoginPage = () => {
+  const [username, setUsername] = useState('')
+>>>>>>> Stashed changes
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(' ')
+  const authLogic = (event) => {
+    event.preventDefault()
+
+    db.User.findFirst({ where: { username, password } })
+      .then((user) => {
+        if (user) {
+>>>>>>> Stashed changes
+          navigate('/meme')
+        } else {
+          setError('Incorrect User Id or Password. Try again.')
+        }
+      })
+      .catch((error) => {
+        setError('Something went wrong. Please try again.')
+      })
+  }*/
+
 const LoginPage = () => {
   const { isAuthenticated, logIn } = useAuth()
+
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(routes.home())
+      navigate(routes.meme())
     }
   }, [isAuthenticated])
+
+  const usernameRef = useRef()
+  useEffect(() => {
+    usernameRef.current.focus()
+  }, [])
 
   const onSubmit = async (data) => {
     const response = await logIn({ ...data })
@@ -35,77 +63,58 @@ const LoginPage = () => {
       navigate(routes.meme())
     }
   }
-
   /*
-const LoginPage = () => {
-  const [userId, setUserId] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState(' ')
-
-  const authLogic = () => {
-    db.User.findFirst({ where: { userid, password } })
-      .then((User) => {
-        if (User) {
-          navigate('/meme')
-        } else {
-          setError('Incorrect User Id or Password. Try again.')
-        }
-      })
-      .catch((error) => {
-        setError('Something went wrong. Please try again.')
-      })
-  }
-  */
-
-  /* return (
+  return (
     <>
-      <MetaTags title="Login" description="Login" />
-      <br></br>
-      <br></br>
-      <center>
-        <h1 style={{ fontSize: '50px' }}>Login</h1>
-        <form>
-          <p>
-            <label
-              htmlFor="userid"
-              style={{ fontSize: '20px', marginLeft: '-90px' }}
-            >
-              Username:
-            </label>
-            <br></br>
-            <input type="text" id="userid" name="userid" required />
-          </p>
-          <p>
-            <label
-              htmlFor="password"
-              style={{ fontSize: '20px', marginLeft: '-90px' }}
-            >
-              Password:
-            </label>
-            <br></br>
-            <input type="password" id="password" name="password" required />
-          </p>
-          <button
-            type="submit"
-            onClick={onSubmit}
-            style={{
-              fontSize: '18px',
-              backgroundColor: 'green',
-              color: 'white',
-              fontWeight: 'bold',
-            }}
-          >
-            Login
-          </button>
-        </form>
-        <p>_________________________</p>
-        <p style={{ fontSize: '20px' }}>
-          Don't have an account?{' '}
-          <Link to={routes.signup()}>Create account</Link>
-        </p>
-      </center>
+      <MetaTags titel="Login" />
+
+            <div className="rw-segment-main">
+              <div className="rw-form-wrapper">
+                <Form onSubmit={onSubmit} className="rw-form-wrapper">
+                  <p>
+                    <label htmlFor="username">Username</label>
+                    <br />
+                    <input
+                      type="text"
+                      id="username"
+                      name="username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                    />
+                  </p>
+                  <p>
+                    <label htmlFor="password">Password</label>
+                    <br />
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </p>
+                  <button type="submit">Login</button>
+                </Form>
+                <p>
+                  Don't have an account?{' '}
+                  <Link to={routes.signup()}>Create account</Link>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="rw-login-link mt-2 text-center">
+            <span>Don't have an account?</span>{' '}
+            <Link to={routes.signup()} className="rw-link">
+              Sign up!
+            </Link>
+          </div>
+        </div>
+      </main>
     </>
   )
+}
 */
   return (
     <>
@@ -133,6 +142,7 @@ const LoginPage = () => {
                     name="username"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
+                    ref={usernameRef}
                     validation={{
                       required: {
                         value: true,
