@@ -9,9 +9,9 @@ describe('ForgotPasswordPage', () => {
   it('renders successfully', () => {
     expect(() => {
       render(<ForgotPasswordPage />)
-      screen.getByLabelText('Username').toBeIntheDocument()
-      screen.getByRole('h2', 'Forgot Password').toBeIntheDocument()
-      screen.getByRole('Submit', 'Submit').toBeIntheDocument()
+      expect(screen.getByLabelText('Username')).toBeInTheDocument()
+      expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument()
+      expect(screen.getByText('Submit')).toBeInTheDocument()
     }).not.toThrow()
   })
 })
