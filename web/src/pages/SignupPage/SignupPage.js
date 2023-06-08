@@ -1,8 +1,6 @@
-import { Link, navigate, routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
-import { toast, Toaster } from '@redwoodjs/web/toast'
+import { useRef } from 'react'
+import { useEffect } from 'react'
 
-// For Form Usage (from Redwood Tutorial)
 import {
   Form,
   Label,
@@ -11,14 +9,16 @@ import {
   FieldError,
   Submit,
 } from '@redwoodjs/forms'
+import { Link, navigate, routes } from '@redwoodjs/router'
+import { MetaTags } from '@redwoodjs/web'
+import { toast, Toaster } from '@redwoodjs/web/toast'
+
+// For Form Usage (from Redwood Tutorial)
 
 import { useAuth } from 'src/auth'
-import { useRef } from 'react'
-import { useEffect } from 'react'
 
 // Authentication Logic
 const SignupPage = () => {
-
   const { isAuthenticated, signUp } = useAuth()
   useEffect(() => {
     if (isAuthenticated) {
@@ -44,6 +44,7 @@ const SignupPage = () => {
     } else {
       // user is signed in automatically
       toast.success('Welcome!')
+      navigate(routes.meme())
     }
   }
 
