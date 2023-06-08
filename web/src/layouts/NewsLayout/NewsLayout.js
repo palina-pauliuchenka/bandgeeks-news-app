@@ -1,6 +1,19 @@
 import { Link, routes } from '@redwoodjs/router'
+import { useAuth } from 'src/auth'
 
 const NewsLayout = ({ children }) => {
+
+  const { isAuthenticated, currentUser } = useAuth();
+
+  /* Testing Variables
+  console.log('isAuthenticated:', isAuthenticated);
+  console.log('currentUser:', currentUser);
+
+  --Result of Console Logging--
+  - isAuthenticated is false (even when logged in)
+  - currentUser is null (even when logged in)
+  */
+
   return (
     <>
       <header className="bg-white shadow w-full">
@@ -20,9 +33,16 @@ const NewsLayout = ({ children }) => {
             </ul>
           </nav>
 
-          <div className="font-mono lowercase text-sm">
-            <Link to={routes.signup()}>Account</Link>
-          </div>
+          {/* Currently Doesn't Work: Account is the only thing that displays */}
+          {isAuthenticated && currentUser ? (
+            <div className="font-mono lowercase text-sm">
+              Hello, {currentUser.userCredential.username}.
+            </div>
+          ) : (
+            <div className="font-mono lowercase text-sm">
+              <Link to={routes.signup()}>Account</Link>
+            </div>
+          )}
         </div>
       </header>
       <main>{children}</main>
