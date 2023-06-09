@@ -116,9 +116,9 @@ export const handler = async (event, context) => {
     // Include any format checks for password here. Return `true` if the
     // password is valid, otherwise throw a `PasswordValidationError`.
     // Import the error along with `DbAuthHandler` from `@redwoodjs/api` above.
-    passwordValidation: (_password) => {
-      return true
-    },
+    // passwordValidation: (_password) => {
+    //   return true
+    // },
 
     errors: {
       // `field` will be either "username" or "password"
@@ -149,7 +149,7 @@ export const handler = async (event, context) => {
       salt: 'salt',
       resetToken: 'resetToken',
       resetTokenExpiresAt: 'resetTokenExpiresAt',
-      challenge: 'webAuthnChallenge',
+      // challenge: 'webAuthnChallenge',
     },
 
     // Specifies attributes on the cookie that dbAuth sets in order to remember
