@@ -78,6 +78,11 @@ const SignupPage = () => {
                         value: true,
                         message: 'Username is required',
                       },
+                      /*
+                      Username Constraints:
+                        - AT LEAST 8 Characters Long
+                        - NO Spaces
+                      */
                     }}
                   />
 
@@ -100,6 +105,14 @@ const SignupPage = () => {
                         value: true,
                         message: 'Password is required',
                       },
+                      /*
+                      Password Constraints:
+                        - AT LEAST 8 Characters long
+                          - 1 Uppercase
+                          - 1 Lowercase
+                        - At least 1 digit
+                        - At least 1 Special Character
+                      */
                     }}
                   />
 
