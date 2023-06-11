@@ -117,6 +117,10 @@ const SignupPage = () => {
                         - At least 1 digit
                         - At least 1 Special Character
                       */
+                      pattern: {
+                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/,
+                        message: "Password MUST be AT LEAST 8 Characters with: 1 upper case, 1 lowercase, 1 digit, and 1 special",
+                      },
                     }}
                   />
 
