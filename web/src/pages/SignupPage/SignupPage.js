@@ -1,6 +1,8 @@
-import { useRef } from 'react'
-import { useEffect } from 'react'
+import { Link, navigate, routes } from '@redwoodjs/router'
+import { MetaTags } from '@redwoodjs/web'
+import { toast, Toaster } from '@redwoodjs/web/toast'
 
+// For Form Usage (from Redwood Tutorial)
 import {
   Form,
   Label,
@@ -9,25 +11,24 @@ import {
   FieldError,
   Submit,
 } from '@redwoodjs/forms'
-import { Link, navigate, routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
-import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import { useRef } from 'react'
+import { useEffect } from 'react'
 
+// Authentication Logic
 const SignupPage = () => {
-  const { isAuthenticated, signUp } = useAuth()
 
+  const { isAuthenticated, signUp } = useAuth()
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(routes.home())
+      navigate(routes.meme())
     }
   }, [isAuthenticated])
 
-  // focus on username box on page load
   const usernameRef = useRef(null)
   useEffect(() => {
-    usernameRef.current?.focus()
+    usernameRef.current.focus()
   }, [])
 
   const onSubmit = async (data) => {
@@ -42,7 +43,8 @@ const SignupPage = () => {
       toast.error(response.error)
     } else {
       // user is signed in automatically
-      toast.success('Welcome!')
+      toast.success('Registered - Successfully!!')
+      navigate(routes.meme())
     }
   }
 
@@ -50,27 +52,25 @@ const SignupPage = () => {
     <>
       <MetaTags title="Signup" />
 
-      <main className="rw-main">
+      <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Signup</h2>
-            </header>
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Register an Account</h2>
 
             <div className="rw-segment-main">
-              <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
+              <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                <Form onSubmit={onSubmit} className="space-y-6">
                   <Label
                     name="username"
-                    className="rw-label"
+                    className="block text-sm font-medium leading-6 text-gray-900"
                     errorClassName="rw-label rw-label-error"
                   >
                     Username
                   </Label>
                   <TextField
                     name="username"
-                    className="rw-input"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     errorClassName="rw-input rw-input-error"
                     ref={usernameRef}
                     validation={{
@@ -85,14 +85,14 @@ const SignupPage = () => {
 
                   <Label
                     name="password"
-                    className="rw-label"
+                    className="block text-sm font-medium leading-6 text-gray-900"
                     errorClassName="rw-label rw-label-error"
                   >
                     Password
                   </Label>
                   <PasswordField
                     name="password"
-                    className="rw-input"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     errorClassName="rw-input rw-input-error"
                     autoComplete="current-password"
                     validation={{
@@ -103,10 +103,30 @@ const SignupPage = () => {
                     }}
                   />
 
+                  <Label
+                    name="confirm-password"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Confirm Password
+                  </Label>
+                  <PasswordField
+                    name="confirm-password"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    errorClassName="rw-input rw-input-error"
+                    autoComplete="current-password"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Passwords must match',
+                      },
+                    }}
+                  />
+
                   <FieldError name="password" className="rw-field-error" />
 
                   <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">
+                    <Submit className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                       Sign Up
                     </Submit>
                   </div>
@@ -114,9 +134,9 @@ const SignupPage = () => {
               </div>
             </div>
           </div>
-          <div className="rw-login-link">
+          <div className="text-center mt-2">
             <span>Already have an account?</span>{' '}
-            <Link to={routes.login()} className="rw-link">
+            <Link to={routes.login()} className="underline text-indigo-600 leading-6">
               Log in!
             </Link>
           </div>
