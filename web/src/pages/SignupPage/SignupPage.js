@@ -83,6 +83,10 @@ const SignupPage = () => {
                         - AT LEAST 8 Characters Long
                         - NO Spaces
                       */
+                      pattern: {
+                        value: /^(?!.*\s).{8,}$/,
+                        message: "Username MUST be AT LEAST 8 Characters with NO Spaces",
+                      },
                     }}
                   />
 
