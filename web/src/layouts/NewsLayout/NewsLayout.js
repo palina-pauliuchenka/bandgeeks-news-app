@@ -3,7 +3,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from 'src/auth'
 
 const NewsLayout = ({ children }) => {
-  const { isAuthenticated, currentUser } = useAuth()
+  const { isAuthenticated, currentUser, logOut } = useAuth()
 
   /* Testing Variables
   console.log('isAuthenticated:', isAuthenticated);
@@ -39,6 +39,9 @@ const NewsLayout = ({ children }) => {
           {isAuthenticated && currentUser ? (
             <div className="font-mono text-sm lowercase">
               Hello, {currentUser.username}.
+              <button type="button" onClick={logOut}>
+                Logout
+              </button>
             </div>
           ) : (
             <div className="font-mono text-sm lowercase">

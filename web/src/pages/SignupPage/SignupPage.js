@@ -1,8 +1,6 @@
-import { Link, navigate, routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
-import { toast, Toaster } from '@redwoodjs/web/toast'
+import { useRef } from 'react'
+import { useEffect } from 'react'
 
-// For Form Usage (from Redwood Tutorial)
 import {
   Form,
   Label,
@@ -11,14 +9,16 @@ import {
   FieldError,
   Submit,
 } from '@redwoodjs/forms'
-
+import { Link, navigate, routes } from '@redwoodjs/router'
+import { MetaTags } from '@redwoodjs/web'
+// eslint-disable-next-line import/order
+import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useAuth } from 'src/auth'
-import { useRef } from 'react'
-import { useEffect } from 'react'
+
+// For Form Usage (from Redwood Tutorial)
 
 // Authentication Logic
 const SignupPage = () => {
-
   const { isAuthenticated, signUp } = useAuth()
   useEffect(() => {
     if (isAuthenticated) {
@@ -56,7 +56,9 @@ const SignupPage = () => {
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="rw-segment">
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Register an Account</h2>
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+              Register an Account
+            </h2>
 
             <div className="rw-segment-main">
               <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -77,7 +79,8 @@ const SignupPage = () => {
                       required: true,
                       pattern: {
                         value: /^(?!.*\s)[a-zA-Z0-9]{8,}$/,
-                        message: "Username MUST be AT LEAST 8 Characters with NO Spaces and only alphanumeric characters",
+                        message:
+                          'Username MUST be AT LEAST 8 Characters with NO Spaces and only alphanumeric characters',
                       },
                     }}
                   />
@@ -99,11 +102,15 @@ const SignupPage = () => {
                     validation={{
                       required: true,
                       pattern: {
-                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\\W).{8,}$/,
-                        message: "Password MUST be AT LEAST 8 Characters with: 1 uppercase, 1 lowercase, 1 digit, and 1 special character",
+                        value:
+                          /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\d).{8,}$/,
+                        message:
+                          'Password MUST be AT LEAST 8 Characters with: 1 uppercase, 1 lowercase, 1 digit, and 1 special character',
                       },
                     }}
                   />
+
+                  <FieldError name="password" className="rw-field-error" />
 
                   <Label
                     name="confirm-password"
@@ -125,7 +132,10 @@ const SignupPage = () => {
                     }}
                   />
 
-                  <FieldError name="confirm-password" className="rw-field-error" />
+                  <FieldError
+                    name="confirm-password"
+                    className="rw-field-error"
+                  />
 
                   <div className="rw-button-group">
                     <Submit className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
@@ -136,9 +146,12 @@ const SignupPage = () => {
               </div>
             </div>
           </div>
-          <div className="text-center mt-2">
+          <div className="mt-2 text-center">
             <span>Already have an account?</span>{' '}
-            <Link to={routes.login()} className="underline text-indigo-600 leading-6">
+            <Link
+              to={routes.login()}
+              className="leading-6 text-indigo-600 underline"
+            >
               Log in!
             </Link>
           </div>
