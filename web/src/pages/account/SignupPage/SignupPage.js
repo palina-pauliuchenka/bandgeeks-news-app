@@ -32,7 +32,14 @@ const SignupPage = () => {
 
   const onSubmit = async (data) => {
     if (data.password != data.confirm) {
-      toast.error('Passwords must match. Please confirm again')
+      // toast.error('Passwords must match. Please confirm again')
+      document
+        .getElementById('confirm')
+        .setAttribute(
+          'class',
+          'block w-full rounded-md border-0 py-1.5 text-red-600 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-red-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6'
+        )
+
       return false
     }
     const response = await signUp({
@@ -133,9 +140,10 @@ const SignupPage = () => {
                   <PasswordField
                     name="confirm"
                     title="confirm"
+                    id="confirm"
                     aria-label="confirm-password"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    errorClassName="rw-input rw-input-error"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow focus:shadow-violet-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
+                    errorClassName="block w-full rounded-md border-0 py-1.5 text-red-600 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-red-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
                     autoComplete="current-password"
                     validation={{
                       required: true,
