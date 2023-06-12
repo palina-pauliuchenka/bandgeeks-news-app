@@ -122,7 +122,6 @@ const SignupPage = () => {
                   {/* <--------------CONFIRM STUFF--------------> */}
                   <Label
                     name="confirm-password"
-                    for="confirm-password"
                     className="block text-sm font-medium leading-6 text-gray-900"
                     errorClassName="rw-label rw-label-error"
                   >
