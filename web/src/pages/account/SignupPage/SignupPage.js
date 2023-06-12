@@ -31,6 +31,10 @@ const SignupPage = () => {
   }, [])
 
   const onSubmit = async (data) => {
+    if (data.password != data.confirm) {
+      toast.error('Passwords must match. Please confirm again')
+      return false
+    }
     const response = await signUp({
       username: data.username,
       password: data.password,
@@ -82,7 +86,6 @@ const SignupPage = () => {
                     ref={usernameRef}
                     validation={{
                       required: {
-                        value: true,
                         message:
                           'Username must be alphanumeric and at least 8 characters with no spaces',
                         pattern: /^[A-Za-z0-9]{8,}$/,
@@ -108,12 +111,11 @@ const SignupPage = () => {
                     style={{ outline: 'none' }}
                     autoComplete="current-password"
                     validation={{
-                      required: {
-                        value: true,
+                      required: true,
+                      pattern: {
+                        value: /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W).{8,}/,
                         message:
                           'Password must be at least 8 characters long, have at least 1 capital & lowercase letter, 1 number and 1 special character',
-                        pattern:
-                          /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W).{8,}/,
                       },
                     }}
                   />
@@ -121,23 +123,25 @@ const SignupPage = () => {
 
                   {/* <--------------CONFIRM STUFF--------------> */}
                   <Label
-                    name="confirm-password"
+                    name="confirm"
                     className="block text-sm font-medium leading-6 text-gray-900"
                     errorClassName="rw-label rw-label-error"
                   >
                     Confirm Password
                   </Label>
                   <PasswordField
-                    name="confirm-password"
+                    name="confirm"
                     title="confirm"
                     aria-label="confirm-password"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     errorClassName="rw-input rw-input-error"
                     autoComplete="current-password"
                     validation={{
-                      required: {
-                        value: true,
-                        message: 'MUST confirm password',
+                      required: true,
+                      pattern: {
+                        value: /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W).{8,}/,
+                        message:
+                          'Password must be at least 8 characters long, have at least 1 capital & lowercase letter, 1 number and 1 special character',
                       },
                     }}
                   />
