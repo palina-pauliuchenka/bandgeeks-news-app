@@ -85,10 +85,11 @@ const SignupPage = () => {
                     style={{ outline: 'none' }}
                     ref={usernameRef}
                     validation={{
-                      required: {
+                      required: true,
+                      pattern: {
                         message:
                           'Username must be alphanumeric and at least 8 characters with no spaces',
-                        pattern: /^[A-Za-z0-9]{8,}$/,
+                        value: /^[A-Za-z0-9]{8,}$/,
                       },
                     }}
                   />
