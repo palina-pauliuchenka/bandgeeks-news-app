@@ -54,13 +54,17 @@ const SignupPage = () => {
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="">
+            {/* This string of text "Regester an Account" must be present to pass all tests */}
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Register an Account
             </h2>
 
             <div className="">
               <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                {/* Form Has a title of data so it can be detected by the test cases.
+                Always make sure it has the title of data so we can confirm it is rendering */}
                 <Form title="data" onSubmit={onSubmit} className="space-y-6">
+                  {/* <--------------USERNAME STUFF--------------> */}
                   <Label
                     name="username"
                     className="block font-medium leading-6 text-gray-900"
@@ -86,6 +90,8 @@ const SignupPage = () => {
                     }}
                   />
                   <FieldError name="username" className="rw-field-error" />
+
+                  {/* <--------------PASSWORD STUFF--------------> */}
                   <Label
                     name="password"
                     className="block font-medium leading-6 text-gray-900"
@@ -112,8 +118,11 @@ const SignupPage = () => {
                     }}
                   />
                   <FieldError name="password" className="rw-field-error" />
+
+                  {/* <--------------CONFIRM STUFF--------------> */}
                   <Label
                     name="confirm-password"
+                    for="confirm-password"
                     className="block text-sm font-medium leading-6 text-gray-900"
                     errorClassName="rw-label rw-label-error"
                   >
@@ -133,10 +142,12 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError
+                  <FieldError //for Confirm password
                     name="confirm-password"
                     className="rw-field-error"
                   />
+
+                  {/* <--------------BUTTONS AND LINKS--------------> */}
                   <div className="">
                     <Submit className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                       Sign Up

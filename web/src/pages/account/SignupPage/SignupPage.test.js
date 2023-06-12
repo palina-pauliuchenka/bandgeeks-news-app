@@ -9,7 +9,9 @@ describe('SignupPage', () => {
   it('renders the headings successfully', () => {
     expect(() => {
       render(<SignupPage />)
+      //Ensures the title renders properly somewhere in the doc
       expect(screen.getByText('Register an Account')).toBeInTheDocument()
+      //Ensures the form (going under the title of 'data') is being rendered
       expect(screen.getByTitle('data')).toBeInTheDocument()
     }).not.toThrow()
   })
