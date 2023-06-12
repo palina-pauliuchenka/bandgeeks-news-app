@@ -74,9 +74,10 @@ const SignupPage = () => {
                     errorClassName="rw-input rw-input-error"
                     ref={usernameRef}
                     validation={{
-                      required: {
-                        value: true,
-                        message: 'Username is required',
+                      required: true,
+                      pattern: {
+                        value: /^(?!.*\s)[a-zA-Z0-9]{8,}$/,
+                        message: "Username MUST be AT LEAST 8 Characters with NO Spaces and only alphanumeric characters",
                       },
                     }}
                   />
@@ -96,9 +97,10 @@ const SignupPage = () => {
                     errorClassName="rw-input rw-input-error"
                     autoComplete="current-password"
                     validation={{
-                      required: {
-                        value: true,
-                        message: 'Password is required',
+                      required: true,
+                      pattern: {
+                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\\W).{8,}$/,
+                        message: "Password MUST be AT LEAST 8 Characters with: 1 uppercase, 1 lowercase, 1 digit, and 1 special character",
                       },
                     }}
                   />
@@ -118,12 +120,12 @@ const SignupPage = () => {
                     validation={{
                       required: {
                         value: true,
-                        message: 'Passwords must match',
+                        message: 'MUST confirm password',
                       },
                     }}
                   />
 
-                  <FieldError name="password" className="rw-field-error" />
+                  <FieldError name="confirm-password" className="rw-field-error" />
 
                   <div className="rw-button-group">
                     <Submit className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
