@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         'chomsky': ['chomsky', 'sans-serif'],
         'gruppo': ['gruppo', 'sans-serif'],
+        'playfair': ['playfair', 'serif'],
       }},
   },
   plugins: [],
