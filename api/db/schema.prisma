@@ -16,4 +16,10 @@ model User {
   salt                String
   resetToken          String?
   resetTokenExpiresAt DateTime?
+  newsGeneral         Boolean
+  newsBusiness        Boolean
+  newsHealth          Boolean
+  newsScience         Boolean
+  newsSports          Boolean
+  newsTechnology      Boolean
 }
