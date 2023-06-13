@@ -58,3 +58,6 @@ Install tools
 
 Run project in ``dev`` mode
 ``yarn rw dev``
+
+Get the database, if not ran an error will occur
+``yarn rw prisma db push``
