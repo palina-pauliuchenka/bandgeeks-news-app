@@ -26,6 +26,11 @@
   font-family: 'gruppo';
 }
 
+@font-face {
+  src: url("fonts/Playfair/PlayfairDisplay-VariableFont_wght.ttf") format("truetype");
+  font-family: 'playfair';
+}
+
 /**
  * END --- CONNECTING FONTS
 **/

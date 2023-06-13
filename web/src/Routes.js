@@ -48,6 +48,11 @@ const Routes = () => {
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/general" page={GeneralPage} name="general" />
       </Set>
+      {/*<Private unauthenticated="home">*/}
+      {/*  <Set wrap={NewsLayout}>*/}
+      {/*    <Route path="/general" page={GeneralPage} name="general" />*/}
+      {/*  </Set>*/}
+      {/*</Private>*/}
       <Route notfound page={NotFoundPage} />
     </Router>
   )
