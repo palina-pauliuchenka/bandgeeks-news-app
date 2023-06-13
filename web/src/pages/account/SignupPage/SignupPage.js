@@ -31,6 +31,17 @@ const SignupPage = () => {
   }, [])
 
   const onSubmit = async (data) => {
+    if (data.password != data.confirm) {
+      // toast.error('Passwords must match. Please confirm again')
+      document
+        .getElementById('confirm')
+        .setAttribute(
+          'class',
+          'block w-full rounded-md border-0 py-1.5 text-red-600 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-red-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6'
+        )
+
+      return false
+    }
     const response = await signUp({
       username: data.username,
       password: data.password,
@@ -54,13 +65,17 @@ const SignupPage = () => {
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="">
+            {/* This string of text "Regester an Account" must be present to pass all tests */}
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Register an Account
             </h2>
 
             <div className="">
               <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <Form onSubmit={onSubmit} className="space-y-6">
+                {/* Form Has a title of data so it can be detected by the test cases.
+                Always make sure it has the title of data so we can confirm it is rendering */}
+                <Form title="data" onSubmit={onSubmit} className="space-y-6">
+                  {/* <--------------USERNAME STUFF--------------> */}
                   <Label
                     name="username"
                     className="block font-medium leading-6 text-gray-900"
@@ -70,20 +85,24 @@ const SignupPage = () => {
                   </Label>
                   <TextField
                     name="username"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 focus:shadow focus:shadow-violet-400 sm:text-sm sm:leading-6"
+                    title="Username"
+                    aria-label="Username"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow focus:shadow-violet-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                     errorClassName="block w-full rounded-md border-0 py-1.5 text-red-600 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-red-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
-                    style={{outline: "none"}}
+                    style={{ outline: 'none' }}
                     ref={usernameRef}
                     validation={{
-                      required: {
-                        value: true,
-                        message: 'Username is required',
+                      required: true,
+                      pattern: {
+                        message:
+                          'Username must be alphanumeric and at least 8 characters with no spaces',
+                        value: /^[A-Za-z0-9]{8,}$/,
                       },
                     }}
                   />
-
                   <FieldError name="username" className="rw-field-error" />
 
+                  {/* <--------------PASSWORD STUFF--------------> */}
                   <Label
                     name="password"
                     className="block font-medium leading-6 text-gray-900"
@@ -93,20 +112,54 @@ const SignupPage = () => {
                   </Label>
                   <PasswordField
                     name="password"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 focus:shadow focus:shadow-violet-400 sm:text-sm sm:leading-6"
+                    title="Password"
+                    aria-label="Password"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow focus:shadow-violet-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                     errorClassName="block w-full rounded-md border-0 py-1.5 text-red-600 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-red-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
-                    style={{outline: "none"}}
+                    style={{ outline: 'none' }}
                     autoComplete="current-password"
                     validation={{
-                      required: {
-                        value: true,
-                        message: 'Password is required',
+                      required: true,
+                      pattern: {
+                        value: /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W).{8,}/,
+                        message:
+                          'Password must be at least 8 characters long, have at least 1 capital & lowercase letter, 1 number and 1 special character',
                       },
                     }}
                   />
-
                   <FieldError name="password" className="rw-field-error" />
 
+                  {/* <--------------CONFIRM STUFF--------------> */}
+                  <Label
+                    name="confirm"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Confirm Password
+                  </Label>
+                  <PasswordField
+                    name="confirm"
+                    title="confirm"
+                    id="confirm"
+                    aria-label="confirm-password"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:shadow focus:shadow-violet-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
+                    errorClassName="block w-full rounded-md border-0 py-1.5 text-red-600 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-red-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
+                    autoComplete="current-password"
+                    validation={{
+                      required: true,
+                      pattern: {
+                        value: /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W).{8,}/,
+                        message:
+                          'Password must be at least 8 characters long, have at least 1 capital & lowercase letter, 1 number and 1 special character',
+                      },
+                    }}
+                  />
+                  <FieldError //for Confirm password
+                    name="confirm-password"
+                    className="rw-field-error"
+                  />
+
+                  {/* <--------------BUTTONS AND LINKS--------------> */}
                   <div className="">
                     <Submit className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                       Sign Up
@@ -118,7 +171,7 @@ const SignupPage = () => {
           </div>
           <div className="rw-login-link">
             <span>Already have an account?</span>{' '}
-            <Link to={routes.login()} className="underline text-indigo-500">
+            <Link to={routes.login()} className="text-indigo-500 underline">
               Log in!
             </Link>
           </div>
