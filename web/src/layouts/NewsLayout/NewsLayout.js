@@ -1,11 +1,18 @@
 import { Link, routes } from '@redwoodjs/router'
 import {useAuth} from "src/auth";
+import {useState} from "react";
 
 import njit from './njit.svg.png'
 import ywcc from './ywcc.png'
 
 const NewsLayout = ({ children }) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
+  // const [refreshing, setRefreshing] = useState(false);
+  //
+  // const handleRefreshClick = () => {
+  //   setRefreshing(true);
+  //   navigate(window.location.pathname, { state: { refresh: true } });
+  // };
 
   return (
     <>
@@ -44,14 +51,51 @@ const NewsLayout = ({ children }) => {
           <ul className={"text-sm capitalize font-bold flex justify-between"}>
             <li>
               {isAuthenticated ? (
-                <div className={"relative font-bold"}>
-                  <i className="fa-solid fa-user-tie mr-3"></i>
-                    <span className={"uppercase"}>{currentUser.email}</span>{' '}<i className="fa-solid fa-caret-down mx-2 -rotate-90"></i>
-                    <button type="button" onClick={logOut}>
-                      Logout
-                    </button>
-                </div>
-              ) : (
+                <>
+
+                  <div className="relative ml-3">
+                    <div>
+                      <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                              className="flex items-center rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                              id="user-menu-button"
+                              type="button"
+                      >
+                        <i className="text-2xl fa-regular fa-circle-user"></i><i
+                        className="ml-1 fa-solid fa-caret-down fa-xs"></i>
+                      </button>
+                    </div>
+
+                    <div
+                      className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
+                      <p className={"block px-4 py-2 text-sm text-gray-600 border-b "}>
+                        <span className={"lowercase font-medium font-mono py-2"}>Signed in as</span> <br/>
+
+                        <span className={"uppercase font-bold py-2"}>{currentUser.email}</span>
+                      </p>
+                      <Link
+                        to={routes.settings()}
+                        className="block px-4 py-2 text-sm text-gray-700"
+                        role="menuitem"
+                      >
+                        Settings
+                      </Link>
+                      <Link
+                        className="block px-4 py-2 text-sm text-gray-700"
+                        role="menuitem"
+                        tabIndex="-1"
+                        id="user-menu-item-2"
+                      >
+                        <button type="button" onClick={logOut}>
+                          Sign Out
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+
+                </>
+
+                ) : (
                 <Link to={routes.login()}
                       className={"py-2 px-5 border border-gray-900 rounded-full hover:bg-gray-900 hover:border-gray-900 hover:text-white"}>
                   <i className="fa-solid fa-user-tie mr-2"></i>Login</Link>
@@ -60,6 +104,22 @@ const NewsLayout = ({ children }) => {
           </ul>
         </div>
       </header>
+
+      {/* Button to be clicked to refresh the page */}
+      <div className="relative z-50">
+        <button
+          className={"fixed right-10 bottom-10 border border-gray-300 shadow rounded py-2 px-3 bg-white"}
+          // onClick={handleRefreshClick()}
+        >
+
+          <i className="fa-solid fa-arrows-rotate"></i>
+          {/*{refreshing ? (*/}
+          {/*  <i className="fa-solid fa-spinner animate-spin"></i>*/}
+          {/*) : (*/}
+          {/*  <i className="fa-solid fa-arrows-rotate"></i>*/}
+          {/*)}*/}
+        </button>
+      </div>
 
       {children}
 
