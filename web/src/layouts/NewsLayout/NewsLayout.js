@@ -8,12 +8,10 @@ import ywcc from './ywcc.png'
 
 const NewsLayout = ({ children }) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
-  // const [refreshing, setRefreshing] = useState(false);
   //
-  // const handleRefreshClick = () => {
-  //   setRefreshing(true);
-  //   navigate(window.location.pathname, { state: { refresh: true } });
-  // };
+  const handleRefreshClick = () => {
+    window.location.reload()
+  }
   return (
     <>
       <header className={'px-12 py-6 text-gray-900'}>
@@ -71,7 +69,7 @@ const NewsLayout = ({ children }) => {
           className={
             'fixed bottom-10 right-10 rounded border border-gray-300 bg-white px-3 py-2 shadow'
           }
-          // onClick={handleRefreshClick()}
+          onClick={handleRefreshClick}
         >
           <i className="fa-solid fa-arrows-rotate"></i>
           {/*{refreshing ? (*/}
