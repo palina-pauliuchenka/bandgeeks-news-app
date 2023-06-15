@@ -1,10 +1,27 @@
 import { db } from 'src/lib/db'
-import { setupTestDatabase } from 'src/lib/test'
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 // Creating a Test Suite called "User"
 describe('User', () => {
   beforeAll(async () => {
-    await setupTestDatabase()
+    // Creates a Sample User
+    await prisma.user.create({
+      data: {
+        name: 'Jane Doe',
+        email: 'janedoe123', // email right now is acting as the username
+        hashedPassword: 'hashedPassword',
+        salt: 'salt',
+        resetToken: null,
+        resetTokenExpiresAt: null,
+        newsGeneral: true,
+        newsBusiness: false,
+        newsHealth: false,
+        newsScience: false,
+        newsSports: false,
+        newsTechnology: false,
+      },
+    })
   })
 
   afterAll(async () => {
@@ -38,7 +55,8 @@ describe('User', () => {
 
     // Assertions
     expect(createdUser).toBeDefined()
-    expect(createdUser.name).toBeDefined(userData.name)
+    expect(createdUser.name).toBeDefined()
+    expect(createdUser.name).toBe(userData.name)
     expect(retrievedUser).toEqual(createdUser)
   })
 
