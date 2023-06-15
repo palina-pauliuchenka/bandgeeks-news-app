@@ -31,6 +31,8 @@ const TechnologyPage = () => {
     return dateObj.toLocaleDateString(undefined, options);
   };
 
+  console.log('Articles:', articles);
+
   return (
     <>
       <MetaTags title="Technology" description="Technology page" />
