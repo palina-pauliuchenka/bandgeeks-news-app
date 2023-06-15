@@ -9,12 +9,12 @@ export const setupTestDatabase = async() => {
   await prisma.user.create({
     data: {
       name: 'Jane Doe',
-      email: 'janedoe123',
+      email: 'janedoe123', // email right now is acting as the username
       hashedPassword: 'hashedPassword',
       salt: 'salt',
       resetToken: null,
       resetTokenExpiresAt: null,
-      newsGeneral: false,
+      newsGeneral: true,
       newsBusiness: false,
       newsHealth: false,
       newsScience: false,
