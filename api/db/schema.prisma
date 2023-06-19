@@ -16,4 +16,10 @@ model User {
   salt                String
   resetToken          String?
   resetTokenExpiresAt DateTime?
+  newsGeneral         Boolean   @default(false)
+  newsBusiness        Boolean   @default(false)
+  newsHealth          Boolean   @default(false)
+  newsScience         Boolean   @default(false)
+  newsSports          Boolean   @default(false)
+  newsTechnology      Boolean   @default(false)
 }
