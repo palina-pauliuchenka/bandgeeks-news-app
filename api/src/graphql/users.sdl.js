@@ -16,7 +16,8 @@ export const schema = gql`
   }
 
   type Mutation {
-    createUser(input: CreateUserInput!): User!
+    createUser(input: CreateUserInput!): User! @skipAuth
+    updateUser(id: Int!, input: UpdateUserInput!): User! @skipAuth
   }
 
   input CreateUserInput {
@@ -32,5 +33,20 @@ export const schema = gql`
     newsScience: Boolean!
     newsSports: Boolean!
     newsTechnology: Boolean!
+  }
+
+  input UpdateUserInput {
+    name: String
+    email: String
+    hashedPassword: String
+    salt: String
+    resetToken: String
+    resetTokenExpiresAt: DateTime
+    newsGeneral: Boolean
+    newsBusiness: Boolean
+    newsHealth: Boolean
+    newsScience: Boolean
+    newsSports: Boolean
+    newsTechnology: Boolean
   }
 `;

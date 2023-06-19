@@ -18,6 +18,7 @@ model User {
   resetTokenExpiresAt DateTime?
   newsGeneral         Boolean   @default(false)
   newsBusiness        Boolean   @default(false)
+  newsEntertainment   Boolean   @default(false)
   newsHealth          Boolean   @default(false)
   newsScience         Boolean   @default(false)
   newsSports          Boolean   @default(false)
