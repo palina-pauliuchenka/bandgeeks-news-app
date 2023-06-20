@@ -9,6 +9,7 @@ export const schema = gql`
     resetTokenExpiresAt: DateTime
     newsGeneral: Boolean!
     newsBusiness: Boolean!
+    newsEntertainment: Boolean!
     newsHealth: Boolean!
     newsScience: Boolean!
     newsSports: Boolean!
@@ -29,6 +30,7 @@ export const schema = gql`
     resetTokenExpiresAt: DateTime
     newsGeneral: Boolean!
     newsBusiness: Boolean!
+    newsEntertainment: Boolean!
     newsHealth: Boolean!
     newsScience: Boolean!
     newsSports: Boolean!
@@ -44,9 +46,10 @@ export const schema = gql`
     resetTokenExpiresAt: DateTime
     newsGeneral: Boolean
     newsBusiness: Boolean
+    newsEntertainment: Boolean
     newsHealth: Boolean
     newsScience: Boolean
     newsSports: Boolean
     newsTechnology: Boolean
   }
-`;
+`
