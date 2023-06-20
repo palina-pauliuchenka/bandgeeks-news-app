@@ -6,6 +6,9 @@ import SettingsPage from './SettingsPage'
 //   https://redwoodjs.com/docs/testing#testing-pages-layouts
 
 describe('SettingsPage', () => {
+  it('renders the icons successfully', ()=>{
+    expect(screen.getByRole('checkbox', { name: 'General' })).not.toThrow() //To Be implemented in the next sprint
+  })
   it('renders the options successfully', () => {
     expect(() => {
       render(<SettingsPage />)
