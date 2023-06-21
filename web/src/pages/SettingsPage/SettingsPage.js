@@ -1,7 +1,8 @@
-import { Link, routes } from '@redwoodjs/router'
-import { MetaTags, useMutation, useQuery} from '@redwoodjs/web'
-import { useAuth } from 'src/auth'
 import { Form, useForm, useFormContext, CheckboxField } from '@redwoodjs/forms'
+import { Link, routes } from '@redwoodjs/router'
+import { MetaTags, useMutation, useQuery } from '@redwoodjs/web'
+
+import { useAuth } from 'src/auth'
 const EDITUSER = gql`
   mutation EditUserMutation(
     $General: Boolean!
@@ -29,33 +30,50 @@ const EDITUSER = gql`
     }
   }
 `
+const getusr = gql`
+  query User($id: Int!) {
+    fetchUserbyId(id: $id) {
+      newsGeneral
+      newsBusiness
+      newsEntertainment
+      newsHealth
+      newsScience
+      newsSports
+      newsTechnology
+    }
+  }
+`
 // Holy Fuckles It's Knuckles, the amount of mental hoops I have to jump through just to understand this GQL syntax
 const SettingsPage = () => {
   const [create] = useMutation(EDITUSER)
   const { isAuthenticated, currentUser, logOut } = useAuth()
-
+  const { data, loading, error } = useQuery(getusr, {
+    variables: { id: currentUser.id },
+  })
+  if (loading) return <div>Loading...</div>
+  console.log(data.fetchUserbyId)
   const runQuery = (event) => {
     var counter = 0
-    for(var x in event){
-      if(event[x] == true) counter=counter+1;
+    for (var x in event) {
+      if (event[x] == true) counter = counter + 1
     }
     console.log(event, counter)
-    if (counter == 0){
+    if (counter == 0) {
       return false
     }
     create({
       variables: {
-        General:     event['General'],
+        General: event['General'],
         Business: event['Business'],
-        Entertainment : event['Entertainment'],
+        Entertainment: event['Entertainment'],
         Health: event['Health'],
         Science: event['Science'],
         Sports: event['Sports'],
         Technology: event['Technology'],
-        Username: currentUser.id
-      }
-    })//*/
-    window.location.href=routes.home()
+        Username: currentUser.id,
+      },
+    }) //*/
+    window.location.href = routes.home()
     return true
   }
 
@@ -208,8 +226,8 @@ const SettingsPage = () => {
                     <label className="relative mr-5 inline-flex cursor-pointer items-center">
                       <CheckboxField
                         type="checkbox"
-
                         name="General"
+                        defaultChecked={data.fetchUserbyId.newsGeneral}
                         className="peer sr-only"
                       />
                       <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
@@ -221,8 +239,8 @@ const SettingsPage = () => {
                     <label className="relative mr-5 inline-flex cursor-pointer items-center">
                       <CheckboxField
                         type="checkbox"
-
                         name="Business"
+                        defaultChecked={data.fetchUserbyId.newsBusiness}
                         className="peer sr-only"
                       />
                       <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
@@ -234,8 +252,8 @@ const SettingsPage = () => {
                     <label className="relative mr-5 inline-flex cursor-pointer items-center">
                       <CheckboxField
                         type="checkbox"
-
                         name="Entertainment"
+                        defaultChecked={data.fetchUserbyId.newsEntertainment}
                         className="peer sr-only"
                       />
                       <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
@@ -247,8 +265,8 @@ const SettingsPage = () => {
                     <label className="relative mr-5 inline-flex cursor-pointer items-center">
                       <CheckboxField
                         type="checkbox"
-
                         name="Health"
+                        defaultChecked={data.fetchUserbyId.newsHealth}
                         className="peer sr-only"
                       />
                       <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
@@ -260,8 +278,8 @@ const SettingsPage = () => {
                     <label className="relative mr-5 inline-flex cursor-pointer items-center">
                       <CheckboxField
                         type="checkbox"
-
                         name="Science"
+                        defaultChecked={data.fetchUserbyId.newsScience}
                         className="peer sr-only"
                       />
                       <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
@@ -273,8 +291,8 @@ const SettingsPage = () => {
                     <label className="relative mr-5 inline-flex cursor-pointer items-center">
                       <CheckboxField
                         type="checkbox"
-
                         name="Sports"
+                        defaultChecked={data.fetchUserbyId.newsSports}
                         className="peer sr-only"
                       />
                       <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
@@ -286,8 +304,8 @@ const SettingsPage = () => {
                     <label className="relative mr-5 inline-flex cursor-pointer items-center">
                       <CheckboxField
                         type="checkbox"
-
                         name="Technology"
+                        defaultChecked={data.fetchUserbyId.newsTechnology}
                         className="peer sr-only"
                       />
                       <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
