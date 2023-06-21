@@ -1,4 +1,4 @@
-import { db } from 'src/lib/db';
+import { db } from 'src/lib/db'
 
 export const createUser = async ({ input }) => {
   const {
@@ -14,8 +14,8 @@ export const createUser = async ({ input }) => {
     newsHealth,
     newsScience,
     newsSports,
-    newsTechnology
-  } = input;
+    newsTechnology,
+  } = input
 
   return await db.user.create({
     data: {
@@ -31,10 +31,10 @@ export const createUser = async ({ input }) => {
       newsHealth,
       newsScience,
       newsSports,
-      newsTechnology
-    }
-  });
-};
+      newsTechnology,
+    },
+  })
+}
 
 export const updateUser = async ({ id, input }) => {
   const {
@@ -50,8 +50,8 @@ export const updateUser = async ({ id, input }) => {
     newsHealth,
     newsScience,
     newsSports,
-    newsTechnology
-  } = input;
+    newsTechnology,
+  } = input
 
   return await db.user.update({
     where: { id },
@@ -68,7 +68,11 @@ export const updateUser = async ({ id, input }) => {
       newsHealth,
       newsScience,
       newsSports,
-      newsTechnology
-    }
-  });
-};
+      newsTechnology,
+    },
+  })
+}
+
+export const fetchUserbyId = async ({ id }) => {
+  return db.user.findUnique({ where: { id: id } })
+}
