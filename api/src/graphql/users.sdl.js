@@ -20,9 +20,8 @@ export const schema = gql`
     createUser(input: CreateUserInput!): User! @skipAuth
     updateUser(id: Int!, input: UpdateUserInput!): User! @skipAuth
   }
-
-  type Query{
-    fetchUserbyId(input: userID!): User!
+  type Query {
+    fetchUserbyId(id: Int!): User! @skipAuth
   }
 
   input CreateUserInput {
@@ -55,9 +54,5 @@ export const schema = gql`
     newsScience: Boolean
     newsSports: Boolean
     newsTechnology: Boolean
-  }
-
-  input userID{
-    id: Int!
   }
 `
