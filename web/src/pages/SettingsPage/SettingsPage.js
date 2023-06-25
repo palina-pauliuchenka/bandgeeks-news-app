@@ -2,6 +2,8 @@ import { Form, useForm, useFormContext, CheckboxField } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags, useMutation, useQuery } from '@redwoodjs/web'
 
+import ChooseAvatar from "src/components/ChooseAvatar";
+
 import { useAuth } from 'src/auth'
 const EDITUSER = gql`
   mutation EditUserMutation(
@@ -84,7 +86,7 @@ const SettingsPage = () => {
       <Form
         action={routes.home()}
         onSubmit={runQuery}
-        className={'mx-auto max-w-4xl py-24'}
+        className={'mx-auto max-w-4xl py-24 px-6'}
       >
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
@@ -96,227 +98,115 @@ const SettingsPage = () => {
               share.
             </p>
 
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="col-span-full">
-                <label
-                  htmlFor="photo"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Choose Avatar
-                </label>
-                <div className="mt-5 flex items-center gap-x-3">
-                  <div className={'flex justify-between'}>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-regular fa-circle-user text-2xl"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-hippo"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-fish"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-dragon"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-otter"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-kiwi-bird"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-worm"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-spider"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-shrimp"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-paw"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-dove"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-dog"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-crow"></i>
-                    </button>
-                    <button
-                      className={
-                        'mr-4 flex h-12 w-12 items-center justify-center rounded-full border hover:bg-purple-800 hover:text-white'
-                      }
-                    >
-                      <i className="fa-xl fa-solid fa-cat"></i>
-                    </button>
-                  </div>
+            <div className="mt-10">
 
-                  {/*<button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Change</button>*/}
-                </div>
-              </div>
+              <ChooseAvatar></ChooseAvatar>
+
             </div>
           </div>
-
-          <div className="border-gray-900/10 pb-12">
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="col-span-full">
-                <label
-                  htmlFor="photo"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Set-up Your news preferences
-                </label>
-                <div className="mt-5 flex items-center gap-x-3">
-                  <div className="flex flex-col gap-y-4">
-                    <label className="relative mr-5 inline-flex cursor-pointer items-center">
-                      <CheckboxField
-                        type="checkbox"
-                        name="General"
-                        defaultChecked={data.fetchUserbyId.newsGeneral}
-                        className="peer sr-only"
-                      />
-                      <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                      <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+          <div className="mt-10">
+            <div className="">
+              <label
+                htmlFor="photo"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Set-up Your news preferences
+              </label>
+              <div className="mt-5 flex items-center gap-x-3">
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
+                  <label className="relative mr-5 inline-flex cursor-pointer items-center">
+                    <CheckboxField
+                      type="checkbox"
+                      name="General"
+                      defaultChecked={data.fetchUserbyId.newsGeneral}
+                      className="peer sr-only"
+                    />
+                    <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
                         General
                       </span>
-                    </label>
+                  </label>
 
-                    <label className="relative mr-5 inline-flex cursor-pointer items-center">
-                      <CheckboxField
-                        type="checkbox"
-                        name="Business"
-                        defaultChecked={data.fetchUserbyId.newsBusiness}
-                        className="peer sr-only"
-                      />
-                      <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                      <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                  <label className="relative mr-5 inline-flex cursor-pointer items-center">
+                    <CheckboxField
+                      type="checkbox"
+                      name="Business"
+                      defaultChecked={data.fetchUserbyId.newsBusiness}
+                      className="peer sr-only"
+                    />
+                    <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
                         Business
                       </span>
-                    </label>
+                  </label>
 
-                    <label className="relative mr-5 inline-flex cursor-pointer items-center">
-                      <CheckboxField
-                        type="checkbox"
-                        name="Entertainment"
-                        defaultChecked={data.fetchUserbyId.newsEntertainment}
-                        className="peer sr-only"
-                      />
-                      <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                      <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                  <label className="relative mr-5 inline-flex cursor-pointer items-center">
+                    <CheckboxField
+                      type="checkbox"
+                      name="Entertainment"
+                      defaultChecked={data.fetchUserbyId.newsEntertainment}
+                      className="peer sr-only"
+                    />
+                    <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
                         Entertainment
                       </span>
-                    </label>
+                  </label>
 
-                    <label className="relative mr-5 inline-flex cursor-pointer items-center">
-                      <CheckboxField
-                        type="checkbox"
-                        name="Health"
-                        defaultChecked={data.fetchUserbyId.newsHealth}
-                        className="peer sr-only"
-                      />
-                      <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                      <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                  <label className="relative mr-5 inline-flex cursor-pointer items-center">
+                    <CheckboxField
+                      type="checkbox"
+                      name="Health"
+                      defaultChecked={data.fetchUserbyId.newsHealth}
+                      className="peer sr-only"
+                    />
+                    <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
                         Health
                       </span>
-                    </label>
+                  </label>
 
-                    <label className="relative mr-5 inline-flex cursor-pointer items-center">
-                      <CheckboxField
-                        type="checkbox"
-                        name="Science"
-                        defaultChecked={data.fetchUserbyId.newsScience}
-                        className="peer sr-only"
-                      />
-                      <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                      <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                  <label className="relative mr-5 inline-flex cursor-pointer items-center">
+                    <CheckboxField
+                      type="checkbox"
+                      name="Science"
+                      defaultChecked={data.fetchUserbyId.newsScience}
+                      className="peer sr-only"
+                    />
+                    <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
                         Science
                       </span>
-                    </label>
+                  </label>
 
-                    <label className="relative mr-5 inline-flex cursor-pointer items-center">
-                      <CheckboxField
-                        type="checkbox"
-                        name="Sports"
-                        defaultChecked={data.fetchUserbyId.newsSports}
-                        className="peer sr-only"
-                      />
-                      <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                      <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                  <label className="relative mr-5 inline-flex cursor-pointer items-center">
+                    <CheckboxField
+                      type="checkbox"
+                      name="Sports"
+                      defaultChecked={data.fetchUserbyId.newsSports}
+                      className="peer sr-only"
+                    />
+                    <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
                         Sports
                       </span>
-                    </label>
+                  </label>
 
-                    <label className="relative mr-5 inline-flex cursor-pointer items-center">
-                      <CheckboxField
-                        type="checkbox"
-                        name="Technology"
-                        defaultChecked={data.fetchUserbyId.newsTechnology}
-                        className="peer sr-only"
-                      />
-                      <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                      <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                  <label className="relative mr-5 inline-flex cursor-pointer items-center">
+                    <CheckboxField
+                      type="checkbox"
+                      name="Technology"
+                      defaultChecked={data.fetchUserbyId.newsTechnology}
+                      className="peer sr-only"
+                    />
+                    <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
                         Technology
                       </span>
-                    </label>
-                  </div>
-
-                  {/*<button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Change</button>*/}
+                  </label>
                 </div>
+
+                {/*<button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Change</button>*/}
               </div>
             </div>
           </div>
