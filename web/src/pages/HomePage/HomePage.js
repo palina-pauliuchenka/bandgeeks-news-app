@@ -14,11 +14,17 @@ const HomePage = () => {
   useEffect(() => {
     // fetching data from newsapi
     const fetchArticles = async () => {
+      const getParam = new URL(window.location.href).searchParams.get('q')
+      console.log(getParam)
+      // const getParam = 'Trump'
       const url =
-        'https://newsapi.org/v2/top-headlines?' + // looking for top news
-        'country=us&' + // country
-        'apiKey=09610701367a48349b3fe5d64c9f3d9b' // api key
-
+        getParam == ''
+          ? 'https://newsapi.org/v2/top-headlines?' + // looking for top news
+            'country=us&' + // country
+            'apiKey=34432fbc8cc0463e9f045ab8d9bcbd62' // api key
+          : 'https://newsapi.org/v2/everything?q=' +
+            encodeURIComponent(getParam) +
+            '&apiKey=34432fbc8cc0463e9f045ab8d9bcbd62' // api key
       try {
         // fetching articles from api ande converting to json
         const response = await fetch(url)
