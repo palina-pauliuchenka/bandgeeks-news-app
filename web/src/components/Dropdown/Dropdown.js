@@ -15,6 +15,7 @@ const ListElements = () => {
         <Link
           to={routes.login()}
           className={'block border-b px-4 py-2 text-sm text-gray-700'}
+          aria-label="login-link"
         >
           <i className="fa-solid fa-user-tie mr-2"></i>Login
         </Link>
@@ -79,7 +80,7 @@ function Dropdown() {
         onClick={handleClick}
       >
         {isAuthenticated ? (
-          <div className={'flex items-center'}>
+          <div className={'flex items-center'} aria-label="user-icon">
             <i className="fa-regular fa-circle-user md:fa-2xl fa-xl mr-1"></i>
             <i className="fa-solid fa-caret-down"></i>
           </div>
