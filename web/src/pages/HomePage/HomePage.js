@@ -18,7 +18,7 @@ const HomePage = () => {
   const userName = currentUser ? currentUser.email : ''; // this was just a test. I kept it here incase I ever need to access this 
 
 const{ data } = useQuery(UserPreferences, {
-  variables: { userId: currentUser.email },
+  variables: { userId: userName },
 });
 
 const userPref = data?.fetchUser || {};
