@@ -12,7 +12,7 @@ const BusinessPage = () => {
       const url =
         'https://newsapi.org/v2/top-headlines?' +
         'country=us&category=business' + '&pageSize=10&page=' + PageNUM +
-        'apiKey=f60f382f482740ce82b48fed910506d5';
+        '&apiKey=f60f382f482740ce82b48fed910506d5';
 
       try {
         const response = await fetch(url);
