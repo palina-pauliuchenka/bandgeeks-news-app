@@ -54,12 +54,12 @@ const HomePage = () => {
         getParam == '' || getParam == null
           ? 'https://newsapi.org/v2/top-headlines?category=' +
             encodeURIComponent(section) +
-            '&sortBy=publishedAt&country=us&page=' +
+            '&sortBy=publishedAt&country=us&pageSize=20&page=' +
             pageNo + // country
             '&apiKey=34432fbc8cc0463e9f045ab8d9bcbd62' // api key
           : 'https://newsapi.org/v2/everything?q=' +
             encodeURIComponent(getParam) +
-            '&sortBy=publishedAt&page=' +
+            '&sortBy=publishedAt&pageSize=20&page=' +
             pageNo +
             '&apiKey=34432fbc8cc0463e9f045ab8d9bcbd62' // api key
       try {
@@ -73,7 +73,7 @@ const HomePage = () => {
       }
     }
     if (section != true) getArticles()
-  }, [section])
+  }, [section, pageNo])
 
   // formating publishedAt to have only date
   const formatDate = (timestamp) => {
@@ -120,6 +120,27 @@ const HomePage = () => {
               </article>
             ))}
           </TopNewsSlider>
+          <form>
+            <input
+              type="hidden"
+              name="q"
+              value={
+                new URL(window.location.href).searchParams.get('q') == null
+                  ? ''
+                  : new URL(window.location.href).searchParams.get('q')
+              }
+            />
+            <button
+              name="page"
+              value={Number(pageNo) <= 0 ? 1 : Number(pageNo) - 1}
+            >
+              Last page
+            </button>
+            <button name="page" value={Number(pageNo) + 1}>
+              Next page
+            </button>
+          </form>
+
           <PoliticalNews></PoliticalNews>
         </div>
         <div>
