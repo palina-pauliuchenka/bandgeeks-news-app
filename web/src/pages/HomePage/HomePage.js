@@ -7,6 +7,7 @@ import Discussions from 'src/components/Discussions'
 import PoliticalNews from 'src/components/PoliticalNews'
 import Search from 'src/components/Search'
 import TopNewsSlider from 'src/components/TopNewsSlider'
+const API_KEY = process.env.API_KEY;
 
 const getusr = gql`
   query User($id: Int!) {
@@ -54,14 +55,14 @@ const HomePage = () => {
         getParam == '' || getParam == null
           ? 'https://newsapi.org/v2/top-headlines?category=' +
             encodeURIComponent(section) +
-            '&sortBy=publishedAt&country=us&pageSize=10&page=' +
+            '&sortBy=publishedAt&country=us&pageSize=3&page=' +
             PageNUM + // country
-            '&apiKey=f60f382f482740ce82b48fed910506d5' // api key
+            '&apiKey=' + API_KEY// api key
           : 'https://newsapi.org/v2/everything?q=' +
             encodeURIComponent(getParam) +
-            '&sortBy=publishedAt&pageSize=10&page=' +
+            '&sortBy=publishedAt&pageSize=3&page=' +
             PageNUM +
-            '&apiKey=34432fbc8cc0463e9f045ab8d9bcbd62' // api key
+            '&apiKey=' + API_KEY// api key
       try {
         // fetching articles from api ande converting to json
         console.log('articles have been set to:', url)

@@ -1,7 +1,7 @@
 import { Link, routes } from '@redwoodjs/router';
 import { MetaTags } from '@redwoodjs/web';
 import { useState, useEffect } from 'react';
-
+const API_KEY = process.env.API_KEY;
 const GeneralPage = () => {
   // Initialize state for storing articles fetched from the API
   const [articles, setArticles] = useState([]);
@@ -13,7 +13,7 @@ const GeneralPage = () => {
       const url =
         'https://newsapi.org/v2/top-headlines?' + // looking for top news
         'country=us&' + '&pageSize=10&page=' + PageNUM +// country
-        '&apiKey=f60f382f482740ce82b48fed910506d5'; // api key
+        '&apiKey=' + API_KEY; // api key
 
       try {
         // fetching articles from api ande converting to json
