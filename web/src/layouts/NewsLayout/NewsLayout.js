@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
@@ -7,19 +9,22 @@ import njit from './njit.svg.png'
 import ywcc from './ywcc.png'
 
 const NewsLayout = ({ children }) => {
-  const { isAuthenticated, currentUser, logOut } = useAuth()
-  //
+  const { isAuthenticated } = useAuth()
+  const [refreshing, setRefresh] = useState(false)
+
   const handleRefreshClick = () => {
     window.location.reload()
+    setRefresh(true)
   }
+
   return (
     <>
-      <header className={'px-12 py-6 text-gray-900'}>
+      <header className={'px-6 py-6 text-gray-900 md:px-12'}>
         <div className={'flex items-center justify-between'}>
-          <h1 className={'font-chomsky text-4xl'}>
+          <h1 className={'font-chomsky text-2xl md:text-4xl'}>
             <Link to={routes.home()}>The Bikini Bottom News</Link>
           </h1>
-          <nav>
+          <nav className={'hidden lg:block'}>
             <ul className={'font-serif text-sm font-bold'}>
               <li className={'mx-3 inline-block'}>
                 <Link to={routes.general()}>General</Link>
@@ -47,16 +52,21 @@ const NewsLayout = ({ children }) => {
           <ul className={'flex justify-between text-sm font-bold capitalize'}>
             <li>
               {isAuthenticated ? (
-                <Dropdown></Dropdown>
+                <Dropdown />
               ) : (
-                <Link
-                  to={routes.login()}
-                  className={
-                    'rounded-full border border-gray-900 px-5 py-2 hover:border-gray-900 hover:bg-gray-900 hover:text-white'
-                  }
-                >
-                  <i className="fa-solid fa-user-tie mr-2"></i>Login
-                </Link>
+                <>
+                  <Link
+                    to={routes.login()}
+                    className={
+                      'hidden rounded-full border border-gray-900 px-5 py-2 hover:border-gray-900 hover:bg-gray-900 hover:text-white lg:block'
+                    }
+                  >
+                    <i className="fa-solid fa-user-tie mr-2"></i>Login
+                  </Link>
+                  <div className={"block lg:hidden"}>
+                    <Dropdown />
+                  </div>
+                </>
               )}
             </li>
           </ul>
@@ -71,12 +81,11 @@ const NewsLayout = ({ children }) => {
           }
           onClick={handleRefreshClick}
         >
-          <i className="fa-solid fa-arrows-rotate"></i>
-          {/*{refreshing ? (*/}
-          {/*  <i className="fa-solid fa-spinner animate-spin"></i>*/}
-          {/*) : (*/}
-          {/*  <i className="fa-solid fa-arrows-rotate"></i>*/}
-          {/*)}*/}
+          {refreshing ? (
+            <i className="fa-solid fa-spinner animate-spin"></i>
+          ) : (
+            <i className="fa-solid fa-arrows-rotate"></i>
+          )}
         </button>
       </div>
 

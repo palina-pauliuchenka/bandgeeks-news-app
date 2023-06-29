@@ -5,14 +5,15 @@ import { useState, useEffect } from 'react';
 const GeneralPage = () => {
   // Initialize state for storing articles fetched from the API
   const [articles, setArticles] = useState([]);
+  const [PageNUM, setPageNUM] = useState(1);
 
   useEffect(() => {
     // fetching data from newsapi
     const fetchArticles = async () => {
       const url =
         'https://newsapi.org/v2/top-headlines?' + // looking for top news
-        'country=us&' + // country
-        'apiKey=09610701367a48349b3fe5d64c9f3d9b'; // api key
+        'country=us&' + '&pageSize=10&page=' + PageNUM +// country
+        '&apiKey=f60f382f482740ce82b48fed910506d5'; // api key
 
       try {
         // fetching articles from api ande converting to json
@@ -25,7 +26,7 @@ const GeneralPage = () => {
     };
 
     fetchArticles();
-  }, []);
+  }, [PageNUM]);
 
   // formating publishedAt to have only date
   const formatDate = (timestamp) => {
@@ -34,12 +35,29 @@ const GeneralPage = () => {
     return dateObj.toLocaleDateString(undefined, options);
   };
 
+  const next = () => {
+    setPageNUM(PageNUM + 1)
+  };
+
+  const prev = () => {
+    if(PageNUM > 1){
+      setPageNUM(PageNUM - 1);
+    }
+  }
+
   return (
     <>
       <MetaTags title="General" description="General page" />
-
+      <button
+              onClick={prev}
+              style={{color:'black', padding: 25, textAlign: 'center', margin: 'auto', right: '50px'}}
+            >
+              Previous
+            </button>
+            <button onClick={next} style={{color: 'black', padding: 25, textAlign: 'center', margin: 'auto', right: '100px'}}>
+              Next
+        </button>
       <div className={"p-12 text-gray-900 relative"}>
-
         {articles.map((article, index) => (
           <article key={index} className={"max-w-7xl mx-auto mt-6 p-6 grid md:grid-cols-2 grid-cols-1 gap-16"}>
             <div className={"my-auto"}>

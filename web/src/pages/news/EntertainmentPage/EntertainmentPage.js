@@ -5,13 +5,14 @@ import {useEffect, useState} from "react";
 const EntertainmentPage = () => {
 
   const [articles, setArticles] = useState([]);
+  const [PageNUM, setPageNUM] = useState(1);
 
   useEffect(() => {
     const fetchArticles = async () => {
       const url =
         'https://newsapi.org/v2/top-headlines?' +
-        'country=us&category=entertainment' +
-        '&apiKey=09610701367a48349b3fe5d64c9f3d9b';
+        'country=us&category=entertainment' + '&pageSize=10&page=' + PageNUM +
+        '&apiKey=f60f382f482740ce82b48fed910506d5';
 
       try {
         const response = await fetch(url);
@@ -24,7 +25,7 @@ const EntertainmentPage = () => {
     };
 
     fetchArticles();
-  }, []);
+  }, [PageNUM]);
 
   const formatDate = (timestamp) => {
     const dateObj = new Date(timestamp);
@@ -32,10 +33,30 @@ const EntertainmentPage = () => {
     return dateObj.toLocaleDateString(undefined, options);
   };
 
+  const next = () => {
+    setPageNUM(PageNUM + 1)
+  };
+
+  const prev = () => {
+    if(PageNUM > 1){
+      setPageNUM(PageNUM - 1);
+    }
+  }
+
+
   return (
     <>
       <MetaTags title="Entertainment" description="Entertainment page" />
-
+      <button
+          name="page"
+          onClick={prev}
+          style={{color:'black', padding: 25}}
+          >
+          Previous
+        </button>
+        <button name="page" onClick={next} style={{color: 'black', padding: 25}}>
+              Next
+        </button>
       <div className="p-12 text-gray-900">
         {articles.map((article, index) => (
           <article

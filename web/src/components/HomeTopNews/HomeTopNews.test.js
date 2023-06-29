@@ -1,14 +1,14 @@
 import { render } from '@redwoodjs/testing/web'
 
-import HealthPage from './HealthPage'
+import HomeTopNews from './HomeTopNews'
 
 //   Improve this test with help from the Redwood Testing Doc:
-//   https://redwoodjs.com/docs/testing#testing-pages-layouts
+//    https://redwoodjs.com/docs/testing#testing-components
 
-describe('HealthPage', () => {
+describe('HomeTopNews', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<HealthPage />)
+      render(<HomeTopNews />)
     }).not.toThrow()
   })
 })

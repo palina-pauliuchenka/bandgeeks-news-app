@@ -1,4 +1,5 @@
 import { screen, render } from '@redwoodjs/testing/web'
+import NewsLayout from 'src/layouts/NewsLayout/NewsLayout'
 
 import Dropdown from './Dropdown'
 
@@ -9,14 +10,15 @@ describe('Dropdown', () => {
   it('renders successfully when logged out', () => {
     expect(() => {
       render(<Dropdown />)
-      expect(screen.getByText('Welcome, Nobody')).toBeInTheDocument()
+      render(<NewsLayout />)
+      expect(screen.getByRole('link', { name: 'Login' })).toBeInTheDocument()
     }).not.toThrow()
   })
   it('renders successfully when logged in', () => {
     expect(() => {
       mockCurrentUser({ email: 'Jimbo' })
       render(<Dropdown />)
-      expect(screen.getByText('Welcome, Jimbo')).toBeInTheDocument()
+      expect(screen.getByLabelText('user-icon')).toBeInTheDocument()
     }).not.toThrow()
   })
 })

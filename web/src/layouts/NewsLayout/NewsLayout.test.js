@@ -20,7 +20,7 @@ describe('NewsLayout', () => {
         screen.getByRole('link', { name: 'Technology' })
       ).toBeInTheDocument()
       expect(
-        screen.getByRole('button', { value: 'Welcome, Nobody' })
+        screen.getByRole('link', { name: 'Login' })
       ).toBeInTheDocument()
     }).not.toThrow()
   })
@@ -40,8 +40,8 @@ describe('NewsLayout', () => {
         screen.getByRole('link', { name: 'Technology' })
       ).toBeInTheDocument()
       expect(
-        screen.getByRole('button', { name: 'Welcome, Jimbo' })
-      ).toBeInTheDocument()
+        screen.getByLabelText('user-icon')
+      ).toBeInTheDocument();
     }).not.toThrow()
   })
 })
