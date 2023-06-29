@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link, routes, useLocation } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 import Dropdown from 'src/components/Dropdown/Dropdown.js'
@@ -10,12 +10,17 @@ import ywcc from './ywcc.png'
 
 const NewsLayout = ({ children }) => {
   const { isAuthenticated } = useAuth()
+  const { pathname } = useLocation()
   const [refreshing, setRefresh] = useState(false)
+
+  const activeRoute = window.localStorage.getItem('activeRoute') || pathname
 
   const handleRefreshClick = () => {
     window.location.reload()
     setRefresh(true)
   }
+
+  window.localStorage.setItem('activeRoute', activeRoute)
 
   return (
     <>
@@ -26,25 +31,25 @@ const NewsLayout = ({ children }) => {
           </h1>
           <nav className={'hidden lg:block'}>
             <ul className={'font-serif text-sm font-bold'}>
-              <li className={'mx-3 inline-block'}>
+              <li className={`${pathname === routes.general() ? 'mx-3 inline-block text-white bg-neutral-950' : 'mx-3 inline-block'}`}>
                 <Link to={routes.general()}>General</Link>
               </li>
-              <li className={'mx-3 inline-block'}>
+              <li className={`${pathname === routes.business() ? 'mx-3 inline-block text-white bg-neutral-950' : 'mx-3 inline-block'}`}>
                 <Link to={routes.business()}>Business</Link>
               </li>
-              <li className={'mx-3 inline-block'}>
+              <li className={`${pathname === routes.entertainment() ? 'mx-3 inline-block text-white bg-neutral-950' : 'mx-3 inline-block'}`}>
                 <Link to={routes.entertainment()}>Entertainment</Link>
               </li>
-              <li className={'mx-3 inline-block'}>
+              <li className={`${pathname === routes.health() ? 'mx-3 inline-block text-white bg-neutral-950' : 'mx-3 inline-block'}`}>
                 <Link to={routes.health()}>Health</Link>
               </li>
-              <li className={'mx-3 inline-block'}>
+              <li className={`${pathname === routes.science() ? 'mx-3 inline-block text-white bg-neutral-950' : 'mx-3 inline-block'}`}>
                 <Link to={routes.science()}>Science</Link>
               </li>
-              <li className={'mx-3 inline-block'}>
+              <li className={`${pathname === routes.sports() ? 'mx-3 inline-block text-white bg-neutral-950' : 'mx-3 inline-block'}`}>
                 <Link to={routes.sports()}>Sports</Link>
               </li>
-              <li className={'mx-3 inline-block'}>
+              <li className={`${pathname === routes.technology() ? 'mx-3 inline-block text-white bg-neutral-950' : 'mx-3 inline-block'}`}>
                 <Link to={routes.technology()}>Technology</Link>
               </li>
             </ul>
