@@ -1,42 +1,79 @@
 import { useState, useEffect } from 'react'
 
-import { MetaTags } from '@redwoodjs/web'
+import { NumberField } from '@redwoodjs/forms'
+import { MetaTags, useQuery } from '@redwoodjs/web'
 
+import { useAuth } from 'src/auth'
 import Discussions from 'src/components/Discussions'
 import PoliticalNews from 'src/components/PoliticalNews'
 import Search from 'src/components/Search'
 import TopNewsSlider from 'src/components/TopNewsSlider'
 
+const getusr = gql`
+  query User($id: Int!) {
+    fetchUserbyId(id: $id) {
+      newsGeneral
+      newsBusiness
+      newsEntertainment
+      newsHealth
+      newsScience
+      newsSports
+      newsTechnology
+    }
+  }
+`
+export const beforeQuery = (props) => {
+  return { variables: props, fetchPolicy: 'cache-and-network' }
+}
 const HomePage = () => {
-  // Initialize state for storing articles fetched from the API
   const [articles, setArticles] = useState([])
+  const [section, setState] = useState('')
+  const { isAuthenticated, currentUser, logOut } = useAuth()
+  const { data, loading, error } = useQuery(getusr, {
+    variables: { id: currentUser == null ? -1 : currentUser.id },
+  })
+  let pageNo = new URL(window.location.href).searchParams.get('page')
+  pageNo = pageNo == null ? 1 : pageNo
+  if (currentUser != null && !loading && section == '') {
+    let tmp = ''
+    for (var x in data.fetchUserbyId) {
+      if (data.fetchUserbyId[x] == true) {
+        tmp = x.substring(4).toLocaleLowerCase()
+      }
+    }
+    setState(tmp)
+  }
 
+  console.log('Section = ', section)
+  // fetching data from newsapi
   useEffect(() => {
-    // fetching data from newsapi
-    const fetchArticles = async () => {
+    const getArticles = async () => {
       const getParam = new URL(window.location.href).searchParams.get('q')
-      console.log(getParam)
-      // const getParam = 'Trump'
-      const url =
-        getParam == ''
-          ? 'https://newsapi.org/v2/top-headlines?' + // looking for top news
-            'country=us&' + // country
-            'apiKey=34432fbc8cc0463e9f045ab8d9bcbd62' // api key
+      console.log('getParam = "', getParam, '"')
+      let url =
+        getParam == '' || getParam == null
+          ? 'https://newsapi.org/v2/top-headlines?category=' +
+            encodeURIComponent(section) +
+            '&sortBy=publishedAt&country=us&page=' +
+            pageNo + // country
+            '&apiKey=34432fbc8cc0463e9f045ab8d9bcbd62' // api key
           : 'https://newsapi.org/v2/everything?q=' +
             encodeURIComponent(getParam) +
+            '&sortBy=publishedAt&page=' +
+            pageNo +
             '&apiKey=34432fbc8cc0463e9f045ab8d9bcbd62' // api key
       try {
         // fetching articles from api ande converting to json
+        console.log('articles have been set to:', url)
         const response = await fetch(url)
-        const json = await response.json()
+        let json = await response.json()
         setArticles(json.articles)
       } catch (error) {
         console.error('Error fetching articles:', error)
       }
     }
-
-    fetchArticles()
-  }, [])
+    if (section != true) getArticles()
+  }, [section])
 
   // formating publishedAt to have only date
   const formatDate = (timestamp) => {
@@ -44,7 +81,8 @@ const HomePage = () => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
     return dateObj.toLocaleDateString(undefined, options)
   }
-
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>An error has occurred... {error.message}</div>
   return (
     <>
       <MetaTags title="General" description="General page" />
