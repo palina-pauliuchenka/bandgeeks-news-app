@@ -9,7 +9,6 @@ const HomePage = () => {
 
   const { generalPref } = useAuth();
 
-
   return (
     <>
       <MetaTags title="Home" description="Home page" />
@@ -17,11 +16,11 @@ const HomePage = () => {
       <main>
 
         <div className="relative w-full h-[calc(100vh-100px)]">
-          <div className="absolute transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          
             {currentUser ? (
-            <> <GeneralPage /> </>
-              ) : ( <GeneralPage /> )}
-          </div>
+            <> <GeneralPage numberOfArticles = {5} /> </>
+              ) : ( <GeneralPage numberOfArticles = {5}/> )}
+
         </div>
       </main>
     </>
