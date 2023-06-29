@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 
-import { NumberField } from '@redwoodjs/forms'
 import { MetaTags, useQuery } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
@@ -28,6 +27,7 @@ export const beforeQuery = (props) => {
 const HomePage = () => {
   const [articles, setArticles] = useState([])
   const [section, setState] = useState('')
+  const [PageNUM, setPageNUM] = useState(1);
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const { data, loading, error } = useQuery(getusr, {
     variables: { id: currentUser == null ? -1 : currentUser.id },
@@ -54,13 +54,13 @@ const HomePage = () => {
         getParam == '' || getParam == null
           ? 'https://newsapi.org/v2/top-headlines?category=' +
             encodeURIComponent(section) +
-            '&sortBy=publishedAt&country=us&pageSize=20&page=' +
-            pageNo + // country
-            '&apiKey=34432fbc8cc0463e9f045ab8d9bcbd62' // api key
+            '&sortBy=publishedAt&country=us&pageSize=10&page=' +
+            PageNUM + // country
+            '&apiKey=f60f382f482740ce82b48fed910506d5' // api key
           : 'https://newsapi.org/v2/everything?q=' +
             encodeURIComponent(getParam) +
-            '&sortBy=publishedAt&pageSize=20&page=' +
-            pageNo +
+            '&sortBy=publishedAt&pageSize=10&page=' +
+            PageNUM +
             '&apiKey=34432fbc8cc0463e9f045ab8d9bcbd62' // api key
       try {
         // fetching articles from api ande converting to json
@@ -73,7 +73,7 @@ const HomePage = () => {
       }
     }
     if (section != true) getArticles()
-  }, [section, pageNo])
+  }, [section, PageNUM])
 
   // formating publishedAt to have only date
   const formatDate = (timestamp) => {
@@ -81,10 +81,32 @@ const HomePage = () => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
     return dateObj.toLocaleDateString(undefined, options)
   }
+
+  const next = () => {
+    setPageNUM(PageNUM + 1)
+  };
+
+  const prev = () => {
+    if(PageNUM > 1){
+      setPageNUM(PageNUM - 1);
+    }
+  }
+
   if (loading) return <div>Loading...</div>
   return (
     <>
       <MetaTags title="General" description="General page" />
+      <button
+              name="page"
+              /* value={Number(pageNo) <= 0 ? 1 : Number(pageNo) - 1} */
+              onClick={prev}
+              style={{color:'black', padding: 25, textAlign: 'center', margin: 'auto', right: '50px'}}
+            >
+              Previous
+            </button>
+            <button name="page" /*value={Number(pageNo) + 1}*/ onClick={next} style={{color: 'black', padding: 25, textAlign: 'center', margin: 'auto', right: '100px'}}>
+              Next
+            </button>
 
       <div
         className={'relative grid grid-cols-4 gap-x-6 gap-y-6 px-12 text-white'}
@@ -119,26 +141,17 @@ const HomePage = () => {
               </article>
             ))}
           </TopNewsSlider>
-          <form>
-            <input
-              type="hidden"
-              name="q"
-              value={
-                new URL(window.location.href).searchParams.get('q') == null
-                  ? ''
-                  : new URL(window.location.href).searchParams.get('q')
-              }
-            />
             <button
               name="page"
-              value={Number(pageNo) <= 0 ? 1 : Number(pageNo) - 1}
+              /* value={Number(pageNo) <= 0 ? 1 : Number(pageNo) - 1} */
+              onClick={prev}
+              style={{color:'black', padding: 25, textAlign: 'center', margin: 'auto'}}
             >
-              Last page
+              Previous
             </button>
-            <button name="page" value={Number(pageNo) + 1}>
-              Next page
+            <button name="page" /*value={Number(pageNo) + 1}*/ onClick={next} style={{color: 'black', padding: 25, textAlign: 'center', margin: 'auto', right: '100px'}}>
+              Next
             </button>
-          </form>
 
           <PoliticalNews></PoliticalNews>
         </div>

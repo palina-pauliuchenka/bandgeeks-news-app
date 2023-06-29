@@ -9,7 +9,7 @@ const Discussions = () => {
       const url =
         'https://newsapi.org/v2/top-headlines?' + // looking for top news
         'country=us&' + // country
-        'apiKey=09610701367a48349b3fe5d64c9f3d9b' // api key
+        'apiKey=f60f382f482740ce82b48fed910506d5' // api key
 
       try {
         // fetching articles from api ande converting to json
