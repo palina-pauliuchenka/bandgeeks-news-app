@@ -2,7 +2,7 @@ import { Link, routes } from '@redwoodjs/router';
 import { MetaTags } from '@redwoodjs/web';
 import { useState, useEffect } from 'react';
 
-const GeneralPage = () => {
+const GeneralPage = ({numberOfArticles}) => {
   // Initialize state for storing articles fetched from the API
   const [articles, setArticles] = useState([]);
 
@@ -18,7 +18,7 @@ const GeneralPage = () => {
         // fetching articles from api ande converting to json
         const response = await fetch(url);
         const json = await response.json();
-        setArticles(json.articles);
+        setArticles(json.articles.slice(0, numberOfArticles));
       } catch (error) {
         console.error('Error fetching articles:', error);
       }
