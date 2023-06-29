@@ -1,13 +1,27 @@
 import { MetaTags } from '@redwoodjs/web'
 import { useAuth } from 'src/auth'
-import { useEffect, useState } from 'react'
+import { useQuery, gql } from '@apollo/client'
 import GeneralPage from '../news/GeneralPage/GeneralPage'
+import BusinessPage from '../news/BusinessPage/BusinessPage'
+
+const UserPreferences = gql`
+query grabUserPreferences($userId: String!) {
+  fetchUser(id:$userId) {
+    newsGeneral
+    newsBusiness
+  }
+}
+`;
 
 const HomePage = () => {
   const { currentUser } = useAuth();
-  const userName = currentUser ? currentUser.email : '';
+  const userName = currentUser ? currentUser.email : ''; // this was just a test. I kept it here incase I ever need to access this 
 
-  const { generalPref } = useAuth();
+const{ data } = useQuery(UserPreferences, {
+  variables: { userId: currentUser.email },
+});
+
+const userPref = data?.fetchUser || {};
 
   return (
     <>
@@ -15,10 +29,13 @@ const HomePage = () => {
 
       <main>
 
-        <div className="relative w-full h-[calc(100vh-100px)]">
+        <div>
           
             {currentUser ? (
-            <> <GeneralPage numberOfArticles = {5} /> </>
+            <> 
+            {userPref.newsGeneral && <GeneralPage numberOfArticles = {5} />}
+            {userPref.newsBusiness && <BusinessPage numberOfArticles = {5}/>}
+            </>
               ) : ( <GeneralPage numberOfArticles = {5}/> )}
 
         </div>
