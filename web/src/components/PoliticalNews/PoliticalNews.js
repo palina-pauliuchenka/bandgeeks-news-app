@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+const API_KEY = process.env.API_KEY;
 const PoliticalNews = () => {
   const [articles, setArticles] = useState([])
 
@@ -9,7 +10,7 @@ const PoliticalNews = () => {
       const url =
         'https://newsapi.org/v2/everything?' +
         'q=political&' +
-        'apiKey=f60f382f482740ce82b48fed910506d5' // api key
+        'apiKey=' + API_KEY; // api key
 
       try {
         // fetching articles from api and converting to json
@@ -18,7 +19,7 @@ const PoliticalNews = () => {
         const articlesWithImage = json.articles.filter(
           (article) => article.urlToImage
         ) // Filter articles with image
-        setArticles(articlesWithImage.slice(0, 20)) // Limiting to the first 20 articles with image
+        setArticles(articlesWithImage.slice(0, 5)) // Limiting to the first 5 articles with image
       } catch (error) {
         console.error('Error fetching articles:', error)
       }

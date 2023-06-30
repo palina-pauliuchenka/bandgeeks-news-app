@@ -1,7 +1,7 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import {useEffect, useState} from "react";
-
+const API_KEY = process.env.API_KEY;
 const SciencePage = () => {
 
   const [articles, setArticles] = useState([]);
@@ -12,7 +12,7 @@ const SciencePage = () => {
       const url =
         'https://newsapi.org/v2/top-headlines?' +
         'country=us&category=science' + '&pageSize=10&page=' + PageNUM +
-        '&apiKey=f60f382f482740ce82b48fed910506d5';
+        '&apiKey=' + API_KEY;
 
       try {
         const response = await fetch(url);
