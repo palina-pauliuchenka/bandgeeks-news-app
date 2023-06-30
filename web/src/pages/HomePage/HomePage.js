@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
 
+import { Link, routes, useLocation } from '@redwoodjs/router'
 import { MetaTags, useQuery } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
-import Discussions from 'src/components/Discussions'
-import PoliticalNews from 'src/components/PoliticalNews'
 import Search from 'src/components/Search'
-import TopNewsSlider from 'src/components/TopNewsSlider'
-const API_KEY = process.env.API_KEY;
+
+const API_KEY = process.env.API_KEY
 
 const getusr = gql`
   query User($id: Int!) {
@@ -22,108 +21,176 @@ const getusr = gql`
     }
   }
 `
-export const beforeQuery = (props) => {
-  return { variables: props, fetchPolicy: 'cache-and-network' }
-}
+
 const HomePage = () => {
   const [articles, setArticles] = useState([])
   const [section, setState] = useState('')
-  const [PageNUM, setPageNUM] = useState(1);
-  const { isAuthenticated, currentUser, logOut } = useAuth()
-  const { data, loading, error } = useQuery(getusr, {
+  const [PageNUM, setPageNUM] = useState(1)
+  const [activeCategory, setActiveCategory] = useState('')
+  const { currentUser } = useAuth()
+  const { data, loading } = useQuery(getusr, {
     variables: { id: currentUser == null ? -1 : currentUser.id },
   })
-  let pageNo = new URL(window.location.href).searchParams.get('page')
-  pageNo = pageNo == null ? 1 : pageNo
-  if (currentUser != null && !loading && section == '') {
+
+  const categories = [
+    'general',
+    'business',
+    'entertainment',
+    'technology',
+    'sports',
+    'health',
+    'science',
+  ]
+
+  const { pathname } = useLocation()
+  const activeRoute = window.localStorage.getItem('activeRoute') || pathname
+  window.localStorage.setItem('activeRoute', activeRoute)
+
+  if (currentUser != null && !loading && section === '') {
     let tmp = ''
-    for (var x in data.fetchUserbyId) {
-      if (data.fetchUserbyId[x] == true) {
+    for (let x in data.fetchUserbyId) {
+      if (data.fetchUserbyId[x] === true) {
         tmp = x.substring(4).toLocaleLowerCase()
       }
     }
     setState(tmp)
   }
 
-  console.log('Section = ', section)
-  // fetching data from newsapi
   useEffect(() => {
     const getArticles = async () => {
       const getParam = new URL(window.location.href).searchParams.get('q')
-      console.log('getParam = "', getParam, '"')
       let url =
-        getParam == '' || getParam == null
-          ? 'https://newsapi.org/v2/top-headlines?category=' +
-            encodeURIComponent(section) +
-            '&sortBy=publishedAt&country=us&pageSize=3&page=' +
-            PageNUM + // country
-            '&apiKey=' + API_KEY// api key
-          : 'https://newsapi.org/v2/everything?q=' +
-            encodeURIComponent(getParam) +
-            '&sortBy=publishedAt&pageSize=3&page=' +
-            PageNUM +
-            '&apiKey=' + API_KEY// api key
+        getParam === '' || getParam == null
+          ? `https://newsapi.org/v2/top-headlines?category=${encodeURIComponent(
+              section
+            )}&sortBy=publishedAt&country=us&page=${PageNUM}&apiKey=${API_KEY}`
+          : `https://newsapi.org/v2/top-headlines?category=${encodeURIComponent(
+              getParam
+            )}&sortBy=publishedAt&page=${PageNUM}&apiKey=${API_KEY}`
+
       try {
-        // fetching articles from api ande converting to json
-        console.log('articles have been set to:', url)
         const response = await fetch(url)
         let json = await response.json()
-        setArticles(json.articles)
+
+        const filteredArticles = json.articles.filter(
+          (article) =>
+            article.urlToImage && !article.url.includes('youtube.com')
+        )
+
+        const slicedArticles = filteredArticles.slice(0, 12)
+        setArticles(slicedArticles)
       } catch (error) {
         console.error('Error fetching articles:', error)
       }
     }
-    if (section != true) getArticles()
+
+    if (section !== '') getArticles()
   }, [section, PageNUM])
 
-  // formating publishedAt to have only date
   const formatDate = (timestamp) => {
     const dateObj = new Date(timestamp)
-    const options = { year: 'numeric', month: 'long', day: 'numeric' }
-    return dateObj.toLocaleDateString(undefined, options)
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    }
+    return dateObj.toLocaleString(undefined, options)
   }
 
   const next = () => {
     setPageNUM(PageNUM + 1)
-  };
+  }
 
   const prev = () => {
-    if(PageNUM > 1){
-      setPageNUM(PageNUM - 1);
+    if (PageNUM > 1) {
+      setPageNUM(PageNUM - 1)
     }
   }
 
   if (loading) return <div>Loading...</div>
+
   return (
     <>
       <MetaTags title="General" description="General page" />
-      <button
-              name="page"
-              /* value={Number(pageNo) <= 0 ? 1 : Number(pageNo) - 1} */
-              onClick={prev}
-              style={{color:'black', padding: 25, textAlign: 'center', margin: 'auto', right: '50px'}}
-            >
-              Previous
-            </button>
-            <button name="page" /*value={Number(pageNo) + 1}*/ onClick={next} style={{color: 'black', padding: 25, textAlign: 'center', margin: 'auto', right: '100px'}}>
-              Next
-            </button>
 
-      <div
-        className={'relative grid grid-cols-4 gap-x-6 gap-y-6 px-12 text-white'}
-      >
-        <div className={'col-span-3'}>
-          <TopNewsSlider>
-            {articles.map((article, index) => (
+      <div className={'relative mx-auto px-6 md:w-11/12 md:px-12'}>
+        <div
+          className={
+            'mb-6 border-b-8 border-double border-gray-600 py-3 text-center text-gray-900'
+          }
+        >
+          <nav className={''}>
+            <ul
+              className={
+                'mx-auto text-xs sm:text-sm md:max-w-7xl md:px-12 lg:flex lg:items-center lg:justify-between'
+              }
+            >
+              <li
+                className={`${
+                  pathname === routes.home() && activeCategory === ''
+                    ? 'my-1 inline-block rounded bg-purple-600 px-2 py-1 text-white'
+                    : 'mx-3 my-1 inline-block'
+                }`}
+              >
+                <Link
+                  to={routes.home()}
+                  onClick={() => {
+                    setState('')
+                    setActiveCategory('')
+                  }}
+                >
+                  Home
+                </Link>
+              </li>
+              {categories.map((category) => (
+                <li
+                  key={category}
+                  className={`${
+                    activeCategory === category
+                      ? 'my-1 inline-block rounded bg-purple-600 px-2 py-1 text-white'
+                      : 'mx-3 my-1 inline-block'
+                  }`}
+                >
+                  <Link
+                    onClick={() => {
+                      setState(category)
+                      setActiveCategory(category)
+                    }}
+                    className={'cursor-pointer'}
+                  >
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Search />
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div
+          className={
+            'columns-1 text-white sm:columns-2 lg:columns-3  2xl:columns-4'
+          }
+        >
+          {articles.map((article, index) => {
+            const aspectClass =
+              Math.random() < 0.5 ? 'aspect-square' : 'aspect-video'
+
+            return (
               <article
                 key={index}
-                className={'flex h-96 flex-col justify-end bg-cover p-6'}
+                className={`w-full ${aspectClass} mb-4 flex flex-col justify-end bg-black bg-cover p-6`}
                 style={{
                   backgroundImage: `linear-gradient(to top, black, transparent), url(${article.urlToImage})`,
                 }}
               >
                 <div className={'flex h-full flex-col justify-end'}>
-                  <p className={'mb-3 font-gruppo text-sm'}>
+                  <p className={'font-gruppo text-sm'}>
                     {formatDate(article.publishedAt)}
                   </p>
                   <a
@@ -133,32 +200,35 @@ const HomePage = () => {
                     rel="noreferrer"
                   >
                     <h2
-                      className={'font-playfair text-lg font-bold lg:text-xl'}
+                      className={
+                        'font-playfair text-xs font-bold sm:text-base xl:text-xl'
+                      }
                     >
                       {article.title}
                     </h2>
                   </a>
                 </div>
               </article>
-            ))}
-          </TopNewsSlider>
-            <button
-              name="page"
-              /* value={Number(pageNo) <= 0 ? 1 : Number(pageNo) - 1} */
-              onClick={prev}
-              style={{color:'black', padding: 25, textAlign: 'center', margin: 'auto'}}
-            >
-              Previous
-            </button>
-            <button name="page" /*value={Number(pageNo) + 1}*/ onClick={next} style={{color: 'black', padding: 25, textAlign: 'center', margin: 'auto', right: '100px'}}>
-              Next
-            </button>
-
-          <PoliticalNews></PoliticalNews>
+            )
+          })}
         </div>
-        <div>
-          <Search></Search>
-          <Discussions></Discussions>
+        <div className={'mt-6 flex w-full justify-between'}>
+          <button
+            name="page"
+            onClick={prev}
+            className={'text-center text-black'}
+          >
+            <i className="fa-solid fa-chevron-left mr-2"></i>
+            Previous
+          </button>
+          <button
+            name="page"
+            onClick={next}
+            className={'text-center text-black'}
+          >
+            Next
+            <i className="fa-solid fa-chevron-right ml-2"></i>
+          </button>
         </div>
       </div>
     </>

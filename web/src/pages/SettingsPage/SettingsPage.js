@@ -1,10 +1,12 @@
-import { Form, useForm, useFormContext, CheckboxField } from '@redwoodjs/forms'
+import React from 'react'
+
+import { Form, CheckboxField } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags, useMutation, useQuery } from '@redwoodjs/web'
 
-import ChooseAvatar from "src/components/ChooseAvatar";
-
 import { useAuth } from 'src/auth'
+import ChooseAvatar from 'src/components/ChooseAvatar'
+
 const EDITUSER = gql`
   mutation EditUserMutation(
     $General: Boolean!
@@ -48,8 +50,8 @@ const getusr = gql`
 // Holy Fuckles It's Knuckles, the amount of mental hoops I have to jump through just to understand this GQL syntax
 const SettingsPage = () => {
   const [create] = useMutation(EDITUSER)
-  const { isAuthenticated, currentUser, logOut } = useAuth()
-  const { data, loading, error } = useQuery(getusr, {
+  const { currentUser } = useAuth()
+  const { data, loading } = useQuery(getusr, {
     variables: { id: currentUser.id },
   })
   if (loading) return <div>Loading...</div>
@@ -57,10 +59,10 @@ const SettingsPage = () => {
   const runQuery = (event) => {
     var counter = 0
     for (var x in event) {
-      if (event[x] == true) counter = counter + 1
+      if (event[x] === true) counter = counter + 1
     }
     console.log(event, counter)
-    if (counter == 0) {
+    if (counter === 0) {
       return false
     }
     create({
@@ -86,10 +88,53 @@ const SettingsPage = () => {
       <Form
         action={routes.home()}
         onSubmit={runQuery}
-        className={'mx-auto max-w-4xl py-24 px-6'}
+        className={'mx-auto max-w-4xl px-6 py-24'}
       >
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
+            <nav className="mb-6 flex" aria-label="Breadcrumb">
+              <ol className="inline-flex items-center space-x-1 md:space-x-3">
+                <li className="inline-flex items-center">
+                  <p className="inline-flex items-center text-sm font-medium text-gray-700 dark:text-gray-400">
+                    <svg
+                      aria-hidden="true"
+                      className="mr-2 h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                    </svg>
+                    TBBN
+                  </p>
+                </li>
+                <li>
+                  <div className="flex items-center">
+                    <svg
+                      aria-hidden="true"
+                      className="h-6 w-6 text-gray-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+
+                    <Link
+                      className="ml-1 text-sm font-medium text-gray-700 hover:text-purple-600 dark:text-purple-400 dark:hover:text-white md:ml-2"
+                      to={routes.home()}
+                    >
+                      Home
+                    </Link>
+                  </div>
+                </li>
+              </ol>
+            </nav>
+
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               Profile
             </h2>
@@ -99,9 +144,7 @@ const SettingsPage = () => {
             </p>
 
             <div className="mt-10">
-
               <ChooseAvatar></ChooseAvatar>
-
             </div>
           </div>
           <div className="mt-10">
@@ -123,8 +166,8 @@ const SettingsPage = () => {
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
                     <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
-                        General
-                      </span>
+                      General
+                    </span>
                   </label>
 
                   <label className="relative mr-5 inline-flex cursor-pointer items-center">
@@ -136,8 +179,8 @@ const SettingsPage = () => {
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
                     <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
-                        Business
-                      </span>
+                      Business
+                    </span>
                   </label>
 
                   <label className="relative mr-5 inline-flex cursor-pointer items-center">
@@ -149,8 +192,8 @@ const SettingsPage = () => {
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
                     <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
-                        Entertainment
-                      </span>
+                      Entertainment
+                    </span>
                   </label>
 
                   <label className="relative mr-5 inline-flex cursor-pointer items-center">
@@ -162,8 +205,8 @@ const SettingsPage = () => {
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
                     <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
-                        Health
-                      </span>
+                      Health
+                    </span>
                   </label>
 
                   <label className="relative mr-5 inline-flex cursor-pointer items-center">
@@ -175,8 +218,8 @@ const SettingsPage = () => {
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
                     <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
-                        Science
-                      </span>
+                      Science
+                    </span>
                   </label>
 
                   <label className="relative mr-5 inline-flex cursor-pointer items-center">
@@ -188,8 +231,8 @@ const SettingsPage = () => {
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
                     <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
-                        Sports
-                      </span>
+                      Sports
+                    </span>
                   </label>
 
                   <label className="relative mr-5 inline-flex cursor-pointer items-center">
@@ -201,8 +244,8 @@ const SettingsPage = () => {
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
                     <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
-                        Technology
-                      </span>
+                      Technology
+                    </span>
                   </label>
                 </div>
 
@@ -223,7 +266,7 @@ const SettingsPage = () => {
           </Link>
           <button
             type="submit"
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Save
           </button>
