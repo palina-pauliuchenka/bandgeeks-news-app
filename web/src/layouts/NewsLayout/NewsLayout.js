@@ -29,17 +29,21 @@ const NewsLayout = ({ children }) => {
 
   return (
     <>
-      <header className={'mx-auto w-11/12 pt-6 text-gray-900 md:px-12'}>
+      <header
+        className={
+          'mx-auto w-11/12 pt-6 text-gray-900 dark:text-white md:px-12'
+        }
+      >
         <div
           className={
-            'grid w-full border-b border-gray-600 pb-3 grid-cols-2 md:grid-cols-3 items-center'
+            'grid w-full grid-cols-2 items-center border-b border-gray-600 pb-3 dark:border-white md:grid-cols-3'
           }
         >
-          <p className={"text-sm md:block hidden"}>
-            {currentDate}
-          </p>
+          <p className={'hidden text-sm md:block'}>{currentDate}</p>
           <h1
-            className={'justify-self-center font-chomsky text-center xs:text-lg sm:text-xl md:text-5xl'}
+            className={
+              'xs:text-lg justify-self-center text-center font-chomsky sm:text-xl md:text-5xl'
+            }
           >
             <Link to={routes.home()}>The Bikini Bottom News</Link>
           </h1>
@@ -75,7 +79,7 @@ const NewsLayout = ({ children }) => {
       <div className="relative z-50 hidden lg:block">
         <button
           className={
-            'fixed bottom-10 right-10 rounded border border-gray-300 bg-white px-3 py-2 shadow'
+            'fixed bottom-10 right-10 rounded border border-gray-300 bg-white px-3 py-2 shadow dark:border-gray-100 dark:bg-gray-900 hover:dark:bg-gray-700'
           }
           onClick={handleRefreshClick}
         >
@@ -89,10 +93,14 @@ const NewsLayout = ({ children }) => {
 
       {children}
 
-      <footer className={'mx-auto w-11/12 py-12 text-gray-900 md:px-12'}>
+      <footer
+        className={
+          'mx-auto w-11/12 py-12 text-gray-900 dark:text-white md:px-12 '
+        }
+      >
         <div
           className={
-            'w-full border-t border-gray-600 pt-6 text-center font-gruppo'
+            'w-full border-t border-gray-600 pt-6 text-center font-gruppo dark:border-white'
           }
         >
           Built with pure suffering{' '}

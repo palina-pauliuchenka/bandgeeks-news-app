@@ -88,7 +88,7 @@ const SettingsPage = () => {
       <Form
         action={routes.home()}
         onSubmit={runQuery}
-        className={'mx-auto max-w-4xl px-6 py-24'}
+        className={'mx-auto max-w-4xl px-6 py-24 text-gray-900 dark:text-white'}
       >
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
@@ -125,17 +125,20 @@ const SettingsPage = () => {
                     </svg>
 
                     <Link
-                      className="ml-1 text-sm font-medium text-gray-700 hover:text-purple-600 dark:text-purple-400 dark:hover:text-white md:ml-2"
+                      className="ml-1 text-sm font-medium text-gray-700 hover:text-purple-600 dark:text-purple-400 md:ml-2"
                       to={routes.home()}
                     >
                       Home
                     </Link>
                   </div>
                 </li>
+                <li>
+                {/* Add button for dark theme here */}
+                </li>
               </ol>
             </nav>
 
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
+            <h2 className="text-base font-semibold leading-7">
               Profile
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
@@ -151,7 +154,7 @@ const SettingsPage = () => {
             <div className="">
               <label
                 htmlFor="photo"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6"
               >
                 Set-up Your news preferences
               </label>
@@ -165,7 +168,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <span className="ml-3 text-sm font-medium">
                       General
                     </span>
                   </label>
@@ -178,7 +181,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <span className="ml-3 text-sm font-medium">
                       Business
                     </span>
                   </label>
@@ -191,7 +194,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <span className="ml-3 text-sm font-medium">
                       Entertainment
                     </span>
                   </label>
@@ -204,7 +207,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <span className="ml-3 text-sm font-medium">
                       Health
                     </span>
                   </label>
@@ -217,7 +220,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <span className="ml-3 text-sm font-medium">
                       Science
                     </span>
                   </label>
@@ -230,7 +233,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <span className="ml-3 text-sm font-medium">
                       Sports
                     </span>
                   </label>
@@ -243,7 +246,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <span className="ml-3 text-sm font-medium">
                       Technology
                     </span>
                   </label>

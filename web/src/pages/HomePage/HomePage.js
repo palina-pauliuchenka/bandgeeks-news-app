@@ -22,6 +22,10 @@ const getusr = gql`
   }
 `
 
+export const beforeQuery = (props) => {
+  return { variables: props, fetchPolicy: 'cache-and-network' }
+}
+
 const HomePage = () => {
   const [articles, setArticles] = useState([])
   const [section, setState] = useState('')
@@ -119,13 +123,13 @@ const HomePage = () => {
       <div className={'relative mx-auto px-6 md:w-11/12 md:px-12'}>
         <div
           className={
-            'mb-6 border-b-8 border-double border-gray-600 py-3 text-center text-gray-900'
+            'mb-6 border-b-8 border-double border-gray-600 dark:border-white py-3 text-center text-gray-900'
           }
         >
           <nav className={''}>
             <ul
               className={
-                'mx-auto text-xs sm:text-sm md:max-w-7xl md:px-12 lg:flex lg:items-center lg:justify-between'
+                'mx-auto text-xs sm:text-sm md:max-w-7xl md:px-12 lg:flex lg:items-center lg:justify-between  dark:text-white'
               }
             >
               <li
@@ -212,11 +216,11 @@ const HomePage = () => {
             )
           })}
         </div>
-        <div className={'mt-6 flex w-full justify-between'}>
+        <div className={'mt-6 flex w-full justify-between  dark:border-white '}>
           <button
             name="page"
             onClick={prev}
-            className={'text-center text-black'}
+            className={'text-center'}
           >
             <i className="fa-solid fa-chevron-left mr-2"></i>
             Previous
@@ -224,7 +228,7 @@ const HomePage = () => {
           <button
             name="page"
             onClick={next}
-            className={'text-center text-black'}
+            className={'text-center'}
           >
             Next
             <i className="fa-solid fa-chevron-right ml-2"></i>
