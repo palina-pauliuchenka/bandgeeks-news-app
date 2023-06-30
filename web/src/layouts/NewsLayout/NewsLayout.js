@@ -31,6 +31,9 @@ const NewsLayout = ({ children }) => {
           </h1>
           <nav className={'hidden lg:block'}>
             <ul className={'font-serif text-sm font-bold'}>
+              <li className={`${pathname === routes.home() ? 'mx-3 inline-block text-white bg-neutral-950' : 'mx-3 inline-block'}`}>
+                <Link to={routes.home()}>Home</Link>
+              </li>
               <li className={`${pathname === routes.general() ? 'mx-3 inline-block text-white bg-neutral-950' : 'mx-3 inline-block'}`}>
                 <Link to={routes.general()}>General</Link>
               </li>
