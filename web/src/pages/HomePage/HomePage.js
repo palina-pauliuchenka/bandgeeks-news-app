@@ -62,13 +62,13 @@ const HomePage = () => {
 
   useEffect(() => {
     const getArticles = async () => {
-      const getParam = new URL(window.location.href).searchParams.get('q')
+      let getParam = new URL(window.location.href).searchParams.get('q')
       let url =
         getParam === '' || getParam == null
           ? `https://newsapi.org/v2/top-headlines?category=${encodeURIComponent(
               section
             )}&sortBy=publishedAt&country=us&page=${PageNUM}&apiKey=${API_KEY}`
-          : `https://newsapi.org/v2/top-headlines?category=${encodeURIComponent(
+          : `https://newsapi.org/v2/everything?q=${encodeURIComponent(
               getParam
             )}&sortBy=publishedAt&page=${PageNUM}&apiKey=${API_KEY}`
 
@@ -88,8 +88,8 @@ const HomePage = () => {
       }
     }
 
-    if (section !== '') getArticles()
-  }, [section, PageNUM])
+    if (!loading) getArticles()
+  }, [section, PageNUM, loading])
 
   const formatDate = (timestamp) => {
     const dateObj = new Date(timestamp)
@@ -123,13 +123,13 @@ const HomePage = () => {
       <div className={'relative mx-auto px-6 md:w-11/12 md:px-12'}>
         <div
           className={
-            'mb-6 border-b-8 border-double border-gray-600 dark:border-white py-3 text-center text-gray-900'
+            'mb-6 border-b-8 border-double border-gray-600 py-3 text-center text-gray-900 dark:border-white'
           }
         >
           <nav className={''}>
             <ul
               className={
-                'mx-auto text-xs sm:text-sm md:max-w-7xl md:px-12 lg:flex lg:items-center lg:justify-between  dark:text-white'
+                'mx-auto text-xs dark:text-white sm:text-sm md:max-w-7xl md:px-12 lg:flex lg:items-center  lg:justify-between'
               }
             >
               <li
@@ -217,19 +217,11 @@ const HomePage = () => {
           })}
         </div>
         <div className={'mt-6 flex w-full justify-between  dark:border-white '}>
-          <button
-            name="page"
-            onClick={prev}
-            className={'text-center'}
-          >
+          <button name="page" onClick={prev} className={'text-center'}>
             <i className="fa-solid fa-chevron-left mr-2"></i>
             Previous
           </button>
-          <button
-            name="page"
-            onClick={next}
-            className={'text-center'}
-          >
+          <button name="page" onClick={next} className={'text-center'}>
             Next
             <i className="fa-solid fa-chevron-right ml-2"></i>
           </button>
