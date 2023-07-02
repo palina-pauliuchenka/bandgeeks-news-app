@@ -4,6 +4,7 @@ import { Link, routes, useLocation } from '@redwoodjs/router'
 import { MetaTags, useQuery } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
+import Pagination from 'src/components/Pagination'
 import Search from 'src/components/Search'
 
 const API_KEY = process.env.API_KEY
@@ -29,7 +30,8 @@ export const beforeQuery = (props) => {
 const HomePage = () => {
   const [articles, setArticles] = useState([])
   const [section, setState] = useState('')
-  const [PageNUM, setPageNUM] = useState(1)
+  const [totalPages, setTotalPages] = useState()
+  const [pageNUM, setPageNUM] = useState(1)
   const [activeCategory, setActiveCategory] = useState('')
   const { currentUser } = useAuth()
   const { data, loading } = useQuery(getusr, {
@@ -62,34 +64,44 @@ const HomePage = () => {
 
   useEffect(() => {
     const getArticles = async () => {
+      const pageSize = 12
+      let totalArticles = 0
+
       let getParam = new URL(window.location.href).searchParams.get('q')
       let url =
         getParam === '' || getParam == null
           ? `https://newsapi.org/v2/top-headlines?category=${encodeURIComponent(
               section
-            )}&sortBy=publishedAt&country=us&page=${PageNUM}&apiKey=${API_KEY}`
+            )}&sortBy=publishedAt&country=us&page=${pageNUM}&apiKey=${API_KEY}`
           : `https://newsapi.org/v2/everything?q=${encodeURIComponent(
               getParam
-            )}&sortBy=publishedAt&page=${PageNUM}&apiKey=${API_KEY}`
+            )}&sortBy=publishedAt&page=${pageNUM}&apiKey=${API_KEY}`
 
       try {
         const response = await fetch(url)
         let json = await response.json()
 
-        const filteredArticles = json.articles.filter(
-          (article) =>
-            article.urlToImage && !article.url.includes('youtube.com')
-        )
+        // const filteredArticles = json.articles.filter(
+        //   (article) =>
+        //     article.urlToImage && !article.url.includes('youtube.com')
+        // )
 
-        const slicedArticles = filteredArticles.slice(0, 12)
+        totalArticles = json.totalResults // Update totalArticles based on API response
+
+        // const slicedArticles = filteredArticles.slice(0, pageSize)
+
+        const slicedArticles = json.articles.slice(0, pageSize)
         setArticles(slicedArticles)
       } catch (error) {
         console.error('Error fetching articles:', error)
       }
+
+      let totalPages = Math.ceil(totalArticles / pageSize)
+      setTotalPages(totalPages)
     }
 
     if (!loading) getArticles()
-  }, [section, PageNUM, loading])
+  }, [section, pageNUM, loading])
 
   const formatDate = (timestamp) => {
     const dateObj = new Date(timestamp)
@@ -104,13 +116,27 @@ const HomePage = () => {
     return dateObj.toLocaleString(undefined, options)
   }
 
-  const next = () => {
-    setPageNUM(PageNUM + 1)
+  const goToPage = (pageNumber) => {
+    setPageNUM(pageNumber)
   }
 
+  // const next = () => {
+  //   if (pageNUM < totalPages) {
+  //     setPageNUM(pageNUM + 1)
+  //   }
+  // }
+
+  const next = () => {
+    if (pageNUM < totalPages) {
+      const nextPage = pageNUM + 1;
+      if (nextPage === totalPages) {
+        setPageNUM(nextPage);
+      }
+    }
+  };
   const prev = () => {
-    if (PageNUM > 1) {
-      setPageNUM(PageNUM - 1)
+    if (pageNUM > 1) {
+      setPageNUM(pageNUM - 1)
     }
   }
 
@@ -149,6 +175,7 @@ const HomePage = () => {
                   Home
                 </Link>
               </li>
+
               {categories.map((category) => (
                 <li
                   key={category}
@@ -162,6 +189,7 @@ const HomePage = () => {
                     onClick={() => {
                       setState(category)
                       setActiveCategory(category)
+                      setPageNUM(1) // Reset page number when changing category
                     }}
                     className={'cursor-pointer'}
                   >
@@ -169,6 +197,7 @@ const HomePage = () => {
                   </Link>
                 </li>
               ))}
+
               <li>
                 <Search />
               </li>
@@ -176,6 +205,7 @@ const HomePage = () => {
           </nav>
         </div>
 
+        {/* ARTICLES SECTION */}
         <div
           className={
             'columns-1 text-white sm:columns-2 lg:columns-3  2xl:columns-4'
@@ -216,15 +246,16 @@ const HomePage = () => {
             )
           })}
         </div>
-        <div className={'mt-6 flex w-full justify-between  dark:border-white '}>
-          <button name="page" onClick={prev} className={'text-center'}>
-            <i className="fa-solid fa-chevron-left mr-2"></i>
-            Previous
-          </button>
-          <button name="page" onClick={next} className={'text-center'}>
-            Next
-            <i className="fa-solid fa-chevron-right ml-2"></i>
-          </button>
+
+        {/* PAGINATION */}
+        <div className={'mt-12 flex justify-center dark:border-white'}>
+          <Pagination
+            totalPages={totalPages}
+            pageNUM={pageNUM}
+            goToPage={goToPage}
+            prev={prev}
+            next={next}
+          />
         </div>
       </div>
     </>

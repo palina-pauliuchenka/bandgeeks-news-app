@@ -35,7 +35,6 @@ var import_graphql_server = require("@redwoodjs/graphql-server");
 var directives_requireAuth_requireAuth = __toESM(require("../directives/requireAuth/requireAuth"));
 var directives_skipAuth_skipAuth = __toESM(require("../directives/skipAuth/skipAuth"));
 var sdls_users_sdl = __toESM(require("../graphql/users.sdl"));
-var services_news = __toESM(require("../services/news"));
 var services_users_users = __toESM(require("../services/users/users"));
 var import_auth = require("../lib/auth");
 var import_db = require("../lib/db");
@@ -46,7 +45,6 @@ directives.skipAuth_skipAuth = directives_skipAuth_skipAuth;
 let sdls = {};
 sdls.users_sdl = sdls_users_sdl;
 let services = {};
-services.news = services_news;
 services.users_users = services_users_users;
 const handler = (0, import_graphql_server.createGraphQLHandler)({
   authDecoder: import_auth_dbauth_api.authDecoder,
