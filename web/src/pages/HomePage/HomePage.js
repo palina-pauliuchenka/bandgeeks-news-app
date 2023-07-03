@@ -81,14 +81,7 @@ const HomePage = () => {
         const response = await fetch(url)
         let json = await response.json()
 
-        // const filteredArticles = json.articles.filter(
-        //   (article) =>
-        //     article.urlToImage && !article.url.includes('youtube.com')
-        // )
-
         totalArticles = json.totalResults // Update totalArticles based on API response
-
-        // const slicedArticles = filteredArticles.slice(0, pageSize)
 
         const slicedArticles = json.articles.slice(0, pageSize)
         setArticles(slicedArticles)
@@ -120,20 +113,20 @@ const HomePage = () => {
     setPageNUM(pageNumber)
   }
 
-  // const next = () => {
-  //   if (pageNUM < totalPages) {
-  //     setPageNUM(pageNUM + 1)
-  //   }
-  // }
-
   const next = () => {
     if (pageNUM < totalPages) {
-      const nextPage = pageNUM + 1;
-      if (nextPage === totalPages) {
-        setPageNUM(nextPage);
-      }
+      setPageNUM(pageNUM + 1)
     }
-  };
+  }
+
+  // const next = () => {
+  //   if (pageNUM < totalPages) {
+  //     const nextPage = pageNUM + 1
+  //     if (nextPage === totalPages) {
+  //       setPageNUM(nextPage)
+  //     }
+  //   }
+  // }
   const prev = () => {
     if (pageNUM > 1) {
       setPageNUM(pageNUM - 1)
