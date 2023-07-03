@@ -1,8 +1,9 @@
 import React from 'react'
 
 import { Form, CheckboxField } from '@redwoodjs/forms'
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { MetaTags, useMutation, useQuery } from '@redwoodjs/web'
+import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 import ChooseAvatar from 'src/components/ChooseAvatar'
@@ -51,18 +52,17 @@ const getusr = gql`
 const SettingsPage = () => {
   const [create] = useMutation(EDITUSER)
   const { currentUser } = useAuth()
-  const { data, loading } = useQuery(getusr, {
+  const { data, loading, error } = useQuery(getusr, {
     variables: { id: currentUser.id },
   })
-  if (loading) return <div>Loading...</div>
-  console.log(data.fetchUserbyId)
+  if (loading || error) return <div>Loading...</div>
   const runQuery = (event) => {
     var counter = 0
     for (var x in event) {
-      if (event[x] === true) counter = counter + 1
+      if (event[x] == true) counter = counter + 1
     }
-    console.log(event, counter)
-    if (counter === 0) {
+    if (counter == 0) {
+      window.alert('Please select at least 1 checkbox')
       return false
     }
     create({
@@ -77,7 +77,7 @@ const SettingsPage = () => {
         Username: currentUser.id,
       },
     }) //*/
-    window.location.href = routes.home()
+    navigate(routes.home())
     return true
   }
 
@@ -87,6 +87,7 @@ const SettingsPage = () => {
 
       <Form
         action={routes.home()}
+        Link={routes.home()}
         onSubmit={runQuery}
         className={'mx-auto max-w-4xl px-6 py-24 text-gray-900 dark:text-white'}
       >
@@ -132,15 +133,11 @@ const SettingsPage = () => {
                     </Link>
                   </div>
                 </li>
-                <li>
-                {/* Add button for dark theme here */}
-                </li>
+                <li>{/* Add button for dark theme here */}</li>
               </ol>
             </nav>
 
-            <h2 className="text-base font-semibold leading-7">
-              Profile
-            </h2>
+            <h2 className="text-base font-semibold leading-7">Profile</h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
               This information will be displayed publicly so be careful what you
               share.
@@ -168,9 +165,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium">
-                      General
-                    </span>
+                    <span className="ml-3 text-sm font-medium">General</span>
                   </label>
 
                   <label className="relative mr-5 inline-flex cursor-pointer items-center">
@@ -181,9 +176,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium">
-                      Business
-                    </span>
+                    <span className="ml-3 text-sm font-medium">Business</span>
                   </label>
 
                   <label className="relative mr-5 inline-flex cursor-pointer items-center">
@@ -207,9 +200,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium">
-                      Health
-                    </span>
+                    <span className="ml-3 text-sm font-medium">Health</span>
                   </label>
 
                   <label className="relative mr-5 inline-flex cursor-pointer items-center">
@@ -220,9 +211,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium">
-                      Science
-                    </span>
+                    <span className="ml-3 text-sm font-medium">Science</span>
                   </label>
 
                   <label className="relative mr-5 inline-flex cursor-pointer items-center">
@@ -233,9 +222,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium">
-                      Sports
-                    </span>
+                    <span className="ml-3 text-sm font-medium">Sports</span>
                   </label>
 
                   <label className="relative mr-5 inline-flex cursor-pointer items-center">
@@ -246,9 +233,7 @@ const SettingsPage = () => {
                       className="peer sr-only"
                     />
                     <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-purple-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-purple-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-purple-800"></div>
-                    <span className="ml-3 text-sm font-medium">
-                      Technology
-                    </span>
+                    <span className="ml-3 text-sm font-medium">Technology</span>
                   </label>
                 </div>
 
@@ -269,6 +254,7 @@ const SettingsPage = () => {
           </Link>
           <button
             type="submit"
+            // onClick={runQuery}
             className="rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Save
