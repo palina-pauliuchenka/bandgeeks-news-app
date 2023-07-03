@@ -84,7 +84,8 @@ const HomePage = () => {
         totalArticles = json.totalResults // Update totalArticles based on API response
 
         const slicedArticles = json.articles.slice(0, pageSize)
-        setArticles(slicedArticles)
+        if (slicedArticles.length > 0 && (getParam != '' || getParam != null))
+          setArticles(slicedArticles)
       } catch (error) {
         console.error('Error fetching articles:', error)
       }
@@ -132,9 +133,14 @@ const HomePage = () => {
       setPageNUM(pageNUM - 1)
     }
   }
-
+  console.log('Total Pages:', articles)
   if (loading) return <div>Loading...</div>
-
+  if (articles == undefined || articles.length == 0)
+    return (
+      <h2 className={'relative mx-auto px-6 md:w-11/12 md:px-12'}>
+        Sorry, looks like we ran out of articles!
+      </h2>
+    )
   return (
     <>
       <MetaTags title="General" description="General page" />
