@@ -10,6 +10,7 @@ import ChooseAvatar from 'src/components/ChooseAvatar'
 
 const EDITUSER = gql`
   mutation EditUserMutation(
+    $DarkMode: Boolean!
     $General: Boolean!
     $Business: Boolean!
     $Entertainment: Boolean!
@@ -22,6 +23,7 @@ const EDITUSER = gql`
     updateUser(
       id: $Username
       input: {
+        darkMode: $DarkMode
         newsGeneral: $General
         newsBusiness: $Business
         newsEntertainment: $Entertainment
@@ -38,6 +40,7 @@ const EDITUSER = gql`
 const getusr = gql`
   query User($id: Int!) {
     fetchUserbyId(id: $id) {
+      darkMode
       newsGeneral
       newsBusiness
       newsEntertainment

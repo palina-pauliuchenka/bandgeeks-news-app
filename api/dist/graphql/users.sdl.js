@@ -40,6 +40,7 @@ const schema = import_graphql_tag.default`
     salt: String!
     resetToken: String
     resetTokenExpiresAt: DateTime
+    darkMode: Boolean!
     newsGeneral: Boolean!
     newsBusiness: Boolean!
     newsEntertainment: Boolean!
@@ -64,6 +65,7 @@ const schema = import_graphql_tag.default`
     salt: String!
     resetToken: String
     resetTokenExpiresAt: DateTime
+    darkMode: Boolean!
     newsGeneral: Boolean!
     newsBusiness: Boolean!
     newsEntertainment: Boolean!
@@ -80,6 +82,7 @@ const schema = import_graphql_tag.default`
     salt: String
     resetToken: String
     resetTokenExpiresAt: DateTime
+    darkMode: Boolean
     newsGeneral: Boolean
     newsBusiness: Boolean
     newsEntertainment: Boolean
