@@ -70,6 +70,7 @@ const SettingsPage = () => {
     }
     create({
       variables: {
+        DarkMode: event['DarkMode'],
         General: event['General'],
         Business: event['Business'],
         Entertainment: event['Entertainment'],
