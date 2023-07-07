@@ -26,6 +26,7 @@ import SignupPage from 'src/pages/account/SignupPage/SignupPage'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Route path="/bubbles" page={BubblesPage} name="bubbles" />
       <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
       <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       <Set wrap={NewsLayout}>
