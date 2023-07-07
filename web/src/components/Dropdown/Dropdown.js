@@ -33,6 +33,9 @@ const ListElements = () => {
             <Link to={routes.settings()}>Settings</Link>
           </div>
           <div className="block px-4 py-2 text-sm">
+            <Link to={routes.bubbles()}>Bubbles Game</Link>
+          </div>
+          <div className="block px-4 py-2 text-sm">
             <button onClick={logOut}>Log Out</button>
           </div>
         </div>
