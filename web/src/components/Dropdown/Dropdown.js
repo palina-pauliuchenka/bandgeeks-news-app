@@ -1,11 +1,18 @@
-import { Link, routes } from '@redwoodjs/router'
+import { Link, routes, useLocation } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 // Results data filtered using categories
 const ListElements = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
+
+  const { pathname } = useLocation()
+  const activeRoute = window.localStorage.getItem('activeRoute') || pathname
+  window.localStorage.setItem('activeRoute', activeRoute)
+
   return (
-    <p className="absolute right-5 z-10 mt-4 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:right-10">
+    <p
+      className="absolute right-4 z-10 mt-4 w-48 origin-top-right rounded-md border bg-white py-1 shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-white dark:bg-gray-700 dark:shadow-white md:right-28 text-gray-700 dark:text-white"
+    >
       {isAuthenticated ? (
         <div className={'border-b px-4 py-2'}>
           <p className={'font-mono font-thin lowercase'}>signed in as</p>
@@ -14,47 +21,18 @@ const ListElements = () => {
       ) : (
         <Link
           to={routes.login()}
-          className={'block border-b px-4 py-2 text-sm text-gray-700'}
+          className={'block border-b px-4 py-2 text-sm'}
           aria-label="login-link"
         >
           <i className="fa-solid fa-user-tie mr-2"></i>Login
         </Link>
       )}
-      <div className="block lg:hidden">
-        <nav className={'py-4'}>
-          <ul
-            className={'ml-1 flex flex-col gap-4 font-serif text-sm font-bold'}
-          >
-            <li className={'mx-3 inline-block'}>
-              <Link to={routes.general()}>General</Link>
-            </li>
-            <li className={'mx-3 inline-block'}>
-              <Link to={routes.business()}>Business</Link>
-            </li>
-            <li className={'mx-3 inline-block'}>
-              <Link to={routes.entertainment()}>Entertainment</Link>
-            </li>
-            <li className={'mx-3 inline-block'}>
-              <Link to={routes.health()}>Health</Link>
-            </li>
-            <li className={'mx-3 inline-block'}>
-              <Link to={routes.science()}>Science</Link>
-            </li>
-            <li className={'mx-3 inline-block'}>
-              <Link to={routes.sports()}>Sports</Link>
-            </li>
-            <li className={'mx-3 inline-block'}>
-              <Link to={routes.technology()}>Technology</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
       {isAuthenticated ? (
         <div className={'border-t'}>
-          <div className="block px-4 py-2 text-sm text-gray-700">
+          <div className="block px-4 py-2 text-sm">
             <Link to={routes.settings()}>Settings</Link>
           </div>
-          <div className="block px-4 py-2 text-sm text-gray-700">
+          <div className="block px-4 py-2 text-sm">
             <button onClick={logOut}>Log Out</button>
           </div>
         </div>
@@ -80,8 +58,12 @@ function Dropdown() {
         onClick={handleClick}
       >
         {isAuthenticated ? (
-          <div className={'flex items-center'} aria-label="user-icon">
-            <i className="fa-regular fa-circle-user md:fa-2xl fa-xl mr-1"></i>
+          <div
+            className={'flex items-center text-sm font-normal'}
+            aria-label="user-icon"
+          >
+            <i className="fa-regular fa-circle-user fa-xl"></i>
+            <p className={'mx-1'}>Account</p>
             <i className="fa-solid fa-caret-down"></i>
           </div>
         ) : (
