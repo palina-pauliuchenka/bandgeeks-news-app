@@ -23,7 +23,7 @@ function Model() {
               </li>
             </ul>
 
-            <footer class="absolute bottom-5 font-mono text-sm text-amber-200">Developed and Designed by Palina & Joey.</footer>
+<!--            <footer class="absolute bottom-5 font-mono text-sm text-amber-200">Developed and Designed by Palina & Joey.</footer>-->
           </div>
         `,
         game: `
@@ -73,7 +73,7 @@ function Model() {
         `,
         rules: `
         <div id="rules" class="relative h-screen  bg-[url('https://e1.pxfuel.com/desktop-wallpaper/935/134/desktop-wallpaper-jelly-fish-fields-spongebob-flower-sky-background.jpg')] bg-cover bg-center">
-          <nav class="max-w-sm mx-auto py-12">
+          <nav class="max-w-sm mx-auto pt-12 pb-36">
             <ul class="flex justify-between text-3xl text-yellow-500 tracking-wide drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] font-rubik">
               <li><a class="hover:text-amber-700 transition delay-100 ease-in-out" href="#main">Home</a></li>
               <li>
@@ -83,12 +83,21 @@ function Model() {
             </ul>
           </nav>
 
-          <div class="max-w-3xl mx-auto">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit voluptates odio sunt officiis facilis eveniet. Debitis adipisci id hic ducimus incidunt pariatur neque nulla eum dolor, dignissimos nemo, excepturi est.
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet dignissimos totam iure quisquam quaerat laborum, ad amet doloribus. Non ad voluptatum esse modi quam porro nobis sint quae eaque labore!
-            Molestiae ut praesentium, eum sed deleniti totam error ab deserunt accusamus veritatis dolorum fugiat! Reprehenderit dolore temporibus rerum nobis nam laudantium, quaerat ut veniam quos molestiae. Non delectus nam illo!
-            Debitis reiciendis quas inventore? A sunt in nemo ullam quam at alias ipsa praesentium labore pariatur, ducimus perspiciatis blanditiis numquam nam voluptates assumenda obcaecati voluptatum natus quo aperiam. Beatae, iste?
-            Recusandae labore aspernatur ab quasi a eaque, temporibus amet iure aperiam, officia reiciendis, eveniet soluta laboriosam? In illum deleniti error, nihil nobis molestiae ducimus dolores obcaecati debitis, nostrum labore sed.
+          <div class="max-w-3xl mx-auto leading-8 bg-[rgba(255,255,255,0.3)] p-8 rounded text-gray-900">
+            <p class="indent-10">These rules outline the basic gameplay mechanics and scoring system for the game you described. You can implement them in your code to create an interactive word-guessing game. Let me know if you need further assistance or have any additional questions!</p>
+            <ol class="list-decimal list-inside ml-5">
+              <li>The user is given a randomly generated word.</li>
+              <li>Each letter of the word is represented as a blue bubble.</li>
+              <li>The user can enter letters from the keyboard to guess the word.</li>
+              <li>If the user enters a letter that exists in the generated word, the corresponding letter bubble will display the letter.</li>
+              <li>If the user enters a wrong letter, a new red bubble will drop from the top of the screen.</li>
+              <li>The user can request up to 3 hints.</li>
+              <li>If the user requests a hint, a green bubble with a letter from the generated word will drop from the top.</li>
+              <li>The user starts with a limited number of attempts to guess the word. If they run out of attempts, the game is over.</li>
+              <li>When the user guesses a correct letter, they earn +10 points to the score.</li>
+              <li>When the user guesses an incorrect letter, they lose -5 points from the score.</li>
+              <li>The score will be saved into a database for future reference.</li>
+            </ol>
           </div>
 
         </div>
