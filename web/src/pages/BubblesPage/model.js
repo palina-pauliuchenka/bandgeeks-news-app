@@ -50,7 +50,7 @@ function Model() {
                 <span class="transition delay-100 ease-in-out"> Score: <span id="score"></span></span>
               </li>
             </ul>
-
+            <div id="answer"></div>
             <div class="flex">
               <div id="wrapper"><canvas id="canvas"></canvas></div>
             </div>
