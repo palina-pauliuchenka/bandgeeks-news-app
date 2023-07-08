@@ -5,9 +5,20 @@
  * to inject Tailwind's styles into your CSS.
  * For more information, see: https://tailwindcss.com/docs/installation#include-tailwind-in-your-css
  */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+/*@import 'tailwindcss/base';*/
+/*@import 'tailwindcss/components';*/
+/*@import 'tailwindcss/utilities';*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .key {
+    @apply uppercase w-12 h-12 rounded border drop-shadow-[2px_2px_#1d4ed8] font-bold bg-blue-400 border-blue-700 hover:border-blue-900 m-2 hover:shadow-inner hover:shadow-blue-500 hover:drop-shadow-none;
+  }
+}
+
 /**
  * END --- SETUP TAILWINDCSS EDIT
  */

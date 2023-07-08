@@ -1,164 +1,76 @@
 {
-  "wordList": [
-    {
-      "word": "SpongeBob",
-      "category": "Main Character"
-    },
-    {
-      "word": "Patrick",
-      "category": "Main Character"
-    },
-    {
-      "word": "Squidward",
-      "category": "Main Character"
-    },
-    {
-      "word": "Sandy",
-      "category": "Main Character"
-    },
-    {
-      "word": "Mr. Krabs",
-      "category": "Main Character"
-    },
-    {
-      "word": "Plankton",
-      "category": "Antagonist"
-    },
-    {
-      "word": "Gary",
-      "category": "Pet"
-    },
-    {
-      "word": "Bikini Bottom",
-      "category": "Location"
-    },
-    {
-      "word": "Jellyfish",
-      "category": "Creature"
-    },
-    {
-      "word": "Krusty Krab",
-      "category": "Restaurant"
-    },
-    {
-      "word": "Chum Bucket",
-      "category": "Restaurant"
-    },
-    {
-      "word": "Pineapple",
-      "category": "Object"
-    },
-    {
-      "word": "Mermaid Man",
-      "category": "Superhero"
-    },
-    {
-      "word": "Barnacle Boy",
-      "category": "Superhero"
-    },
-    {
-      "word": "Bubble Bass",
-      "category": "Character"
-    },
-    {
-      "word": "Bubble Buddy",
-      "category": "Character"
-    },
-    {
-      "word": "Flying Dutchman",
-      "category": "Character"
-    },
-    {
-      "word": "Krusty Krab Pizza",
-      "category": "Food"
-    },
-    {
-      "word": "Nautical nonsense",
-      "category": "Phrase"
-    },
-    {
-      "word": "Anchovies",
-      "category": "Creature"
-    },
-    {
-      "word": "Squilliam",
-      "category": "Character"
-    },
-    {
-      "word": "Plankton's Plan Z",
-      "category": "Plan"
-    },
-    {
-      "word": "Boating School",
-      "category": "Location"
-    },
-    {
-      "word": "Goo Lagoon",
-      "category": "Location"
-    },
-    {
-      "word": "Krabby Patty",
-      "category": "Food"
-    },
-    {
-      "word": "Secret Formula",
-      "category": "Object"
-    },
-    {
-      "word": "Krusty Krab Training Video",
-      "category": "Video"
-    },
-    {
-      "word": "Kelp Forest",
-      "category": "Location"
-    },
-    {
-      "word": "Sea Needle",
-      "category": "Location"
-    },
-    {
-      "word": "Rock Bottom",
-      "category": "Location"
-    },
-    {
-      "word": "Salty Spitoon",
-      "category": "Club"
-    },
-    {
-      "word": "Bikini Atoll",
-      "category": "Location"
-    },
-    {
-      "word": "Patchy the Pirate",
-      "category": "Character"
-    },
-    {
-      "word": "Man Ray",
-      "category": "Character"
-    },
-    {
-      "word": "King Neptune",
-      "category": "Character"
-    },
-    {
-      "word": "Mrs. Puff",
-      "category": "Character"
-    },
-    {
-      "word": "Larry the Lobster",
-      "category": "Character"
-    },
-    {
-      "word": "Bubble Bowl",
-      "category": "Event"
-    },
-    {
-      "word": "Glove World",
-      "category": "Amusement Park"
-    },
-    {
-      "word": "Sandy's Treedome",
-      "category": "Location"
-    }
-  ]
+  "wordList": {
+    "Character": [
+      "SpongeBob",
+      "Patrick",
+      "Squidward",
+      "Sandy",
+      "Mr. Krabs",
+      "Plankton",
+      "Gary",
+      "Mermaid Man",
+      "Barnacle Boy",
+      "Larry the Lobster"
+    ],
+    "Location": [
+      "Bikini Bottom",
+      "Krusty Krab",
+      "Chum Bucket",
+      "Goo Lagoon",
+      "Jellyfish Fields",
+      "Rock Bottom",
+      "Kelp Forest",
+      "Sandy's Treedome",
+      "Salty Spitoon",
+      "Bubble Bass's Cave"
+    ],
+    "Antagonist/Enemy": [
+      "Man Ray",
+      "The Flying Dutchman",
+      "Dirty Bubble",
+      "Bubble Bass",
+      "DoodleBob",
+      "Prawn",
+      "Flats the Flounder",
+      "The Tattletale Strangler",
+      "Bubble Buddy",
+      "Dennis"
+    ],
+    "Pet": [
+      "Gary",
+      "Mystery",
+      "Larry",
+      "Snellie",
+      "Dan the Orange Snail",
+      "Mrs. Wormsley",
+      "Jerry",
+      "Spike",
+      "Foofie",
+      "Rex"
+    ],
+    "Creature": [
+      "Anchovies",
+      "Jellyfish",
+      "Alaskan bull worm",
+      "Sea Horse",
+      "Clamu",
+      "Sea Bear",
+      "Sea Rhinoceros",
+      "Sea Monkey",
+      "Sea Whelks",
+      "Sea Cucumber"
+    ],
+    "Object": [
+      "Pineapple",
+      "Krusty Krab hat",
+      "Bubble Stand",
+      "Krusty Krab sign",
+      "Secret Formula",
+      "Coral Blue Lipstick",
+      "Mermaid Man's belt",
+      "King Neptune's crown",
+      "Time machine",
+      "Krusty Krab Training Video"
+    ]
+  }
 }

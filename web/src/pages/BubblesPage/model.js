@@ -44,16 +44,54 @@ function Model() {
             </ul>
             <ul class="absolute right-5 top-5 text-right text-2xl font-black tracking-widest text-blue-600 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]">
               <li>
-                <a class="transition delay-100 ease-in-out hover:text-blue-900" href="#attempts"> Attempts Left: <span id="attempts">5</span> </a>
+                <span class="transition delay-100 ease-in-out"> Attempts Left: <span id="attempts"></span> </span>
               </li>
               <li>
-                <a class="transition delay-100 ease-in-out hover:text-blue-900" href="#score"> Score: <span id="score">120</span> </a>
+                <span class="transition delay-100 ease-in-out"> Score: <span id="score"></span></span>
               </li>
             </ul>
 
-            <div class="flex font-rubik">
+            <div class="flex">
               <div id="wrapper"><canvas id="canvas"></canvas></div>
             </div>
+              <div class="keyboard absolute bottom-24">
+                <div class="keys text-blue-900 bg-[#3b82f680] rounded px-3 py-2">
+                  <div class="flex justify-center">
+                    <button class="key" value="q">q</button>
+                    <button class="key" value="w">w</button>
+                    <button class="key" value="e">e</button>
+                    <button class="key" value="r">r</button>
+                    <button class="key" value="t">t</button>
+                    <button class="key" value="y">y</button>
+                    <button class="key" value="u">u</button>
+                    <button class="key" value="i">i</button>
+                    <button class="key" value="o">o</button>
+                    <button class="key" value="p">p</button>
+                  </div>
+
+                  <div class="flex justify-center">
+                    <button class="key" value="a">a</button>
+                    <button class="key" value="s">s</button>
+                    <button class="key" value="d">d</button>
+                    <button class="key" value="f">f</button>
+                    <button class="key" value="g">g</button>
+                    <button class="key" value="h">h</button>
+                    <button class="key" value="j">j</button>
+                    <button class="key" value="k">k</button>
+                    <button class="key" value="l">l</button>
+                  </div>
+
+                  <div class="flex justify-center">
+                    <button class="key" value="z">z</button>
+                    <button class="key" value="x">x</button>
+                    <button class="key" value="c">c</button>
+                    <button class="key" value="v">v</button>
+                    <button class="key" value="b">b</button>
+                    <button class="key" value="n">n</button>
+                    <button class="key" value="m">m</button>
+                  </div>
+                </div>
+              </div>
           </div>
         `,
         results: `
