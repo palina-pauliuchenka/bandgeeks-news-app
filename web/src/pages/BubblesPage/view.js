@@ -25,7 +25,7 @@ function View() {
       else {
         let word = 'test'
         for (let w in word) {
-          let x = document.createElement('input')
+          let x = document.createElement('span')
           x.classList.add(
             'mx-5',
             'flex',
@@ -42,7 +42,7 @@ function View() {
             'text-4xl',
             'text-blue-900'
           )
-          x.value = word[w]
+          x.textContent = word[w]
           ans.appendChild(x)
         }
       }
