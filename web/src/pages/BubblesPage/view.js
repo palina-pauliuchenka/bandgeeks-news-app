@@ -28,6 +28,7 @@ function View() {
         const ans = document.getElementById('answer')
         if (ans) {
           ans.innerHTML = '' // Clear previous content
+          let guessedWord = '' // Store the guessed word
           let lineDiv = document.createElement('div') // Create a div for each line
           for (let i = 0; i < word.length; i++) {
             const bubble = document.createElement('span')
@@ -37,16 +38,17 @@ function View() {
               lineDiv = document.createElement('div') // Create a new line div for the next line
             } else {
               if (word[i] === "'" || word[i] === '.') {
-                bubble.textContent = word[i]
                 bubble.classList.add('blue')
               } else {
                 bubble.classList.add('blueBubble')
-                bubble.textContent = word[i]
+                guessedWord += word[i] // Add the guessed letter to the guessed word
               }
               lineDiv.appendChild(bubble) // Append the bubble to the line div
             }
           }
           ans.appendChild(lineDiv) // Append the last line div to the answer div
+
+          console.log('Guessed Word:', guessedWord) // Print the guessed word in the terminal
         }
       }
     }
