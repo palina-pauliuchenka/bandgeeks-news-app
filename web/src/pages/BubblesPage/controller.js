@@ -9,6 +9,8 @@ function Controller() {
     myView = view
     myControllerContainer = container
 
+    myView.init(myControllerContainer, myModel)
+
     window.addEventListener('hashchange', self.updateState)
     window.addEventListener('load', self.updateState)
     window.addEventListener('resize', self.resize)

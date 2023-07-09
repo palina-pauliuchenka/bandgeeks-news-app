@@ -1,5 +1,7 @@
 import { appView } from 'src/pages/BubblesPage/view'
 
+import data from './data.json'
+
 function Model() {
   console.log('hello')
   let myView = appView,
@@ -23,7 +25,7 @@ function Model() {
               </li>
             </ul>
 
-<!--            <footer class="absolute bottom-5 font-mono text-sm text-amber-200">Developed and Designed by Palina & Joey.</footer>-->
+            <footer class="absolute bottom-5 font-mono text-sm text-amber-200">Developed and Designed by Palina.</footer>
           </div>
         `,
         game: `
@@ -39,7 +41,7 @@ function Model() {
                 <a class="transition delay-100 ease-in-out hover:text-amber-600" href="#"> Show Solution </a>
               </li>
               <li>
-                <a class="transition delay-100 ease-in-out text-red-600 hover:text-red-900 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]" href="#main"> Exit</a>
+                <a class="transition delay-100 ease-in-out text-red-600 hover:text-red-900 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]" href="/bubbles"> Exit</a>
               </li>
             </ul>
             <ul class="absolute right-5 top-5 text-right text-2xl font-black tracking-widest text-blue-600 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]">
@@ -54,44 +56,45 @@ function Model() {
             <div class="flex">
               <div id="wrapper"><canvas id="canvas"></canvas></div>
             </div>
-              <div class="keyboard absolute bottom-24">
-                <div class="keys text-blue-900 bg-[#3b82f680] rounded px-3 py-2">
-                  <div class="flex justify-center">
-                    <button class="key" value="q">q</button>
-                    <button class="key" value="w">w</button>
-                    <button class="key" value="e">e</button>
-                    <button class="key" value="r">r</button>
-                    <button class="key" value="t">t</button>
-                    <button class="key" value="y">y</button>
-                    <button class="key" value="u">u</button>
-                    <button class="key" value="i">i</button>
-                    <button class="key" value="o">o</button>
-                    <button class="key" value="p">p</button>
-                  </div>
+            <div class="keyboard absolute bottom-24">
+              <div class="keys text-blue-900 bg-[#3b82f680] rounded px-3 py-2">
+                <div class="flex justify-center">
+                  <button class="key" value="q">q</button>
+                  <button class="key" value="w">w</button>
+                  <button class="key" value="e">e</button>
+                  <button class="key" value="r">r</button>
+                  <button class="key" value="t">t</button>
+                  <button class="key" value="y">y</button>
+                  <button class="key" value="u">u</button>
+                  <button class="key" value="i">i</button>
+                  <button class="key" value="o">o</button>
+                  <button class="key" value="p">p</button>
+                </div>
 
-                  <div class="flex justify-center">
-                    <button class="key" value="a">a</button>
-                    <button class="key" value="s">s</button>
-                    <button class="key" value="d">d</button>
-                    <button class="key" value="f">f</button>
-                    <button class="key" value="g">g</button>
-                    <button class="key" value="h">h</button>
-                    <button class="key" value="j">j</button>
-                    <button class="key" value="k">k</button>
-                    <button class="key" value="l">l</button>
-                  </div>
+                <div class="flex justify-center">
+                  <button class="key" value="a">a</button>
+                  <button class="key" value="s">s</button>
+                  <button class="key" value="d">d</button>
+                  <button class="key" value="f">f</button>
+                  <button class="key" value="g">g</button>
+                  <button class="key" value="h">h</button>
+                  <button class="key" value="j">j</button>
+                  <button class="key" value="k">k</button>
+                  <button class="key" value="l">l</button>
+                </div>
 
-                  <div class="flex justify-center">
-                    <button class="key" value="z">z</button>
-                    <button class="key" value="x">x</button>
-                    <button class="key" value="c">c</button>
-                    <button class="key" value="v">v</button>
-                    <button class="key" value="b">b</button>
-                    <button class="key" value="n">n</button>
-                    <button class="key" value="m">m</button>
-                  </div>
+                <div class="flex justify-center">
+                  <button class="key" value="z">z</button>
+                  <button class="key" value="x">x</button>
+                  <button class="key" value="c">c</button>
+                  <button class="key" value="v">v</button>
+                  <button class="key" value="b">b</button>
+                  <button class="key" value="n">n</button>
+                  <button class="key" value="m">m</button>
                 </div>
               </div>
+            </div>
+
           </div>
         `,
         results: `
@@ -100,7 +103,7 @@ function Model() {
 
           <nav class="max-w-sm mx-auto py-12">
             <ul class="flex justify-between text-3xl text-yellow-500 tracking-wide drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] font-rubik">
-              <li><a class="hover:text-amber-700 transition delay-100 ease-in-out" href="#main">Home</a></li>
+              <li><a class="hover:text-amber-700 transition delay-100 ease-in-out" href="/bubbles">Home</a></li>
               <li><a class="hover:text-amber-700 transition delay-100 ease-in-out" href="#game">Play</a></li>
               <li><a class="hover:text-amber-700 transition delay-100 ease-in-out" href="#rules">Rules</a></li>
             </ul>
@@ -113,7 +116,7 @@ function Model() {
         <div id="rules" class="relative h-screen  bg-[url('https://e1.pxfuel.com/desktop-wallpaper/935/134/desktop-wallpaper-jelly-fish-fields-spongebob-flower-sky-background.jpg')] bg-cover bg-center">
           <nav class="max-w-sm mx-auto pt-12 pb-36">
             <ul class="flex justify-between text-3xl text-yellow-500 tracking-wide drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] font-rubik">
-              <li><a class="hover:text-amber-700 transition delay-100 ease-in-out" href="#main">Home</a></li>
+              <li><a class="hover:text-amber-700 transition delay-100 ease-in-out" href="/bubbles">Home</a></li>
               <li>
                 <a class="transition delay-100 ease-in-out hover:text-amber-600" href="#game">Play</a>
               </li>
@@ -154,6 +157,12 @@ function Model() {
       self.settings.canvasWidth,
       self.settings.canvasHeight
     )
+  }
+
+  self.generateWord = function() {
+    const words = Object.values(data.wordList).flat()
+    const randomIndex = Math.floor(Math.random() * words.length)
+    return words[randomIndex]
   }
 }
 
