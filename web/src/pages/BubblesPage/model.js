@@ -52,48 +52,48 @@ function Model() {
                 <span class="transition delay-100 ease-in-out"> Score: <span id="score"></span></span>
               </li>
             </ul>
-            <div id="answer" class="flex"></div>
-            <div class="flex">
-              <div id="wrapper"><canvas id="canvas"></canvas></div>
-            </div>
-            <div class="keyboard absolute bottom-24">
-              <div class="keys text-blue-900 bg-[#3b82f680] rounded px-3 py-2">
-                <div class="flex justify-center">
-                  <button class="key" value="q">q</button>
-                  <button class="key" value="w">w</button>
-                  <button class="key" value="e">e</button>
-                  <button class="key" value="r">r</button>
-                  <button class="key" value="t">t</button>
-                  <button class="key" value="y">y</button>
-                  <button class="key" value="u">u</button>
-                  <button class="key" value="i">i</button>
-                  <button class="key" value="o">o</button>
-                  <button class="key" value="p">p</button>
-                </div>
+              <div class="flex">
+                <div id="wrapper"><canvas id="canvas"></canvas></div>
+              </div>
+              <div id="answer" class="flex flex-col justify-center items-center font-rubik text-4xl"></div>
+              <div class="keyboard absolute bottom-6">
+                <div class="keys text-blue-900 bg-[#3b82f680] rounded px-3 py-2">
+                  <div class="flex justify-center">
+                    <button class="key" value="q">q</button>
+                    <button class="key" value="w">w</button>
+                    <button class="key" value="e">e</button>
+                    <button class="key" value="r">r</button>
+                    <button class="key" value="t">t</button>
+                    <button class="key" value="y">y</button>
+                    <button class="key" value="u">u</button>
+                    <button class="key" value="i">i</button>
+                    <button class="key" value="o">o</button>
+                    <button class="key" value="p">p</button>
+                  </div>
 
-                <div class="flex justify-center">
-                  <button class="key" value="a">a</button>
-                  <button class="key" value="s">s</button>
-                  <button class="key" value="d">d</button>
-                  <button class="key" value="f">f</button>
-                  <button class="key" value="g">g</button>
-                  <button class="key" value="h">h</button>
-                  <button class="key" value="j">j</button>
-                  <button class="key" value="k">k</button>
-                  <button class="key" value="l">l</button>
-                </div>
+                  <div class="flex justify-center">
+                    <button class="key" value="a">a</button>
+                    <button class="key" value="s">s</button>
+                    <button class="key" value="d">d</button>
+                    <button class="key" value="f">f</button>
+                    <button class="key" value="g">g</button>
+                    <button class="key" value="h">h</button>
+                    <button class="key" value="j">j</button>
+                    <button class="key" value="k">k</button>
+                    <button class="key" value="l">l</button>
+                  </div>
 
-                <div class="flex justify-center">
-                  <button class="key" value="z">z</button>
-                  <button class="key" value="x">x</button>
-                  <button class="key" value="c">c</button>
-                  <button class="key" value="v">v</button>
-                  <button class="key" value="b">b</button>
-                  <button class="key" value="n">n</button>
-                  <button class="key" value="m">m</button>
+                  <div class="flex justify-center">
+                    <button class="key" value="z">z</button>
+                    <button class="key" value="x">x</button>
+                    <button class="key" value="c">c</button>
+                    <button class="key" value="v">v</button>
+                    <button class="key" value="b">b</button>
+                    <button class="key" value="n">n</button>
+                    <button class="key" value="m">m</button>
+                  </div>
                 </div>
               </div>
-            </div>
 
           </div>
         `,

@@ -28,12 +28,25 @@ function View() {
         const ans = document.getElementById('answer')
         if (ans) {
           ans.innerHTML = '' // Clear previous content
+          let lineDiv = document.createElement('div') // Create a div for each line
           for (let i = 0; i < word.length; i++) {
             const bubble = document.createElement('span')
-            bubble.classList.add('blueBubble')
-            bubble.textContent = word[i]
-            ans.appendChild(bubble)
+            if (word[i] === ' ') {
+              ans.appendChild(lineDiv) // Append the line div to the answer div
+              ans.appendChild(document.createElement('br')) // Add line break
+              lineDiv = document.createElement('div') // Create a new line div for the next line
+            } else {
+              if (word[i] === "'" || word[i] === '.') {
+                bubble.textContent = word[i]
+                bubble.classList.add('blue')
+              } else {
+                bubble.classList.add('blueBubble')
+                bubble.textContent = word[i]
+              }
+              lineDiv.appendChild(bubble) // Append the bubble to the line div
+            }
           }
+          ans.appendChild(lineDiv) // Append the last line div to the answer div
         }
       }
     }
