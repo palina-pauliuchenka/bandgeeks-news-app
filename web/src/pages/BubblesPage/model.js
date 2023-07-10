@@ -34,7 +34,7 @@ function Model() {
                 <button class="transition delay-100 ease-in-out hover:text-amber-600 tracking-widest" onclick="location.reload()"> New Game </button>
               </li>
               <li>
-                <a class="transition delay-100 ease-in-out hover:text-amber-600" href="#"> Get a Hint </a>
+                <button class="transition delay-100 ease-in-out hover:text-amber-600 tracking-widest" id="getHintButton"> Get a Hint </button>
               </li>
               <li>
                 <a class="transition delay-100 ease-in-out hover:text-amber-600" href="#"> Show Solution </a>
@@ -54,6 +54,7 @@ function Model() {
               <div class="flex">
                 <div id="wrapper"><canvas id="canvas"></canvas></div>
               </div>
+              <div id="bubbleContainer"></div>
               <div id="answer" class="flex flex-col justify-center items-center font-rubik text-4xl"></div>
               <div class="keyboard absolute bottom-6">
                 <div class="keys text-blue-900 bg-[#3b82f680] rounded px-3 py-2">
@@ -207,52 +208,94 @@ function Model() {
     }
   }
 
-  self.updateState = function() {
-    let content = self.settings.links[window.location.hash.slice(1)];
-    myView.updateState(content, self.settings.links, self.settings.canvasWidth, self.settings.canvasHeight);
+  self.updateState = function () {
+    let content = self.settings.links[window.location.hash.slice(1)]
+    myView.updateState(
+      content,
+      self.settings.links,
+      self.settings.canvasWidth,
+      self.settings.canvasHeight
+    )
 
     if (content === self.settings.links.game) {
-      myView.gameModal();
+      myView.gameModal()
     }
   }
 
-  self.getWordCategory = function() {
-    console.log('word category');
+  self.getWordCategory = function () {
+    console.log('word category')
   }
 
-  self.generateWord = function(category) {
+  self.generateWord = function (category) {
     if (category === 'any') {
-      const categories = Object.keys(data.wordList);
-      const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-      const words = data.wordList[randomCategory];
+      const categories = Object.keys(data.wordList)
+      const randomCategory =
+        categories[Math.floor(Math.random() * categories.length)]
+      const words = data.wordList[randomCategory]
       if (words) {
-        const randomIndex = Math.floor(Math.random() * words.length);
-        return words[randomIndex];
+        const randomIndex = Math.floor(Math.random() * words.length)
+        return words[randomIndex]
       } else {
-        return "No words in the selected category";
+        return 'No words in the selected category'
       }
     } else {
-      const words = data.wordList[category];
+      const words = data.wordList[category]
       if (words) {
-        const randomIndex = Math.floor(Math.random() * words.length);
-        return words[randomIndex];
+        const randomIndex = Math.floor(Math.random() * words.length)
+        return words[randomIndex]
       } else {
-        return "Invalid category";
+        return 'Invalid category'
       }
     }
   }
 
+  self.displayHint = function (word, ans) {
+    let getHintButton = document.getElementById('getHintButton')
+    let letters = word.split('') // Split the word into an array of letters
+    let bubbleCount = 0
+    let usedLetters = [] // Keep track of used letters
 
-  // self.generateWord = function(category) {
-  //   const words = data.wordList[category]
-  //   if (words) {
-  //     const randomIndex = Math.floor(Math.random() * words.length)
-  //     return words[randomIndex]
-  //   } else {
-  //     return "Invalid category"
-  //   }
-  // }
+    getHintButton.addEventListener('click', (event) => {
+      event.preventDefault()
+
+      if (bubbleCount < 3 && letters.length > 0) {
+        let randomIndex = Math.floor(Math.random() * letters.length)
+        let letter = letters[randomIndex]
+
+        // Check if the letter includes a space, period, or apostrophe, or if it has already been used
+        if (!/[ .'’]/.test(letter) && !usedLetters.includes(letter)) {
+          console.log(letter)
+
+          let hintBubble = document.createElement('div')
+          hintBubble.classList.add('greenBubble', 'absolute')
+          hintBubble.innerText = letter
+
+          // Generate random position for the hint bubble
+          const positionX = Math.random() * (window.innerWidth * 0.8)
+          const positionY = Math.random() * (window.innerHeight * 0.8)
+
+          // Set the position of the hint bubble
+          hintBubble.style.left = positionX + 'px'
+          hintBubble.style.top = positionY + 'px'
+
+          // Append the hint bubble to the answer div
+          ans.appendChild(hintBubble)
+
+          // Remove the selected letter from the array
+          letters.splice(randomIndex, 1)
+
+          // Add the letter to the used letters array
+          usedLetters.push(letter)
+
+          bubbleCount++
+        }
+      } else {
+        console.log('No more bubbles to generate.')
+      }
+    })
+  }
+
+
 }
-
 
 export const appModel = new Model()

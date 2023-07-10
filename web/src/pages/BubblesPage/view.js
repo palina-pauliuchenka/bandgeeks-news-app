@@ -5,8 +5,6 @@ function View() {
     canvas: null,
     context: null,
   }
-  let selectedCategories = [];
-
 
   this.init = function (container, model) {
     myViewContainer = container
@@ -30,21 +28,20 @@ function View() {
           if (category) {
             this.displayBubbles(category)
           } else {
-            console.log("No category selected.")
+            console.log('No category selected.')
           }
-        });
+        })
       }
     }
   }
 
-  this.displayBubbles = function(category) {
+  this.displayBubbles = function (category) {
     const word = myModel.generateWord(category)
-    console.log(word);
-    // const word = this.getGameMode()
+    console.log(word)
+
     const ans = document.getElementById('answer')
     if (ans) {
       ans.innerHTML = '' // Clear previous content
-      let guessedWord = '' // Store the guessed word
       let lineDiv = document.createElement('div') // Create a div for each line
       for (let i = 0; i < word.length; i++) {
         lineDiv.classList.add('flex')
@@ -59,11 +56,14 @@ function View() {
             bubble.classList.add('blue')
           } else {
             bubble.classList.add('blueBubble')
-            guessedWord += word[i] // Add the guessed letter to the guessed word
           }
           lineDiv.appendChild(bubble) // Append the bubble to the line div
         }
       }
+
+      // Generate hint bubble for each letter
+      myModel.displayHint(word, ans)
+
       ans.appendChild(lineDiv) // Append the last line div to the answer div
     }
   }
@@ -72,7 +72,7 @@ function View() {
   this.gameModal = function () {
     myViewContainer.getElementById('setGameMode').style.display = 'block'
 
-    const startButton = document.getElementById('modalStartButton');
+    const startButton = document.getElementById('modalStartButton')
     startButton.addEventListener('click', function () {
       // close modal after setting preference for the game
       myViewContainer.getElementById('setGameMode').style.display = 'block'
@@ -80,28 +80,27 @@ function View() {
   }
 
   // receiving
-  this.setGameMode = function(callback) {
-    const modalStartButton = document.getElementById('modalStartButton');
+  this.setGameMode = function (callback) {
+    const modalStartButton = document.getElementById('modalStartButton')
 
     modalStartButton.addEventListener('click', () => {
-      const radio = document.querySelectorAll("input[type='radio']");
-      let selectedRadio = '';
+      const radio = document.querySelectorAll("input[type='radio']")
+      let selectedRadio = ''
 
       // Iterate over the checkboxes and check if they are selected
-      radio.forEach(function(r) {
+      radio.forEach(function (r) {
         if (r.checked) {
           selectedRadio = r.value
         }
-      });
+      })
 
-      document.getElementById('setGameMode').style.display = 'none';
+      document.getElementById('setGameMode').style.display = 'none'
 
       // Print the selected checkbox values
-      console.log(`setGameMode: ${selectedRadio}`);
-      callback(selectedRadio);
-    });
-  };
-
+      console.log(`setGameMode: ${selectedRadio}`)
+      callback(selectedRadio)
+    })
+  }
 }
 
 export const appView = new View()

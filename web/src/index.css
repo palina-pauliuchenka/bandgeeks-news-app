@@ -27,19 +27,11 @@
   }
 
   .greenBubble {
-    @apply uppercase m-5 inline-flex h-24 w-24 items-center justify-center rounded-full border border-lime-300 bg-gradient-to-t from-lime-300 to-transparent text-lime-900;
-  }
-
-  .green {
-    @apply text-lime-900
+    @apply font-rubik text-4xl uppercase text-lime-900 m-5 inline-flex h-24 w-24 items-center justify-center rounded-full border border-lime-300 bg-gradient-to-t from-lime-300 to-transparent text-lime-900;
   }
 
   .redBubble {
-    @apply uppercase m-5 inline-flex h-24 w-24 items-center justify-center rounded-full border border-red-300 bg-gradient-to-t from-red-300 to-transparent text-red-900;
-  }
-
-  .red {
-    @apply text-red-900
+    @apply uppercase text-red-900 m-5 inline-flex h-24 w-24 items-center justify-center rounded-full border border-red-300 bg-gradient-to-t from-red-300 to-transparent text-red-900;
   }
 }
 
