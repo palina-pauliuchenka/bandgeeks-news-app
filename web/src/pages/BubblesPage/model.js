@@ -297,27 +297,19 @@ function Model() {
 
   self.displaySolution = function () {
     const showSolutionButton = document.getElementById('showSolutionButton')
-
     showSolutionButton.addEventListener('click', () => {
       // Get all the blue bubbles
-
       const blueBubbles = document.getElementsByClassName('blueBubble')
 
       // Iterate over the blue bubbles
-
       for (let i = 0; i < blueBubbles.length; i++) {
-        // Get the letter from the data attribute
-
-        const letter = blueBubbles[i].getAttribute('data-letter')
-
-        // Set the content of the bubble to the letter
-
-        blueBubbles[i].innerText = letter
+        blueBubbles[i].innerText = blueBubbles[i].getAttribute('data-letter')
       }
     })
   }
 
   self.revealLetter = function (blueBubbles, pressedKey) {
+    let revealed = false
     // Iterate over the blue bubbles
     for (let i = 0; i < blueBubbles.length; i++) {
       const bubble = blueBubbles[i]
@@ -325,9 +317,32 @@ function Model() {
       if (bubbleLetter === pressedKey) {
         // Update the content of the blue bubble with the revealed letter
         bubble.innerText = bubbleLetter
+        revealed = true
       }
     }
+
+    if (!revealed) {
+      self.displayWrongGuessedLetter(pressedKey);
+    }
   }
+
+  self.displayWrongGuessedLetter = function(letter) {
+    let bubbleContainer = document.getElementById('bubbleContainer');
+    let redBubble = document.createElement('div');
+    redBubble.classList.add('redBubble', 'absolute');
+    redBubble.innerText = letter; // Set the letter inside the red bubble
+
+    // Generate random position for the red bubble
+    const positionX = Math.random() * (window.innerWidth * 1.2);
+    const positionY = Math.random() * (window.innerHeight * 0.8);
+
+    // Set the position of the red bubble
+    redBubble.style.left = positionX + 'px';
+    redBubble.style.top = positionY + 'px';
+
+    // Append the red bubble to the bubble container
+    bubbleContainer.appendChild(redBubble);
+  };
 }
 
 export const appModel = new Model()

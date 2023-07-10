@@ -31,7 +31,7 @@
   }
 
   .redBubble {
-    @apply uppercase text-red-900 m-5 inline-flex h-24 w-24 items-center justify-center rounded-full border border-red-300 bg-gradient-to-t from-red-300 to-transparent text-red-900;
+    @apply uppercase text-red-900 font-rubik text-4xl m-5 inline-flex h-24 w-24 items-center justify-center rounded-full border border-red-300 bg-gradient-to-t from-red-300 to-transparent text-red-900;
   }
 }
 
