@@ -36,13 +36,14 @@ function View() {
   }
 
   this.displayBubbles = function (category) {
-    const word = myModel.generateWord(category)
+    const word = myModel.generateWord(category).toLowerCase()
     console.log(word)
 
     const ans = document.getElementById('answer')
     if (ans) {
       ans.innerHTML = '' // Clear previous content
       let lineDiv = document.createElement('div') // Create a div for each line
+      let blueBubbles = [] // Store the blue bubbles in an array
       for (let i = 0; i < word.length; i++) {
         lineDiv.classList.add('flex')
 
@@ -57,9 +58,18 @@ function View() {
           } else {
             bubble.classList.add('blueBubble')
           }
-          bubble.setAttribute('data-letter', word[i]);
+          bubble.setAttribute('data-letter', word[i])
           lineDiv.appendChild(bubble) // Append the bubble to the line div
+          blueBubbles.push(bubble) // Add the bubble to the blueBubbles array
         }
+      }
+
+      const keys = document.getElementsByClassName('key')
+      for (let i = 0; i < keys.length; i++) {
+        keys[i].addEventListener('click', function () {
+          const pressedKey = this.value
+          myModel.revealLetter(blueBubbles, pressedKey)
+        })
       }
 
       // Generate hint bubble for each letter
@@ -103,8 +113,6 @@ function View() {
       callback(selectedRadio)
     })
   }
-
-
 }
 
 export const appView = new View()

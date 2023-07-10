@@ -45,7 +45,7 @@ function Model() {
             </ul>
             <ul class="absolute right-5 top-5 text-right text-2xl font-black tracking-widest text-blue-600 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]">
               <li>
-                <span class="transition delay-100 ease-in-out"> Attempts Left: <span id="attempts"></span> </span>
+                <span class="transition delay-100 ease-in-out"> Wrong Attempts Left: <span id="attempts"></span> </span>
               </li>
               <li>
                 <span class="transition delay-100 ease-in-out"> Score: <span id="score"></span></span>
@@ -272,7 +272,7 @@ function Model() {
 
           // Generate random position for the hint bubble
           const positionX = Math.random() * (window.innerWidth * 0.2)
-          const positionY = Math.random() * (window.innerHeight * 0.9)
+          const positionY = Math.random() * (window.innerHeight * 0.8)
 
           // Set the position of the hint bubble
           hintBubble.style.left = positionX + 'px'
@@ -315,6 +315,18 @@ function Model() {
         blueBubbles[i].innerText = letter
       }
     })
+  }
+
+  self.revealLetter = function (blueBubbles, pressedKey) {
+    // Iterate over the blue bubbles
+    for (let i = 0; i < blueBubbles.length; i++) {
+      const bubble = blueBubbles[i]
+      const bubbleLetter = bubble.getAttribute('data-letter')
+      if (bubbleLetter === pressedKey) {
+        // Update the content of the blue bubble with the revealed letter
+        bubble.innerText = bubbleLetter
+      }
+    }
   }
 }
 
