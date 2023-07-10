@@ -37,7 +37,7 @@ function Model() {
                 <button class="transition delay-100 ease-in-out hover:text-amber-600 tracking-widest" id="getHintButton"> Get a Hint </button>
               </li>
               <li>
-                <a class="transition delay-100 ease-in-out hover:text-amber-600" href="#"> Show Solution </a>
+                <button class="transition delay-100 ease-in-out hover:text-amber-600" id="showSolutionButton"> Show Solution </button>
               </li>
               <li>
                 <a class="transition delay-100 ease-in-out text-red-600 hover:text-red-900 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]" href="/bubbles"> Exit</a>
@@ -111,7 +111,7 @@ function Model() {
                         <div class="setGameMode grid grid-cols-2 gap-8 capitalize text-gray-900">
                           <div class="col-span-2">
                             <input type="radio" id="preference_any" name="preference_any" value="any" />
-                            <label for="preference_any" class="w-48 text-center">All</label>
+                            <label for="preference_any" class="w-48 text-center" >All</label>
                           </div>
                           <div>
                             <input type="radio" id="preference_character" name="preference_character" value="character" />
@@ -271,8 +271,8 @@ function Model() {
           hintBubble.innerText = letter
 
           // Generate random position for the hint bubble
-          const positionX = Math.random() * (window.innerWidth * 0.8)
-          const positionY = Math.random() * (window.innerHeight * 0.8)
+          const positionX = Math.random() * (window.innerWidth * 0.2)
+          const positionY = Math.random() * (window.innerHeight * 0.9)
 
           // Set the position of the hint bubble
           hintBubble.style.left = positionX + 'px'
@@ -295,7 +295,27 @@ function Model() {
     })
   }
 
+  self.displaySolution = function () {
+    const showSolutionButton = document.getElementById('showSolutionButton')
 
+    showSolutionButton.addEventListener('click', () => {
+      // Get all the blue bubbles
+
+      const blueBubbles = document.getElementsByClassName('blueBubble')
+
+      // Iterate over the blue bubbles
+
+      for (let i = 0; i < blueBubbles.length; i++) {
+        // Get the letter from the data attribute
+
+        const letter = blueBubbles[i].getAttribute('data-letter')
+
+        // Set the content of the bubble to the letter
+
+        blueBubbles[i].innerText = letter
+      }
+    })
+  }
 }
 
 export const appModel = new Model()

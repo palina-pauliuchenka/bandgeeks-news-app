@@ -57,12 +57,14 @@ function View() {
           } else {
             bubble.classList.add('blueBubble')
           }
+          bubble.setAttribute('data-letter', word[i]);
           lineDiv.appendChild(bubble) // Append the bubble to the line div
         }
       }
 
       // Generate hint bubble for each letter
       myModel.displayHint(word, ans)
+      myModel.displaySolution()
 
       ans.appendChild(lineDiv) // Append the last line div to the answer div
     }
@@ -101,6 +103,8 @@ function View() {
       callback(selectedRadio)
     })
   }
+
+
 }
 
 export const appView = new View()
