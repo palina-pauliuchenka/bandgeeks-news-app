@@ -31,7 +31,7 @@ function Model() {
           <div id="game" class="relative flex h-screen items-center justify-center bg-[url('https://e1.pxfuel.com/desktop-wallpaper/935/134/desktop-wallpaper-jelly-fish-fields-spongebob-flower-sky-background.jpg')] bg-cover bg-center">
             <ul class="absolute left-5 top-5 text-left text-2xl font-black tracking-widest text-amber-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
               <li>
-                <a class="transition delay-100 ease-in-out hover:text-amber-600" href=""> New Game </a>
+                <button class="transition delay-100 ease-in-out hover:text-amber-600 tracking-widest" onclick="location.reload()"> New Game </button>
               </li>
               <li>
                 <a class="transition delay-100 ease-in-out hover:text-amber-600" href="#"> Get a Hint </a>
