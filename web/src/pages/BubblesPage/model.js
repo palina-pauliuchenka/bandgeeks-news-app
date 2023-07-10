@@ -202,6 +202,8 @@ function Model() {
       },
       canvasWidth: null,
       canvasHeight: null,
+      attempts: 7,
+      counter: 0,
       score: 0,
       playerScore: null,
       resultData: [],
@@ -224,6 +226,29 @@ function Model() {
 
   self.getWordCategory = function () {
     console.log('word category')
+  }
+
+  // receiving
+  self.setGameMode = function (callback) {
+    const modalStartButton = document.getElementById('modalStartButton')
+
+    modalStartButton.addEventListener('click', () => {
+      const radio = document.querySelectorAll("input[type='radio']")
+      let selectedRadio = ''
+
+      // Iterate over the checkboxes and check if they are selected
+      radio.forEach(function (r) {
+        if (r.checked) {
+          selectedRadio = r.value
+        }
+      })
+
+      document.getElementById('setGameMode').style.display = 'none'
+
+      // Print the selected checkbox values
+      console.log(`setGameMode: ${selectedRadio}`)
+      callback(selectedRadio)
+    })
   }
 
   self.generateWord = function (category) {
@@ -296,16 +321,13 @@ function Model() {
   }
 
   self.displaySolution = function () {
-    const showSolutionButton = document.getElementById('showSolutionButton')
-    showSolutionButton.addEventListener('click', () => {
-      // Get all the blue bubbles
-      const blueBubbles = document.getElementsByClassName('blueBubble')
+    // Get all the blue bubbles
+    const blueBubbles = document.getElementsByClassName('blueBubble')
 
-      // Iterate over the blue bubbles
-      for (let i = 0; i < blueBubbles.length; i++) {
-        blueBubbles[i].innerText = blueBubbles[i].getAttribute('data-letter')
-      }
-    })
+    // Iterate over the blue bubbles
+    for (let i = 0; i < blueBubbles.length; i++) {
+      blueBubbles[i].innerText = blueBubbles[i].getAttribute('data-letter')
+    }
   }
 
   self.revealLetter = function (blueBubbles, pressedKey) {
@@ -318,31 +340,17 @@ function Model() {
         // Update the content of the blue bubble with the revealed letter
         bubble.innerText = bubbleLetter
         revealed = true
+        self.settings.score += 10
       }
     }
 
     if (!revealed) {
-      self.displayWrongGuessedLetter(pressedKey);
+      myView.displayWrongGuessedLetter(pressedKey)
     }
+
+    myView.displayScore()
+
   }
-
-  self.displayWrongGuessedLetter = function(letter) {
-    let bubbleContainer = document.getElementById('bubbleContainer');
-    let redBubble = document.createElement('div');
-    redBubble.classList.add('redBubble', 'absolute');
-    redBubble.innerText = letter; // Set the letter inside the red bubble
-
-    // Generate random position for the red bubble
-    const positionX = Math.random() * (window.innerWidth * 1.2);
-    const positionY = Math.random() * (window.innerHeight * 0.8);
-
-    // Set the position of the red bubble
-    redBubble.style.left = positionX + 'px';
-    redBubble.style.top = positionY + 'px';
-
-    // Append the red bubble to the bubble container
-    bubbleContainer.appendChild(redBubble);
-  };
 }
 
 export const appModel = new Model()

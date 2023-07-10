@@ -24,9 +24,10 @@ function View() {
       settings.context.canvas.height = height
 
       if (content === links.game) {
-        this.setGameMode((category) => {
+        myModel.setGameMode((category) => {
           if (category) {
             this.displayBubbles(category)
+            this.displayWrongAttempts()
           } else {
             console.log('No category selected.')
           }
@@ -74,7 +75,7 @@ function View() {
 
       // Generate hint bubble for each letter
       myModel.displayHint(word, ans)
-      myModel.displaySolution()
+      this.displaySolutionButtonClick()
 
       ans.appendChild(lineDiv) // Append the last line div to the answer div
     }
@@ -83,35 +84,63 @@ function View() {
   // displays game preferences modal window
   this.gameModal = function () {
     myViewContainer.getElementById('setGameMode').style.display = 'block'
-
     const startButton = document.getElementById('modalStartButton')
-    startButton.addEventListener('click', function () {
+    startButton.addEventListener('click', (event) => {
+      event.preventDefault()
       // close modal after setting preference for the game
       myViewContainer.getElementById('setGameMode').style.display = 'block'
     })
   }
 
-  // receiving
-  this.setGameMode = function (callback) {
-    const modalStartButton = document.getElementById('modalStartButton')
-
-    modalStartButton.addEventListener('click', () => {
-      const radio = document.querySelectorAll("input[type='radio']")
-      let selectedRadio = ''
-
-      // Iterate over the checkboxes and check if they are selected
-      radio.forEach(function (r) {
-        if (r.checked) {
-          selectedRadio = r.value
-        }
-      })
-
-      document.getElementById('setGameMode').style.display = 'none'
-
-      // Print the selected checkbox values
-      console.log(`setGameMode: ${selectedRadio}`)
-      callback(selectedRadio)
+  this.displaySolutionButtonClick = function () {
+    const showSolutionButton = document.getElementById('showSolutionButton')
+    showSolutionButton.addEventListener('click', (event) => {
+      event.preventDefault()
+      myModel.displaySolution()
     })
+  }
+
+  this.displayScore = function () {
+    let score = document.getElementById('score')
+    score.innerText = myModel.settings.score
+  }
+
+  this.displayWrongAttempts = function () {
+    let attempts = document.getElementById('attempts')
+    attempts.innerText = myModel.settings.attempts
+  }
+
+  this.displayWrongGuessedLetter = function (letter) {
+    let bubbleContainer = document.getElementById('bubbleContainer')
+    let redBubble = document.createElement('div')
+    let attempts = document.getElementById('attempts')
+    let attemptsCount = parseInt(attempts.innerText) // Get the current attempts count
+
+    // Update the attempts count
+    attemptsCount--
+    attemptsCount = Math.max(0, attemptsCount)
+    attempts.innerText = attemptsCount
+
+    myModel.settings.score -= 5
+
+    redBubble.classList.add('redBubble', 'absolute')
+    redBubble.innerText = letter // Set the letter inside the red bubble
+
+    // Generate random position for the red bubble
+    const positionX = Math.random() * (window.innerWidth * 1.2)
+    const positionY = Math.random() * (window.innerHeight * 0.8)
+
+    // Set the position of the red bubble
+    redBubble.style.left = positionX + 'px'
+    redBubble.style.top = positionY + 'px'
+
+    // Append the red bubble to the bubble container
+    bubbleContainer.appendChild(redBubble)
+
+    // Check if the user has run out of attempts
+    if (attemptsCount === 0) {
+      myModel.displaySolution()
+    }
   }
 }
 
