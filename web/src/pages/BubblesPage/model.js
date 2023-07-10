@@ -3,7 +3,6 @@ import { appView } from 'src/pages/BubblesPage/view'
 import data from './data.json'
 
 function Model() {
-  console.log('hello')
   let myView = appView,
     self = this
 
@@ -32,7 +31,7 @@ function Model() {
           <div id="game" class="relative flex h-screen items-center justify-center bg-[url('https://e1.pxfuel.com/desktop-wallpaper/935/134/desktop-wallpaper-jelly-fish-fields-spongebob-flower-sky-background.jpg')] bg-cover bg-center">
             <ul class="absolute left-5 top-5 text-left text-2xl font-black tracking-widest text-amber-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
               <li>
-                <a class="transition delay-100 ease-in-out hover:text-amber-600" href="#"> New Game </a>
+                <a class="transition delay-100 ease-in-out hover:text-amber-600" href=""> New Game </a>
               </li>
               <li>
                 <a class="transition delay-100 ease-in-out hover:text-amber-600" href="#"> Get a Hint </a>
@@ -96,6 +95,61 @@ function Model() {
               </div>
 
           </div>
+
+          <!--     MODAL     -->
+          <div id="setGameMode">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+            <div class="fixed inset-0 z-10 overflow-y-auto">
+              <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <form id="setGameModeForm" class="relative transform overflow-hidden rounded-lg border bg-[rgba(255,255,255,0.2)] text-left shadow-xl transition-all sm:my-8">
+                  <div class="px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                      <div class="mx-auto mb-8 text-center sm:mt-0">
+                        <h3 class="font-rubik mb-12 mt-8 text-3xl font-semibold leading-6 text-gray-900">Set the Game Mode</h3>
+                        <div class="setGameMode grid grid-cols-2 gap-8 capitalize text-gray-900">
+                          <div class="col-span-2">
+                            <input type="radio" id="preference_any" name="preference_any" value="any" />
+                            <label for="preference_any" class="w-48 text-center">All</label>
+                          </div>
+                          <div>
+                            <input type="radio" id="preference_character" name="preference_character" value="character" />
+                            <label for="preference_character" class="w-48 text-center">Character</label>
+                          </div>
+                          <div>
+                            <input type="radio" id="preference_location" name="preference_location" value="location" />
+                            <label for="preference_location" class="w-48 text-center">Location</label>
+                          </div>
+                          <div>
+                            <input type="radio" id="preference_enemies" name="preference_enemies" value="enemies" />
+                            <label for="preference_enemies" class="w-48 text-center">enemies</label>
+                          </div>
+                          <div>
+                            <input type="radio" id="preference_animals" name="preference_animals" value="animals" />
+                            <label for="preference_animals" class="w-48 text-center">animals</label>
+                          </div>
+                          <div>
+                            <input type="radio" id="preference_creatures" name="preference_creatures" value="creatures" />
+                            <label for="preference_creatures" class="w-48 text-center">creatures</label>
+                          </div>
+                          <div>
+                            <input type="radio" id="preference_objects" name="preference_objects" value="objects" />
+                            <label for="preference_objects" class="w-48 text-center">objects</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-[rgba(255,255,255,0.2)] px-4 py-3 sm:px-6">
+                    <div class="mx-auto w-52 justify-around sm:flex">
+                      <button id="modalStartButton" type="button" class="inline-flex w-full justify-center rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 sm:mr-3 sm:w-auto">Start</button>
+                      <a href="/bubbles" id="modalExitButton" type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:mr-3 sm:w-auto">Exit</a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         `,
         results: `
         <div id="results">
@@ -143,6 +197,7 @@ function Model() {
 
         </div>
         `,
+        selectedCategories: [],
       },
       canvasWidth: null,
       canvasHeight: null,
@@ -150,20 +205,54 @@ function Model() {
       playerScore: null,
       resultData: [],
     }
-
-    myView.updateState(
-      self.settings.links.main,
-      self.settings.links,
-      self.settings.canvasWidth,
-      self.settings.canvasHeight
-    )
   }
 
-  self.generateWord = function() {
-    const words = Object.values(data.wordList).flat()
-    const randomIndex = Math.floor(Math.random() * words.length)
-    return words[randomIndex]
+  self.updateState = function() {
+    let content = self.settings.links[window.location.hash.slice(1)];
+    myView.updateState(content, self.settings.links, self.settings.canvasWidth, self.settings.canvasHeight);
+
+    if (content === self.settings.links.game) {
+      myView.gameModal();
+    }
   }
+
+  self.getWordCategory = function() {
+    console.log('word category');
+  }
+
+  self.generateWord = function(category) {
+    if (category === 'any') {
+      const categories = Object.keys(data.wordList);
+      const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+      const words = data.wordList[randomCategory];
+      if (words) {
+        const randomIndex = Math.floor(Math.random() * words.length);
+        return words[randomIndex];
+      } else {
+        return "No words in the selected category";
+      }
+    } else {
+      const words = data.wordList[category];
+      if (words) {
+        const randomIndex = Math.floor(Math.random() * words.length);
+        return words[randomIndex];
+      } else {
+        return "Invalid category";
+      }
+    }
+  }
+
+
+  // self.generateWord = function(category) {
+  //   const words = data.wordList[category]
+  //   if (words) {
+  //     const randomIndex = Math.floor(Math.random() * words.length)
+  //     return words[randomIndex]
+  //   } else {
+  //     return "Invalid category"
+  //   }
+  // }
 }
+
 
 export const appModel = new Model()

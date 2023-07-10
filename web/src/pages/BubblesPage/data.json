@@ -1,6 +1,6 @@
 {
   "wordList": {
-    "Character": [
+    "character": [
       "SpongeBob",
       "Patrick",
       "Squidward",
@@ -12,7 +12,7 @@
       "Barnacle Boy",
       "Larry the Lobster"
     ],
-    "Location": [
+    "location": [
       "Bikini Bottom",
       "Krusty Krab",
       "Chum Bucket",
@@ -24,7 +24,7 @@
       "Salty Spitoon",
       "Bubble Bass's Cave"
     ],
-    "Antagonist/Enemy": [
+    "enemies": [
       "Man Ray",
       "The Flying Dutchman",
       "Dirty Bubble",
@@ -36,7 +36,7 @@
       "Bubble Buddy",
       "Dennis"
     ],
-    "Pet": [
+    "animals": [
       "Gary",
       "Mystery",
       "Larry",
@@ -48,7 +48,7 @@
       "Foofie",
       "Rex"
     ],
-    "Creature": [
+    "creatures": [
       "Anchovies",
       "Jellyfish",
       "Alaskan bull worm",
@@ -60,7 +60,7 @@
       "Sea Whelks",
       "Sea Cucumber"
     ],
-    "Object": [
+    "objects": [
       "Pineapple",
       "Krusty Krab hat",
       "Bubble Stand",

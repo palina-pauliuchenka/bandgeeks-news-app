@@ -74,3 +74,41 @@
 /**
  * END --- CONNECTING FONTS
 **/
+
+
+/**
+ * START --- GAME MODE SETTINGS
+**/
+
+.setGameMode .radio-toolbar {
+  margin: 10px;
+}
+
+.setGameMode input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.setGameMode label {
+  display: inline-block;
+  background-color: rgb(255, 255, 0);
+  padding: 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  border: 3px solid rgb(255, 153, 0);
+  border-radius: 4px;
+}
+
+.setGameMode label:hover {
+  background-color: #dfd;
+}
+
+.setGameMode input[type="radio"]:focus + label {
+  border: 3px dashed rgb(255, 153, 0);
+}
+
+.setGameMode input[type="radio"]:checked + label {
+  background-color: #bfb;
+  border-color: #4c4;
+}
