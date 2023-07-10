@@ -52,7 +52,7 @@ const LoginPage = () => {
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="">
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
               Login into Account
             </h2>
 
@@ -61,7 +61,7 @@ const LoginPage = () => {
                 <Form onSubmit={onSubmit} className="space-y-6">
                   <Label
                     name="username"
-                    className="block font-medium leading-6 text-gray-900"
+                    className="block font-medium leading-6 text-gray-900 dark:text-white"
                     errorClassName="block font-medium leading-6 text-red-600"
                   >
                     Username
@@ -84,7 +84,7 @@ const LoginPage = () => {
 
                   <Label
                     name="password"
-                    className="block font-medium leading-6 text-gray-900"
+                    className="block font-medium leading-6 text-gray-900 dark:text-white"
                     errorClassName="block font-medium leading-6 text-red-600"
                   >
                     Password
@@ -122,7 +122,7 @@ const LoginPage = () => {
             </div>
           </div>
           <div className="rw-login-link">
-            <span>Don&apos;t have an account?</span>{' '}
+            <span className='mx-auto w-11/12 pt-6 text-gray-900 dark:text-white md:px-12'>Don't have an account?</span>{' '}
             <Link to={routes.signup()} className="underline text-indigo-500">
               Sign up!
             </Link>
