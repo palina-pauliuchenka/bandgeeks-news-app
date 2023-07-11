@@ -11,6 +11,9 @@ const BubblesPage = () => {
   useEffect(() => {
     const container = document.getElementById('app')
     appView.init(container)
+    // appView.registerEventListeners()
+    // appView.init(document.getElementById('app'), container)
+
     appModel.init(appView)
     appController.init(appModel, appView, container)
 

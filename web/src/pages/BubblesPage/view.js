@@ -130,6 +130,7 @@ function View() {
     // Append the red bubble to the bubble container
     bubbleContainer.appendChild(redBubble)
   }
+
 }
 
 export const appView = new View()

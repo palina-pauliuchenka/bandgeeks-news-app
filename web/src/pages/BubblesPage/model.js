@@ -31,13 +31,13 @@ function Model() {
           <div id="game" class="relative flex h-screen items-center justify-center bg-[url('https://e1.pxfuel.com/desktop-wallpaper/935/134/desktop-wallpaper-jelly-fish-fields-spongebob-flower-sky-background.jpg')] bg-cover bg-center">
           <!--     START - NO MORE HINTS - MESSAGE     -->
           <div id="noMoreHintsMessage" class="absolute top-5 left-1/2 transform -translate-x-1/2" style="display: none">
-            <div class="flex items-center p-4 mb-4 text-sm text-yellow-300 rounded-lg bg-yellow-900" role="alert">
+            <div class="flex items-center p-4 mb-4 text-sm text-yellow-300 rounded-lg bg-[rgba(0,0,0,0.2)] border-4 border-yellow-300 font-bold" role="alert">
               <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
               </svg>
               <span class="sr-only">Info</span>
               <div>
-                <span class="font-medium">Ooops!</span> Looks like you ran out of hints. You have used all 3 hints.
+                <span class="font-black">Ooops!</span> Looks like you ran out of hints. You have used all 3 hints.
               </div>
             </div>
           </div>
@@ -399,11 +399,14 @@ function Model() {
         const bubble = blueBubbles[i]
         const bubbleLetter = bubble.getAttribute('data-letter')
 
-        if (bubbleLetter === pressedKey) {
+        if (bubbleLetter === pressedKey && !revealed) {
           // Update the content of the blue bubble with the revealed letter
-          bubble.innerText = bubbleLetter
-          self.settings.score += 10
+          if (bubble.innerText !== bubbleLetter) {
+            bubble.innerText = bubbleLetter
+            self.settings.score += 10
+          }
           revealed = true
+          break
         }
       }
     }
@@ -413,7 +416,7 @@ function Model() {
       myView.displayWrongGuessedLetter(pressedKey)
       self.wrongLetterDisplayed = true
     }
-    if (self.wrongLetterDisplayed) {
+    if (!revealed && self.wrongLetterDisplayed) {
       self.settings.score -= 5
       self.decreaseAttempts()
     }
@@ -433,6 +436,20 @@ function Model() {
     // Check if the user has run out of attempts
     if (attemptsCount === 0) {
       self.displaySolution()
+    }
+  }
+
+  self.handleKeyPress = function (event) {
+    const pressedKey = event.key.toLowerCase()
+    const keys = document.getElementsByClassName('key')
+    const blueBubbles = document.getElementsByClassName('blueBubble')
+
+    // Check if the pressed key is one of the virtual keyboard keys
+    for (let i = 0; i < keys.length; i++) {
+      if (keys[i].value === pressedKey) {
+        self.revealLetter(blueBubbles, pressedKey)
+        break
+      }
     }
   }
 }
