@@ -113,13 +113,6 @@ function View() {
   this.displayWrongGuessedLetter = function (letter) {
     let bubbleContainer = document.getElementById('bubbleContainer')
     let redBubble = document.createElement('div')
-    let attempts = document.getElementById('attempts')
-    let attemptsCount = parseInt(attempts.innerText) // Get the current attempts count
-
-    // Update the attempts count
-    attemptsCount--
-    attemptsCount = Math.max(0, attemptsCount)
-    attempts.innerText = attemptsCount
 
     myModel.settings.score -= 5
 
@@ -127,7 +120,7 @@ function View() {
     redBubble.innerText = letter // Set the letter inside the red bubble
 
     // Generate random position for the red bubble
-    const positionX = Math.random() * (window.innerWidth * 1.2)
+    const positionX = Math.random() * (window.innerWidth * 0.8)
     const positionY = Math.random() * (window.innerHeight * 0.8)
 
     // Set the position of the red bubble
@@ -136,11 +129,6 @@ function View() {
 
     // Append the red bubble to the bubble container
     bubbleContainer.appendChild(redBubble)
-
-    // Check if the user has run out of attempts
-    if (attemptsCount === 0) {
-      myModel.displaySolution()
-    }
   }
 }
 
