@@ -47,6 +47,7 @@ const schema = import_graphql_tag.default`
     newsScience: Boolean!
     newsSports: Boolean!
     newsTechnology: Boolean!
+    icon: String
   }
 
   type Mutation {
@@ -71,6 +72,7 @@ const schema = import_graphql_tag.default`
     newsScience: Boolean!
     newsSports: Boolean!
     newsTechnology: Boolean!
+    icon: String
   }
 
   input UpdateUserInput {
@@ -87,6 +89,7 @@ const schema = import_graphql_tag.default`
     newsScience: Boolean
     newsSports: Boolean
     newsTechnology: Boolean
+    icon: String
   }
 `;
 // Annotate the CommonJS export names for ESM import in node:

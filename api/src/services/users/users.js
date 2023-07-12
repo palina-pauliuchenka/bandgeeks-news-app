@@ -15,6 +15,7 @@ export const createUser = async ({ input }) => {
     newsScience,
     newsSports,
     newsTechnology,
+    icon,
   } = input
 
   return await db.user.create({
@@ -32,6 +33,7 @@ export const createUser = async ({ input }) => {
       newsScience,
       newsSports,
       newsTechnology,
+      icon,
     },
   })
 }
@@ -51,6 +53,7 @@ export const updateUser = async ({ id, input }) => {
     newsScience,
     newsSports,
     newsTechnology,
+    icon,
   } = input
 
   return await db.user.update({
@@ -69,6 +72,7 @@ export const updateUser = async ({ id, input }) => {
       newsScience,
       newsSports,
       newsTechnology,
+      icon,
     },
   })
 }

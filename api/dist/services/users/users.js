@@ -39,7 +39,8 @@ const createUser = async ({
     newsHealth,
     newsScience,
     newsSports,
-    newsTechnology
+    newsTechnology,
+    icon
   } = input;
   return await import_db.db.user.create({
     data: {
@@ -55,7 +56,8 @@ const createUser = async ({
       newsHealth,
       newsScience,
       newsSports,
-      newsTechnology
+      newsTechnology,
+      icon
     }
   });
 };
@@ -76,7 +78,8 @@ const updateUser = async ({
     newsHealth,
     newsScience,
     newsSports,
-    newsTechnology
+    newsTechnology,
+    icon
   } = input;
   return await import_db.db.user.update({
     where: {
@@ -95,7 +98,8 @@ const updateUser = async ({
       newsHealth,
       newsScience,
       newsSports,
-      newsTechnology
+      newsTechnology,
+      icon
     }
   });
 };
