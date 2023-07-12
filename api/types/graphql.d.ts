@@ -40,6 +40,7 @@ export type Scalars = {
 export type CreateUserInput = {
   email: Scalars['String'];
   hashedPassword: Scalars['String'];
+  icon?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   newsBusiness: Scalars['Boolean'];
   newsEntertainment: Scalars['Boolean'];
@@ -102,6 +103,7 @@ export type Redwood = {
 export type UpdateUserInput = {
   email?: InputMaybe<Scalars['String']>;
   hashedPassword?: InputMaybe<Scalars['String']>;
+  icon?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   newsBusiness?: InputMaybe<Scalars['Boolean']>;
   newsEntertainment?: InputMaybe<Scalars['Boolean']>;
@@ -119,6 +121,7 @@ export type User = {
   __typename?: 'User';
   email: Scalars['String'];
   hashedPassword: Scalars['String'];
+  icon?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   name?: Maybe<Scalars['String']>;
   newsBusiness: Scalars['Boolean'];
@@ -302,6 +305,7 @@ export interface TimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 export type UserResolvers<ContextType = RedwoodGraphQLContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   email: OptArgsResolverFn<ResolversTypes['String'], ParentType, ContextType>;
   hashedPassword: OptArgsResolverFn<ResolversTypes['String'], ParentType, ContextType>;
+  icon: OptArgsResolverFn<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id: OptArgsResolverFn<ResolversTypes['Int'], ParentType, ContextType>;
   name: OptArgsResolverFn<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   newsBusiness: OptArgsResolverFn<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -320,6 +324,7 @@ export type UserResolvers<ContextType = RedwoodGraphQLContext, ParentType extend
 export type UserRelationResolvers<ContextType = RedwoodGraphQLContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   email?: RequiredResolverFn<ResolversTypes['String'], ParentType, ContextType>;
   hashedPassword?: RequiredResolverFn<ResolversTypes['String'], ParentType, ContextType>;
+  icon?: RequiredResolverFn<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: RequiredResolverFn<ResolversTypes['Int'], ParentType, ContextType>;
   name?: RequiredResolverFn<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   newsBusiness?: RequiredResolverFn<ResolversTypes['Boolean'], ParentType, ContextType>;
