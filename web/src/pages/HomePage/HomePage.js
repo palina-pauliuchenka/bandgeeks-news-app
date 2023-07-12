@@ -138,6 +138,11 @@ const HomePage = () => {
   if (articles == undefined || articles.length == 0)
     return (
       <div className={'mt-12 w-full text-center'}>
+        <div className = "flex justify-end">
+          <div>
+            <Search />
+          </div>
+        </div>
         { 
           <button className = "text-blue-500 hover:text-blue-700 underline"
           onClick={()=> window.history.back()}
@@ -145,17 +150,17 @@ const HomePage = () => {
             <p className={'my-6 font-gruppo text-2xl font-black capitalize'}>Edit search and try again!</p>
           </button>
         }
+        
         <div
           className="relative mx-auto max-w-3xl rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
           role="alert"
         >
           <p className="block sm:inline">
-            <strong className="font-bold">Holy smokes!</strong> Something
-            seriously bad happened.
+            <strong className="font-bold">Holy smokes!</strong> Unfortunately we were not able to find anything regarding your
+            search!
           </p>
           <p>
-            Unfortunately we were not able to find anything regarding your
-            search!
+          Click the "x" to go back to the homepage or edit your search and try again.
           </p>
           <span className="absolute bottom-0 right-0 top-0 px-4 py-3">
             <svg
@@ -170,7 +175,7 @@ const HomePage = () => {
             </svg>
           </span>
         </div>
-        <Search />
+        
       </div>
     )
   
