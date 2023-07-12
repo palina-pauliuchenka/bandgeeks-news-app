@@ -138,7 +138,7 @@ const HomePage = () => {
   if (articles == undefined || articles.length == 0)
     return (
       <div className={'mt-12 w-full text-center'}>
-        <div className = "flex justify-end">
+        <div className = "flex justify-end mr-32">
           <div>
             <Search />
           </div>
