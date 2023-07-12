@@ -13,7 +13,8 @@ CREATE TABLE "User" (
     "newsHealth" BOOLEAN NOT NULL DEFAULT false,
     "newsScience" BOOLEAN NOT NULL DEFAULT false,
     "newsSports" BOOLEAN NOT NULL DEFAULT false,
-    "newsTechnology" BOOLEAN NOT NULL DEFAULT false
+    "newsTechnology" BOOLEAN NOT NULL DEFAULT false,
+    "icon" TEXT NOT NULL DEFAULT 'fa-circle-user'
 );
 
 -- CreateIndex
