@@ -25,11 +25,23 @@ const ChooseAvatar = () => {
         Username: currentUser.id,
       },
     })
+    navigate(routes.home())
     return true
   }
   return (
     <div className="mt-10">
-      <Form onSubmit={updateIcon}>
+      <Form
+        onSubmit={updateIcon}
+        action={routes.home()}
+        className={'ext-gray-900 mx-auto max-w-4xl px-6 dark:text-white'}
+      >
+        <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white">
+          Profile Picture
+        </h2>
+        <p className="mt-1 text-sm leading-6 text-gray-600">
+          This information will be displayed publicly so be careful what you
+          share.
+        </p>
         <div className="">
           <label
             htmlFor="photo"
