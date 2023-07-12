@@ -142,7 +142,7 @@ const HomePage = () => {
           <button className = "text-blue-500 hover:text-blue-700 underline"
           onClick={()=> window.history.back()}
           >
-            <p className={'my-6 font-gruppo text-2xl font-black capitalize'}>Edit search and try again</p>
+            <p className={'my-6 font-gruppo text-2xl font-black capitalize'}>Edit search and try again!</p>
           </button>
         }
         <div
@@ -170,9 +170,6 @@ const HomePage = () => {
             </svg>
           </span>
         </div>
-        <h2 className={'my-6 font-gruppo text-2xl font-black capitalize'}>
-          Try searching again!
-        </h2>
         <Search />
       </div>
     )
