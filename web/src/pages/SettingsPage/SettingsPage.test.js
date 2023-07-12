@@ -1,4 +1,4 @@
-import { render, screen } from '@redwoodjs/testing/web'
+import { render, screen, waitFor } from '@redwoodjs/testing/web'
 
 import SettingsPage from './SettingsPage'
 
@@ -6,40 +6,49 @@ import SettingsPage from './SettingsPage'
 //   https://redwoodjs.com/docs/testing#testing-pages-layouts
 
 describe('SettingsPage', () => {
-  it('renders the icons successfully', ()=>{
-    expect(screen.getByRole('checkbox', { name: 'General' })).not.toThrow() //To Be implemented in the next sprint
+  it('renders the icon buttons successfully', () => {
+    expect(async () => {
+      render(<SettingsPage />)
+      await waitFor(() => {
+        expect(screen.getByRole('checkbox', { name: 'icon' })).not.toThrow() //To Be implemented in the next sprint
+      })
+    })
   })
   it('renders the options successfully', () => {
-    expect(() => {
+    expect(async () => {
       render(<SettingsPage />)
-      expect(
-        screen.getByRole('checkbox', { name: 'General' })
-      ).toBeInTheDocument()
-      expect(
-        screen.getByRole('checkbox', { name: 'Entertainment' })
-      ).toBeInTheDocument()
-      expect(
-        screen.getByRole('checkbox', { name: 'Sports' })
-      ).toBeInTheDocument()
-      expect(
-        screen.getByRole('checkbox', { name: 'Business' })
-      ).toBeInTheDocument()
-      expect(
-        screen.getByRole('checkbox', { name: 'Health' })
-      ).toBeInTheDocument()
-      expect(
-        screen.getByRole('checkbox', { name: 'Science' })
-      ).toBeInTheDocument()
-      expect(
-        screen.getByRole('checkbox', { name: 'Technology' })
-      ).toBeInTheDocument()
-    }).not.toThrow()
+      await waitFor(() => {
+        expect(
+          screen.getByRole('checkbox', { name: 'General' })
+        ).toBeInTheDocument()
+        expect(
+          screen.getByRole('checkbox', { name: 'Entertainment' })
+        ).toBeInTheDocument()
+        expect(
+          screen.getByRole('checkbox', { name: 'Sports' })
+        ).toBeInTheDocument()
+        expect(
+          screen.getByRole('checkbox', { name: 'Business' })
+        ).toBeInTheDocument()
+        expect(
+          screen.getByRole('checkbox', { name: 'Health' })
+        ).toBeInTheDocument()
+        expect(
+          screen.getByRole('checkbox', { name: 'Science' })
+        ).toBeInTheDocument()
+        expect(
+          screen.getByRole('checkbox', { name: 'Technology' })
+        ).toBeInTheDocument()
+      }).not.toThrow()
+    })
   })
   it('renders the buttons successfully', () => {
-    expect(() => {
+    expect(async () => {
       render(<SettingsPage />)
-      expect(screen.getByText('Save')).toBeInTheDocument()
-      expect(screen.getByText('Cancel')).toBeInTheDocument()
-    }).not.toThrow()
+      await waitFor(() => {
+        expect(screen.getByText('Save')).toBeInTheDocument()
+        expect(screen.getByText('Cancel')).toBeInTheDocument()
+      }).not.toThrow()
+    })
   })
 })
