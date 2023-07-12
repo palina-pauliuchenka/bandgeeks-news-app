@@ -23,4 +23,5 @@ model User {
   newsScience         Boolean   @default(false)
   newsSports          Boolean   @default(false)
   newsTechnology      Boolean   @default(false)
+  icon                String    @default("fa-circle-user")
 }
