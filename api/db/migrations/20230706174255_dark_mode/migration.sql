@@ -7,6 +7,7 @@ CREATE TABLE "User" (
     "salt" TEXT NOT NULL,
     "resetToken" TEXT,
     "resetTokenExpiresAt" DATETIME,
+    "darkMode" BOOLEAN NOT NULL DEFAULT false,
     "newsGeneral" BOOLEAN NOT NULL DEFAULT true,
     "newsBusiness" BOOLEAN NOT NULL DEFAULT false,
     "newsEntertainment" BOOLEAN NOT NULL DEFAULT false,

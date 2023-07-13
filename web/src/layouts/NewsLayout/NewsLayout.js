@@ -1,14 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Link, routes, useLocation } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 import Dropdown from 'src/components/Dropdown/Dropdown.js'
+import { CheckmarkIcon } from '@redwoodjs/web/dist/toast'
 
 const NewsLayout = ({ children }) => {
   const { isAuthenticated } = useAuth()
   const { pathname } = useLocation()
   const [refreshing, setRefresh] = useState(false)
+  const [darkActive, checkDark] = useState(false)
 
   const activeRoute = window.localStorage.getItem('activeRoute') || pathname
 
@@ -25,7 +27,46 @@ const NewsLayout = ({ children }) => {
     year: 'numeric',
   })
 
+  useEffect(() => {
+    const storedDarkActive = localStorage.getItem('darkActive');
+    if (storedDarkActive) {
+      checkDark(JSON.parse(storedDarkActive));
+    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+      localStorage.theme = 'dark'
+    }
+    else {
+      document.documentElement.classList.remove('dark')
+      localStorage.theme = 'light'
+    }// Call lightMode on component mount
+  }, [darkActive]);
+
+  const lightMode = () => {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.remove('dark')
+      localStorage.theme = 'light'
+    }
+    else {
+      document.documentElement.classList.add('dark')
+      localStorage.theme = 'dark'
+    }
+  }
+
+  function checkMode() {
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      checkDark(false); // Set darkActive to true for dark mode
+    } else {
+      checkDark(true); // Set darkActive to false for light mode
+    }
+  }
+
   window.localStorage.setItem('activeRoute', activeRoute)
+
 
   return (
     <>
@@ -79,7 +120,7 @@ const NewsLayout = ({ children }) => {
       <div className="relative z-50 hidden lg:block">
         <button
           className={
-            'fixed bottom-10 right-10 rounded border border-gray-300 bg-white px-3 py-2 shadow dark:border-gray-100 dark:bg-gray-900 hover:dark:bg-gray-700'
+            'fixed bottom-5 right-10 rounded border border-gray-300 bg-white px-3 py-2 shadow dark:border-gray-100 dark:bg-gray-900 hover:dark:bg-gray-700'
           }
           onClick={handleRefreshClick}
         >
@@ -89,7 +130,22 @@ const NewsLayout = ({ children }) => {
             <i className="fa-solid fa-arrows-rotate"></i>
           )}
         </button>
+
+      {/* Button to toggle light and dark  mode */}
+      <button
+          className={
+            'fixed bottom-20 right-10 rounded border border-gray-300 bg-white px-3 py-2 shadow dark:border-gray-100 dark:bg-gray-900 hover:dark:bg-gray-700'
+          }
+          onClick={() => {lightMode(), checkMode()}}
+        >
+          {darkActive ? (
+            <i className="fa-solid fa-sun"></i>
+          ) : (
+            <i className="fa-solid fa-moon"></i>
+          )}
+        </button>
       </div>
+
 
       {children}
 
