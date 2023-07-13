@@ -9,7 +9,9 @@ function View() {
   this.init = function (container, model) {
     myViewContainer = container
     myModel = model
-    settings = {
+    this.settings = {
+      userWon: false,
+      gameOver: false,
       canvas: null,
       context: null,
     }
@@ -56,9 +58,19 @@ function View() {
           lineDiv = document.createElement('div') // Create a new line div for the next line
         } else {
           if (word[i] === "'" || word[i] === '.') {
+            if (word[i] === "'") {
+              bubble.innerText = "'"
+              bubble.classList.add('mt-1')
+            }
+            if (word[i] === '.') {
+              bubble.innerText = '.'
+              bubble.classList.add('pt-16')
+            }
             bubble.classList.add('blue')
+            console.log('period')
           } else {
             bubble.classList.add('blueBubble')
+            console.log('after period')
           }
           bubble.setAttribute('data-letter', word[i])
           lineDiv.appendChild(bubble) // Append the bubble to the line div
@@ -122,7 +134,12 @@ function View() {
     attemptsCount = Math.max(0, attemptsCount)
     attempts.innerText = attemptsCount
 
-    myModel.settings.score -= 5
+    if (this.settings.gameOver === true) {
+      myModel.settings.score -= 0
+      return
+    } else {
+      myModel.settings.score -= 5
+    }
 
     redBubble.classList.add('redBubble', 'absolute')
     redBubble.innerText = letter // Set the letter inside the red bubble
@@ -137,22 +154,44 @@ function View() {
 
     // Append the red bubble to the bubble container
     bubbleContainer.appendChild(redBubble)
+
+    // Check if the user has run out of attempts
+    if (attemptsCount === 0) {
+      myModel.displaySolution()
+      console.log('here')
+      this.gameOver()
+      console.log('should be here')
+    }
   }
 
   this.displayKeyboard = function () {
     let keyboard = document.getElementById('keyboard')
-
 
     let keyboardButton = document.getElementById('keyboardButton')
 
     keyboardButton.addEventListener('click', (event) => {
       event.preventDefault()
       if (keyboard.style.display === 'none') {
-        keyboard.style.display = 'block';
+        keyboard.style.display = 'block'
       } else {
-        keyboard.style.display = 'none';
+        keyboard.style.display = 'none'
       }
     })
+  }
+
+  this.gameOver = function () {
+    let gameOverModal = document.getElementById('gameOverModal')
+    gameOverModal.style.display = 'block'
+
+    let gameResult = document.getElementById('gameResult')
+
+    if (this.settings.userWon === true) {
+      gameResult.innerText = 'You WON!!!'
+      this.settings.gameOver = true
+    } else {
+      gameResult.innerText = 'You LOST!!!'
+      this.settings.gameOver = true
+    }
   }
 }
 

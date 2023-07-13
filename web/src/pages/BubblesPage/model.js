@@ -182,8 +182,25 @@ function Model() {
                   </div>
                 </form>
               </div>
+
             </div>
           </div>
+
+          <!--     Game Over Modal     --->
+              <div id="gameOverModal" style="display: none" tabindex="-1" class="absolute left-1/2 top-5 z-50 -translate-x-1/2 transform">
+                <div class="relative max-h-full w-full max-w-md">
+                  <div class="relative rounded-lg border-4 border-yellow-600 bg-[rgba(255,255,255,0.2)]">
+                    <div class="p-6 text-center">
+                      <div class="mb-6 flex items-center justify-center">
+                        <h3 class="text-4xl font-bold tracking-widest text-yellow-600 dark:text-yellow-300" id="gameResult"></h3>
+                      </div>
+
+                      <a href="/bubbles" class="focus:ring-gray-200 dark:hover:text-white rounded-lg border border-gray-600 bg-[rgba(255,255,255,0.2)] px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-[rgba(255,255,255,0.5)] hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 dark:focus:ring-gray-600">Exit</a>
+                      <button data-modal-hide="popup-modal" onclick="location.reload()" type="button" class="mr-2 inline-flex items-center rounded-lg border border-yellow-900 bg-yellow-600 px-5 py-2 text-center text-sm font-medium text-yellow-900 hover:bg-yellow-500 focus:outline-none focus:ring-4">Play Again</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
         `,
         results: `
         <div id="results">
@@ -386,6 +403,7 @@ function Model() {
 
   self.revealLetter = function (blueBubbles, pressedKey) {
     let revealed = false
+    let allLettersRevealed = true;
 
     // Check if the corresponding blue bubble has already been revealed AND
     // If the blue bubble hasn't been revealed, reveal it and update the score
@@ -397,8 +415,18 @@ function Model() {
         if (bubbleLetter === pressedKey) {
           // Update the content of the blue bubble with the revealed letter
           bubble.innerText = bubbleLetter
-          self.settings.score += 10
+
+          if (myView.settings.gameOver === true) {
+            self.settings.score += 0
+          } else {
+            self.settings.score += 10
+          }
           revealed = true
+        }
+
+        // Check if any blue bubble still has its letter hidden
+        if (bubble.innerText === "") {
+          allLettersRevealed = false;
         }
       }
     }
@@ -421,6 +449,12 @@ function Model() {
     }
 
     myView.displayScore()
+
+    // Check if all letters have been revealed
+    if (allLettersRevealed) {
+      myView.settings.userWon = true
+      myView.gameOver()
+    }
   }
 
   self.decreaseAttempts = function () {
@@ -431,11 +465,6 @@ function Model() {
     attemptsCount -= 1
     attemptsCount = Math.max(0, attemptsCount)
     attempts.innerText = attemptsCount
-
-    // Check if the user has run out of attempts
-    if (attemptsCount === 0) {
-      self.displaySolution()
-    }
   }
 }
 

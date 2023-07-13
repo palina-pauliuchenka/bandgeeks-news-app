@@ -20,6 +20,10 @@ function Controller() {
 
   this.registerEventListeners = function () {
     window.addEventListener('keydown', function (event) {
+      if (myView.settings.gameOver === true) {
+        return
+      }
+
       const pressedKey = event.key.toLowerCase()
       const keys = document.getElementsByClassName('key')
       const blueBubbles = document.getElementsByClassName('blueBubble')
