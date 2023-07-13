@@ -100,7 +100,7 @@ const HomePage = () => {
     }
 
     if (!loading) getArticles()
-  }, [section, pageNUM, loading])
+  }, [section, pageNUM, activeCategory, loading])
 
   const formatDate = (timestamp) => {
     const dateObj = new Date(timestamp)
