@@ -5,9 +5,36 @@
  * to inject Tailwind's styles into your CSS.
  * For more information, see: https://tailwindcss.com/docs/installation#include-tailwind-in-your-css
  */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+/*@import 'tailwindcss/base';*/
+/*@import 'tailwindcss/components';*/
+/*@import 'tailwindcss/utilities';*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .key {
+    @apply uppercase w-12 h-12 rounded border drop-shadow-[2px_2px_#1d4ed8] font-bold bg-blue-400 border-blue-700 hover:border-blue-900 m-2 hover:shadow-inner hover:shadow-blue-500 hover:drop-shadow-none;
+  }
+
+  .blueBubble {
+    @apply uppercase m-5 inline-flex h-24 w-24 items-center justify-center rounded-full border border-blue-300 bg-gradient-to-t from-blue-300 to-transparent text-blue-900;
+  }
+
+  .blue {
+    @apply text-blue-900
+  }
+
+  .greenBubble {
+    @apply font-rubik text-4xl uppercase text-lime-900 m-5 inline-flex h-24 w-24 items-center justify-center rounded-full border border-lime-300 bg-gradient-to-t from-lime-300 to-transparent text-lime-900;
+  }
+
+  .redBubble {
+    @apply uppercase text-red-900 font-rubik text-4xl m-5 inline-flex h-24 w-24 items-center justify-center rounded-full border border-red-300 bg-gradient-to-t from-red-300 to-transparent text-red-900;
+  }
+}
+
 /**
  * END --- SETUP TAILWINDCSS EDIT
  */
@@ -31,6 +58,43 @@
   font-family: 'playfair';
 }
 
+@font-face {
+  src: url("fonts/Rubik_Bubbles/RubikBubbles-Regular.ttf") format("truetype");
+  font-family: 'rubik';
+}
+
 /**
  * END --- CONNECTING FONTS
 **/
+
+
+/**
+ * START --- GAME MODE SETTINGS
+**/
+
+.setGameMode input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.setGameMode label {
+  display: inline-block;
+  background-color: rgb(255, 255, 0);
+  padding: 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  border: 3px solid rgb(255, 153, 0);
+  border-radius: 4px;
+}
+
+.setGameMode label:hover {
+  cursor: pointer;
+  background-color: #dfd;
+  border-color: rgba(68, 204, 68, 0.6);
+}
+
+.setGameMode input[type="radio"]:checked + label {
+  background-color: #bfb;
+  border-color: #4c4;
+}
