@@ -152,9 +152,6 @@ const HomePage = () => {
             <strong className="font-bold">Holy smokes!</strong> Unfortunately we were not able to find anything regarding your
             search!
           </p>
-          <p>
-          Click the "x" to go back to the homepage or edit your search and try again.
-          </p>
           <span className="absolute bottom-0 right-0 top-0 px-4 py-3">
             <svg
               className="h-6 w-6 fill-current text-red-500"
