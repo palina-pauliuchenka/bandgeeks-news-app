@@ -57,7 +57,13 @@ const HomePage = () => {
 
   window.localStorage.setItem('activeRoute', activeRoute)
 
-  if (currentUser != null && !loading && section === '') {
+  if (
+    currentUser != null &&
+    isAuthenticated &&
+    data != null &&
+    !loading &&
+    section === ''
+  ) {
     let tmp = ''
     for (let x in data.fetchUserbyId) {
       if (data.fetchUserbyId[x] === true) {
