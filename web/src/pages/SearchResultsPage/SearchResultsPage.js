@@ -1,21 +1,19 @@
-import { Link, routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
+import { useState, useEffect } from 'react'
+
+import { Link, routes, useLocation } from '@redwoodjs/router'
+import { MetaTags, useQuery } from '@redwoodjs/web'
+
+import { useAuth } from 'src/auth'
+import Pagination from 'src/components/Pagination'
+import Search from 'src/components/Search'
 
 const SearchResultsPage = () => {
   return (
-    <>
-      <MetaTags title="SearchResults" description="SearchResults page" />
+    <p>
+      search results page
+    </p>
 
-      <h1>SearchResultsPage</h1>
-      <p>
-        Find me in{' '}
-        <code>./web/src/pages/SearchResultsPage/SearchResultsPage.js</code>
-      </p>
-      <p>
-        My default route is named <code>searchResults</code>, link to me with `
-        <Link to={routes.searchResults()}>SearchResults</Link>`
-      </p>
-    </>
+
   )
 }
 
