@@ -139,18 +139,15 @@ const HomePage = () => {
     return (
 
       <div className={'mt-12 w-full text-center'}>
-        <div className = "flex justify-center">
-          <div>
-            <Search />
-          </div>
-        </div>
         <div
           className="relative mx-auto max-w-3xl rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
           role="alert"
         >
           <p className="block sm:inline">
-            <strong className="font-bold">Holy smokes!</strong> Unfortunately we were not able to find anything regarding your
-            search!
+            <strong className="font-bold">Holy smokes!</strong> Something seriously bad happened.
+          </p>
+          <p>
+            Unfortunately we were not able to find anything regarding your search!
           </p>
           <span className="absolute bottom-0 right-0 top-0 px-4 py-3">
             <svg
@@ -164,14 +161,20 @@ const HomePage = () => {
               <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
             </svg>
           </span>
-          { 
-          <button className = "text-blue-500 hover:text-blue-700 underline"
-          onClick={()=> window.history.back()}
-          >
-            <p className={'my-6 font-gruppo text-2xl font-black capitalize'}>Edit search and try again!</p>
-          </button>
-        }
         </div> 
+        { 
+        // Optional button 
+         /* <button className = "text-blue-500 hover:text-blue-700 underline"
+          onClick={()=> window.history.back()}
+          >*/
+            <p className={'my-6 font-gruppo text-2xl font-black capitalize'}>Try searching again!</p>
+          // </button> 
+        }
+        <div className = "flex justify-center">
+          <div>
+            <Search />
+          </div>
+        </div>
       </div>
     )
     
