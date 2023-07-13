@@ -84,9 +84,9 @@ const SettingsPage = () => {
   return (
     <>
       <MetaTags title="Settings" description="Settings page" />
-      <div className="space-y-12">
-        <div className="border-b border-gray-900/10 pb-12">
-          <nav className="mb-6 flex" aria-label="Breadcrumb">
+      <div className="mt-12">
+        <div className="border-b mx-auto border-gray-900/10 pb-12">
+          <nav className="mb-6 mx-auto max-w-4xl px-6 flex" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li className="inline-flex items-center">
                 <p className="inline-flex items-center text-sm font-medium text-gray-700 dark:text-gray-400">
@@ -139,7 +139,7 @@ const SettingsPage = () => {
           Link={routes.home()}
           onSubmit={runQuery}
           className={
-            'mx-auto max-w-4xl px-6 py-24 text-gray-900 dark:text-white'
+            'mx-auto max-w-4xl px-6 text-gray-900 dark:text-white'
           }
         >
           <div className="mt-10">
@@ -260,3 +260,4 @@ const SettingsPage = () => {
 }
 
 export default SettingsPage
+
