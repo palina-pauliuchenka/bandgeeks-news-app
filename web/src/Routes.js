@@ -27,6 +27,7 @@ const Routes = () => {
   return (
     <Router useAuth={useAuth}>
       <Route path="/search-results" page={SearchResultsPage} name="searchResults" />
+      <Route path="/bubbles" page={BubblesPage} name="bubbles" />
       <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
       <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       <Set wrap={NewsLayout}>
