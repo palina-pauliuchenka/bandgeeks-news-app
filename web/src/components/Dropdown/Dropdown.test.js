@@ -1,4 +1,5 @@
-import { screen, render } from '@redwoodjs/testing/web'
+import { screen, render, waitFor } from '@redwoodjs/testing/web'
+
 import NewsLayout from 'src/layouts/NewsLayout/NewsLayout'
 
 import Dropdown from './Dropdown'
@@ -8,17 +9,21 @@ import Dropdown from './Dropdown'
 
 describe('Dropdown', () => {
   it('renders successfully when logged out', () => {
-    expect(() => {
+    expect(async () => {
       render(<Dropdown />)
       render(<NewsLayout />)
-      expect(screen.getByRole('link', { name: 'Login' })).toBeInTheDocument()
+      await waitFor(() => {
+        expect(screen.getByRole('link', { name: 'Login' })).toBeInTheDocument()
+      })
     }).not.toThrow()
   })
   it('renders successfully when logged in', () => {
-    expect(() => {
+    expect(async () => {
       mockCurrentUser({ email: 'Jimbo' })
       render(<Dropdown />)
-      expect(screen.getByLabelText('user-icon')).toBeInTheDocument()
+      await waitFor(() => {
+        expect(screen.getByLabelText('user-icon')).toBeInTheDocument()
+      })
     }).not.toThrow()
   })
 })

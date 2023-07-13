@@ -33,7 +33,7 @@ const HomePage = () => {
   const [totalPages, setTotalPages] = useState()
   const [pageNUM, setPageNUM] = useState(1)
   const [activeCategory, setActiveCategory] = useState('')
-  const { currentUser } = useAuth()
+  const { isAuthenticated, currentUser } = useAuth()
   const { data, loading } = useQuery(getusr, {
     variables: { id: currentUser == null ? -1 : currentUser.id },
   })
@@ -52,7 +52,13 @@ const HomePage = () => {
   const activeRoute = window.localStorage.getItem('activeRoute') || pathname
   window.localStorage.setItem('activeRoute', activeRoute)
 
-  if (currentUser != null && !loading && section === '') {
+  if (
+    isAuthenticated &&
+    currentUser != null &&
+    data != undefined &&
+    !loading &&
+    section === ''
+  ) {
     let tmp = ''
     for (let x in data.fetchUserbyId) {
       if (data.fetchUserbyId[x] === true) {

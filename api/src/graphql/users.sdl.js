@@ -14,6 +14,7 @@ export const schema = gql`
     newsScience: Boolean!
     newsSports: Boolean!
     newsTechnology: Boolean!
+    icon: String
   }
 
   type Mutation {
@@ -38,6 +39,7 @@ export const schema = gql`
     newsScience: Boolean!
     newsSports: Boolean!
     newsTechnology: Boolean!
+    icon: String
   }
 
   input UpdateUserInput {
@@ -54,5 +56,6 @@ export const schema = gql`
     newsScience: Boolean
     newsSports: Boolean
     newsTechnology: Boolean
+    icon: String
   }
 `

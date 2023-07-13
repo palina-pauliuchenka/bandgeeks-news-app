@@ -7,14 +7,14 @@ CREATE TABLE "User" (
     "salt" TEXT NOT NULL,
     "resetToken" TEXT,
     "resetTokenExpiresAt" DATETIME,
-    "darkMode" BOOLEAN NOT NULL DEFAULT false,
     "newsGeneral" BOOLEAN NOT NULL DEFAULT true,
     "newsBusiness" BOOLEAN NOT NULL DEFAULT false,
     "newsEntertainment" BOOLEAN NOT NULL DEFAULT false,
     "newsHealth" BOOLEAN NOT NULL DEFAULT false,
     "newsScience" BOOLEAN NOT NULL DEFAULT false,
     "newsSports" BOOLEAN NOT NULL DEFAULT false,
-    "newsTechnology" BOOLEAN NOT NULL DEFAULT false
+    "newsTechnology" BOOLEAN NOT NULL DEFAULT false,
+    "icon" TEXT NOT NULL DEFAULT 'fa-circle-user'
 );
 
 -- CreateIndex

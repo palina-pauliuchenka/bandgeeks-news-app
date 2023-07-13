@@ -7,6 +7,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@redwoodjs/auth-dbauth-setup": "5.4.3",
     "@redwoodjs/core": "5.4.3",
     "prettier-plugin-tailwindcss": "^0.3.0"
