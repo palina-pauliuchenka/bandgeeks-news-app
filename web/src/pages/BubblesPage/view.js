@@ -28,6 +28,7 @@ function View() {
           if (category) {
             this.displayBubbles(category)
             this.displayWrongAttempts()
+            this.displayKeyboard()
           } else {
             console.log('No category selected.')
           }
@@ -113,6 +114,13 @@ function View() {
   this.displayWrongGuessedLetter = function (letter) {
     let bubbleContainer = document.getElementById('bubbleContainer')
     let redBubble = document.createElement('div')
+    let attempts = document.getElementById('attempts')
+    let attemptsCount = parseInt(attempts.innerText) // Get the current attempts count
+
+    // Update the attempts count
+    attemptsCount--
+    attemptsCount = Math.max(0, attemptsCount)
+    attempts.innerText = attemptsCount
 
     myModel.settings.score -= 5
 
@@ -120,8 +128,8 @@ function View() {
     redBubble.innerText = letter // Set the letter inside the red bubble
 
     // Generate random position for the red bubble
-    const positionX = Math.random() * (window.innerWidth * 0.8)
-    const positionY = Math.random() * (window.innerHeight * 0.8)
+    const positionX = Math.random() * (window.innerWidth * 0.9)
+    const positionY = Math.random() * (window.innerHeight * 0.9)
 
     // Set the position of the red bubble
     redBubble.style.left = positionX + 'px'
@@ -131,6 +139,21 @@ function View() {
     bubbleContainer.appendChild(redBubble)
   }
 
+  this.displayKeyboard = function () {
+    let keyboard = document.getElementById('keyboard')
+
+
+    let keyboardButton = document.getElementById('keyboardButton')
+
+    keyboardButton.addEventListener('click', (event) => {
+      event.preventDefault()
+      if (keyboard.style.display === 'none') {
+        keyboard.style.display = 'block';
+      } else {
+        keyboard.style.display = 'none';
+      }
+    })
+  }
 }
 
 export const appView = new View()

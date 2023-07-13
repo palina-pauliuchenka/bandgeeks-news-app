@@ -2,7 +2,7 @@ import React from 'react'
 
 const Search = () => {
   return (
-    <form action="" className={'w-56 text-gray-600 mx-auto'}>
+    <form action="" className={'mx-auto w-56 text-gray-600'}>
       <div className="relative flex shadow-sm">
         <input
           type="text"

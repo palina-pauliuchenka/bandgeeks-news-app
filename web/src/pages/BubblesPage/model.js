@@ -29,20 +29,20 @@ function Model() {
         `,
         game: `
           <div id="game" class="relative flex h-screen items-center justify-center bg-[url('https://e1.pxfuel.com/desktop-wallpaper/935/134/desktop-wallpaper-jelly-fish-fields-spongebob-flower-sky-background.jpg')] bg-cover bg-center">
-          <!--     START - NO MORE HINTS - MESSAGE     -->
-          <div id="noMoreHintsMessage" class="absolute top-5 left-1/2 transform -translate-x-1/2" style="display: none">
-            <div class="flex items-center p-4 mb-4 text-sm text-yellow-300 rounded-lg bg-[rgba(0,0,0,0.2)] border-4 border-yellow-300 font-bold" role="alert">
-              <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-              </svg>
-              <span class="sr-only">Info</span>
-              <div>
-                <span class="font-black">Ooops!</span> Looks like you ran out of hints. You have used all 3 hints.
+
+            <!--     START - NO MORE HINTS - MESSAGE     -->
+            <div id="noMoreHintsMessage" class="absolute top-5 left-1/2 transform -translate-x-1/2" style="display: none">
+              <div class="flex items-center p-4 mb-4 text-sm text-yellow-300 rounded-lg bg-yellow-900" role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                  <span class="font-medium">Ooops!</span> Looks like you ran out of hints. You have used all 3 hints.
+                </div>
               </div>
             </div>
-          </div>
-          <!--     END - NO MORE HINTS - MESSAGE     -->
-
+            <!--     END - NO MORE HINTS - MESSAGE     -->
             <ul class="absolute left-5 top-5 text-left text-2xl font-black tracking-widest text-amber-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
               <li>
                 <button class="transition delay-100 ease-in-out hover:text-amber-600 tracking-widest" onclick="location.reload()"> New Game </button>
@@ -70,7 +70,11 @@ function Model() {
               </div>
               <div id="bubbleContainer"></div>
               <div id="answer" class="flex flex-col justify-center items-center font-rubik text-4xl"></div>
-              <div class="keyboard absolute bottom-6">
+
+              <button id="keyboardButton" class="absolute bottom-10 left-10 border-4 border-yellow-900 bg-yellow-300 text-yellow-900 hover:bg-yellow-200 hover:border-yellow-800 hover:text-yellow-800 h-14 w-14 flex items-center justify-center rounded">
+                <i class="fa-regular fa-keyboard fa-lg font-bold"></i>
+              </button>
+              <div id="keyboard" style="display: none" class="keyboard absolute bottom-6">
                 <div class="keys text-blue-900 bg-[#3b82f680] rounded px-3 py-2">
                   <div class="flex justify-center">
                     <button class="key" value="q">q</button>
@@ -116,20 +120,21 @@ function Model() {
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
             <div class="fixed inset-0 z-10 overflow-y-auto">
-            <!--     NO CATEGORY IS SET - WARNING MESSAGE     -->
-            <div id="setGameModeError" class="absolute top-5 left-1/2 transform -translate-x-1/2">
-              <div class="flex items-center p-4 mb-4 text-sm text-yellow-300 rounded-lg bg-yellow-900" role="alert">
-                <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                </svg>
-                <span class="sr-only">Info</span>
-                <div>
-                  <span class="font-medium">Warning alert!</span> A category must be selected to start a game.
+
+              <!--     NO CATEGORY IS SET - WARNING MESSAGE     -->
+              <div id="setGameModeError" class="absolute top-5 left-1/2 transform -translate-x-1/2">
+                <div class="flex items-center p-4 mb-4 text-sm text-yellow-300 rounded-lg bg-yellow-900" role="alert">
+                  <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                  </svg>
+                  <span class="sr-only">Info</span>
+                  <div>
+                    <span class="font-medium">Warning alert!</span> A category must be selected to start a game.
+                  </div>
                 </div>
               </div>
-            </div>
+              <!--     CATEGORY MODAL     -->
 
-            <!--     CATEGORY MODAL     -->
               <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                 <form id="setGameModeForm" class="relative transform overflow-hidden rounded-lg border bg-[rgba(255,255,255,0.2)] text-left shadow-xl transition-all sm:my-8">
                   <div class="px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
@@ -230,10 +235,10 @@ function Model() {
       },
       canvasWidth: null,
       canvasHeight: null,
+      wrongLetterDisplayed: false,
       attempts: 7,
       counter: 0,
       score: 0,
-      wrongLetterDisplayed: false,
       playerScore: null,
       resultData: [],
     }
@@ -382,41 +387,35 @@ function Model() {
   self.revealLetter = function (blueBubbles, pressedKey) {
     let revealed = false
 
-    // Check if the corresponding blue bubble has already been revealed
-    for (let i = 0; i < blueBubbles.length; i++) {
-      const bubble = blueBubbles[i]
-      const bubbleLetter = bubble.getAttribute('data-letter')
-
-      if (bubbleLetter === pressedKey && bubble.innerText === bubbleLetter) {
-        revealed = true
-        break
-      }
-    }
-
+    // Check if the corresponding blue bubble has already been revealed AND
     // If the blue bubble hasn't been revealed, reveal it and update the score
     if (!revealed) {
       for (let i = 0; i < blueBubbles.length; i++) {
         const bubble = blueBubbles[i]
         const bubbleLetter = bubble.getAttribute('data-letter')
 
-        if (bubbleLetter === pressedKey && !revealed) {
+        if (bubbleLetter === pressedKey) {
           // Update the content of the blue bubble with the revealed letter
-          if (bubble.innerText !== bubbleLetter) {
-            bubble.innerText = bubbleLetter
-            self.settings.score += 10
-          }
+          bubble.innerText = bubbleLetter
+          self.settings.score += 10
           revealed = true
-          break
         }
       }
     }
 
     // Display the wrong guessed letter only if it hasn't been displayed before
+    // && !self.wrongLetterDisplayed
+    // if (!revealed) {
+    //   myView.displayWrongGuessedLetter(pressedKey)
+    //   self.wrongLetterDisplayed = true
+    // }
+
     if (!revealed && !self.wrongLetterDisplayed) {
       myView.displayWrongGuessedLetter(pressedKey)
-      self.wrongLetterDisplayed = true
+      // self.wrongLetterDisplayed = true
     }
-    if (!revealed && self.wrongLetterDisplayed) {
+
+    if (self.wrongLetterDisplayed) {
       self.settings.score -= 5
       self.decreaseAttempts()
     }
@@ -436,20 +435,6 @@ function Model() {
     // Check if the user has run out of attempts
     if (attemptsCount === 0) {
       self.displaySolution()
-    }
-  }
-
-  self.handleKeyPress = function (event) {
-    const pressedKey = event.key.toLowerCase()
-    const keys = document.getElementsByClassName('key')
-    const blueBubbles = document.getElementsByClassName('blueBubble')
-
-    // Check if the pressed key is one of the virtual keyboard keys
-    for (let i = 0; i < keys.length; i++) {
-      if (keys[i].value === pressedKey) {
-        self.revealLetter(blueBubbles, pressedKey)
-        break
-      }
     }
   }
 }

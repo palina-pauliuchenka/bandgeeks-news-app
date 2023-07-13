@@ -18,7 +18,6 @@ function Controller() {
     this.registerEventListeners() // Register event listeners in the controller
   }
 
-
   this.registerEventListeners = function () {
     window.addEventListener('keydown', function (event) {
       const pressedKey = event.key.toLowerCase()
