@@ -7,11 +7,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'chomsky': ['chomsky', 'sans-serif'],
-        'gruppo': ['gruppo', 'sans-serif'],
-        'playfair': ['playfair', 'serif'],
-      }},
+        chomsky: ['chomsky', 'sans-serif'],
+        gruppo: ['gruppo', 'sans-serif'],
+        playfair: ['playfair', 'serif'],
+        rubik: ['rubik', 'cursive'],
+      },
+    },
   },
   plugins: [],
 }
-
