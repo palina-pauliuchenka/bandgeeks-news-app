@@ -4,7 +4,6 @@ import { Link, routes, useLocation } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 import Dropdown from 'src/components/Dropdown/Dropdown.js'
-import { CheckmarkIcon } from '@redwoodjs/web/dist/toast'
 
 const NewsLayout = ({ children }) => {
   const { isAuthenticated } = useAuth()
@@ -28,26 +27,32 @@ const NewsLayout = ({ children }) => {
   })
 
   useEffect(() => {
-    const storedDarkActive = localStorage.getItem('darkActive');
+    const storedDarkActive = localStorage.getItem('darkActive')
     if (storedDarkActive) {
-      checkDark(JSON.parse(storedDarkActive));
+      checkDark(JSON.parse(storedDarkActive))
     }
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
       document.documentElement.classList.add('dark')
       localStorage.theme = 'dark'
-    }
-    else {
+    } else {
       document.documentElement.classList.remove('dark')
       localStorage.theme = 'light'
-    }// Call lightMode on component mount
-  }, [darkActive]);
+    } // Call lightMode on component mount
+  }, [darkActive])
 
   const lightMode = () => {
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
       document.documentElement.classList.remove('dark')
       localStorage.theme = 'light'
-    }
-    else {
+    } else {
       document.documentElement.classList.add('dark')
       localStorage.theme = 'dark'
     }
@@ -59,14 +64,13 @@ const NewsLayout = ({ children }) => {
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
-      checkDark(false); // Set darkActive to true for dark mode
+      checkDark(false) // Set darkActive to true for dark mode
     } else {
-      checkDark(true); // Set darkActive to false for light mode
+      checkDark(true) // Set darkActive to false for light mode
     }
   }
 
   window.localStorage.setItem('activeRoute', activeRoute)
-
 
   return (
     <>
@@ -131,12 +135,14 @@ const NewsLayout = ({ children }) => {
           )}
         </button>
 
-      {/* Button to toggle light and dark  mode */}
-      <button
+        {/* Button to toggle light and dark  mode */}
+        <button
           className={
             'fixed bottom-20 right-10 rounded border border-gray-300 bg-white px-3 py-2 shadow dark:border-gray-100 dark:bg-gray-900 hover:dark:bg-gray-700'
           }
-          onClick={() => {lightMode(), checkMode()}}
+          onClick={() => {
+            lightMode(), checkMode()
+          }}
         >
           {darkActive ? (
             <i className="fa-solid fa-sun"></i>
@@ -145,7 +151,6 @@ const NewsLayout = ({ children }) => {
           )}
         </button>
       </div>
-
 
       {children}
 

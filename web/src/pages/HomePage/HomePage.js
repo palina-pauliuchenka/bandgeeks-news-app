@@ -7,6 +7,8 @@ import { useAuth } from 'src/auth'
 import Pagination from 'src/components/Pagination'
 import Search from 'src/components/Search'
 
+import sponge from './sponge.png'
+
 const API_KEY = process.env.API_KEY
 
 const getusr = gql`
@@ -50,6 +52,9 @@ const HomePage = () => {
 
   const { pathname } = useLocation()
   const activeRoute = window.localStorage.getItem('activeRoute') || pathname
+
+  const { isAuthenticated } = useAuth()
+
   window.localStorage.setItem('activeRoute', activeRoute)
 
   if (currentUser != null && !loading && section === '') {
@@ -120,14 +125,6 @@ const HomePage = () => {
     }
   }
 
-  // const next = () => {
-  //   if (pageNUM < totalPages) {
-  //     const nextPage = pageNUM + 1
-  //     if (nextPage === totalPages) {
-  //       setPageNUM(nextPage)
-  //     }
-  //   }
-  // }
   const prev = () => {
     if (pageNUM > 1) {
       setPageNUM(pageNUM - 1)
@@ -173,6 +170,10 @@ const HomePage = () => {
     <>
       <MetaTags title="General" description="General page" />
 
+      <Link to={routes.bubbles()} className={'absolute bottom-7 left-7'}>
+        <img src={sponge} className={'h-12 w-12'} alt="his" />
+      </Link>
+
       <div className={'relative mx-auto px-6 md:w-11/12 md:px-12'}>
         <div
           className={
@@ -185,46 +186,73 @@ const HomePage = () => {
                 'mx-auto text-xs dark:text-white sm:text-sm md:max-w-7xl md:px-12 lg:flex lg:items-center  lg:justify-between'
               }
             >
-              <li
-                className={`${
-                  pathname === routes.home() && activeCategory === ''
-                    ? 'my-1 inline-block rounded bg-purple-600 px-2 py-1 text-white'
-                    : 'mx-3 my-1 inline-block'
-                }`}
-              >
-                <Link
-                  to={routes.home()}
-                  onClick={() => {
-                    setState('')
-                    setActiveCategory('')
-                  }}
-                >
-                  Home
-                </Link>
-              </li>
-
-              {categories.map((category) => (
-                <li
-                  key={category}
-                  className={`${
-                    activeCategory === category
-                      ? 'my-1 inline-block rounded bg-purple-600 px-2 py-1 text-white'
-                      : 'mx-3 my-1 inline-block'
-                  }`}
-                >
-                  <Link
-                    onClick={() => {
-                      setState(category)
-                      setActiveCategory(category)
-                      setPageNUM(1) // Reset page number when changing category
-                    }}
-                    className={'cursor-pointer'}
+              {isAuthenticated ? (
+                <>
+                  <li
+                    className={`${
+                      pathname === routes.home() && activeCategory === ''
+                        ? 'my-1 inline-block rounded bg-purple-600 px-2 py-1 text-white'
+                        : 'mx-3 my-1 inline-block'
+                    }`}
                   >
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                  </Link>
-                </li>
-              ))}
+                    <Link
+                      to={routes.home()}
+                      onClick={() => {
+                        setState('')
+                        setActiveCategory('')
+                      }}
+                    >
+                      Home
+                    </Link>
+                  </li>
 
+                  {categories.map((category) => (
+                    <li
+                      key={category}
+                      className={`${
+                        activeCategory === category
+                          ? 'my-1 inline-block rounded bg-purple-600 px-2 py-1 text-white'
+                          : 'mx-3 my-1 inline-block'
+                      }`}
+                    >
+                      <Link
+                        onClick={() => {
+                          setState(category)
+                          setActiveCategory(category)
+                          setPageNUM(1) // Reset page number when changing category
+                        }}
+                        className={'cursor-pointer'}
+                      >
+                        {category.charAt(0).toUpperCase() + category.slice(1)}
+                      </Link>
+                    </li>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {categories.map((category) => (
+                    <li
+                      key={category}
+                      className={`${
+                        activeCategory === category
+                          ? 'my-1 inline-block rounded bg-purple-600 px-2 py-1 text-white'
+                          : 'mx-3 my-1 inline-block'
+                      }`}
+                    >
+                      <Link
+                        onClick={() => {
+                          setState(category)
+                          setActiveCategory(category)
+                          setPageNUM(1) // Reset page number when changing category
+                        }}
+                        className={'cursor-pointer'}
+                      >
+                        {category.charAt(0).toUpperCase() + category.slice(1)}
+                      </Link>
+                    </li>
+                  ))}
+                </>
+              )}
               <li>
                 <Search />
               </li>
