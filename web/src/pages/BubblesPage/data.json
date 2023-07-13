@@ -1,0 +1,76 @@
+{
+  "wordList": {
+    "character": [
+      "SpongeBob",
+      "Patrick",
+      "Squidward",
+      "Sandy",
+      "Mr. Krabs",
+      "Plankton",
+      "Gary",
+      "Mermaid Man",
+      "Barnacle Boy",
+      "Larry the Lobster"
+    ],
+    "location": [
+      "Bikini Bottom",
+      "Krusty Krab",
+      "Chum Bucket",
+      "Goo Lagoon",
+      "Jellyfish Fields",
+      "Rock Bottom",
+      "Kelp Forest",
+      "Sandy's Treedome",
+      "Salty Spitoon",
+      "Bubble Bass's Cave"
+    ],
+    "enemies": [
+      "Man Ray",
+      "The Flying Dutchman",
+      "Dirty Bubble",
+      "Bubble Bass",
+      "DoodleBob",
+      "Prawn",
+      "Flats the Flounder",
+      "The Tattletale Strangler",
+      "Bubble Buddy",
+      "Dennis"
+    ],
+    "animals": [
+      "Gary",
+      "Mystery",
+      "Larry",
+      "Snellie",
+      "Dan the Orange Snail",
+      "Mrs. Wormsley",
+      "Jerry",
+      "Spike",
+      "Foofie",
+      "Rex"
+    ],
+    "creatures": [
+      "Anchovies",
+      "Jellyfish",
+      "Alaskan bull worm",
+      "Sea Horse",
+      "Clamu",
+      "Sea Bear",
+      "Sea Rhinoceros",
+      "Sea Monkey",
+      "Sea Whelks",
+      "Sea Cucumber"
+    ],
+    "objects": [
+      "Pineapple",
+      "Krusty Krab hat",
+      "Bubble Stand",
+      "Krusty Krab sign",
+      "Secret Formula",
+      "Coral Blue Lipstick",
+      "Mermaid Man's belt",
+      "King Neptune's crown",
+      "Time machine",
+      "Krusty Krab Training Video"
+    ]
+  }
+}
